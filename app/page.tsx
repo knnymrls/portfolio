@@ -11,7 +11,7 @@ import { useNavigation } from './hooks/useNavigation'
 import { useProjectPresentation } from './hooks/useProjectPresentation'
 import { SectionId, TabType, ChatResponse } from './types'
 import { projects } from './utils/projectData'
-import { PRESENTATION_TIMING } from './constants'
+import { PRESENTATION_TIMING, Z_INDEX } from './constants'
 
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState<TabType>('work')
@@ -20,7 +20,7 @@ export default function PortfolioPage() {
   const [isPresentingProjects, setIsPresentingProjects] = useState(false)
   const [highlightedProject, setHighlightedProject] = useState<string | null>(null)
   const [currentProjectName, setCurrentProjectName] = useState<string>('')
-  
+
   const { refs, navigateToSection } = useNavigation()
   const { getCurrentProject, startPresentation, stopPresentation } = useProjectPresentation()
 
@@ -41,7 +41,7 @@ export default function PortfolioPage() {
 
       if (response.ok) {
         setChatResponse(data.reply)
-        
+
         // Handle navigation if requested
         if (data.navigationAction) {
           setTimeout(() => {
@@ -91,37 +91,45 @@ export default function PortfolioPage() {
 
   // Get current presenting project ID for highlighting
   const currentProject = getCurrentProject()
-  const currentlyHighlightedProject = isPresentingProjects 
-    ? currentProject?.projectId || null 
+  const currentlyHighlightedProject = isPresentingProjects
+    ? currentProject?.projectId || null
     : highlightedProject
 
   return (
-    <div className="bg-[#fbfbfb] relative size-full min-h-screen">
-      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+    <div className="relative size-full min-h-screen">
+      {/* Background layer with pattern */}
+      <div className="fixed inset-0 z-0 bg-pattern transition-colors duration-300" />
 
-      <div className="relative box-border content-stretch flex flex-col gap-[108px] items-start justify-start p-0 top-[165px] w-full max-w-[1000px] mx-auto px-6 pb-32">
-        <section ref={refs.heroRef} id="hero">
-          <HeroSection />
-        </section>
+      {/* Content layer */}
+      <div className="relative z-10">
+        <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
 
-        <section ref={refs.caseStudiesRef} id="case-studies">
-          <CaseStudiesSection highlightedProjectId={currentlyHighlightedProject} />
-        </section>
+        <div
+          className="relative box-border content-stretch flex flex-col gap-[108px] items-start justify-start p-0 top-[165px] w-full max-w-[1000px] mx-auto px-6 pb-32"
+          style={{ zIndex: Z_INDEX.CONTENT }}
+        >
+          <section ref={refs.heroRef} id="hero">
+            <HeroSection />
+          </section>
 
-        <section ref={refs.experimentsRef} id="experiments">
-          <ExperimentsSection />
-        </section>
+          <section ref={refs.caseStudiesRef} id="case-studies">
+            <CaseStudiesSection highlightedProjectId={currentlyHighlightedProject} />
+          </section>
+
+          <section ref={refs.experimentsRef} id="experiments">
+            <ExperimentsSection />
+          </section>
+        </div>
+
+        <ChatInput
+          response={chatResponse}
+          isLoading={isLoading}
+          onSendMessage={handleChatMessage}
+          onClearResponse={handleClearResponse}
+          showTimer={isPresentingProjects && !!highlightedProject}
+          timerDuration={PRESENTATION_TIMING.PROJECT_DURATION}
+        />
       </div>
-
-      <ChatInput 
-        response={chatResponse} 
-        isLoading={isLoading} 
-        onSendMessage={handleChatMessage} 
-        onClearResponse={handleClearResponse}
-        showTimer={isPresentingProjects && !!highlightedProject}
-        timerDuration={PRESENTATION_TIMING.PROJECT_DURATION}
-      />
-
     </div>
   )
 }

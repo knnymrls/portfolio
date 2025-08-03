@@ -80,14 +80,14 @@ export default function ChatInput({ response, isLoading, onSendMessage, onClearR
                             initial={{ opacity: 0, y: 10, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                            className="backdrop-blur-md bg-white/70 p-4 rounded-2xl border border-white/40"
+                            className="chat-response backdrop-blur-md bg-white/70 p-4 rounded-2xl border border-white/40"
                         >
                             {isLoading ? (
                                 <div className="flex items-center gap-2">
                                     <div className="flex gap-1">
-                                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
-                                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" />
+                                        <div className="loading-dot w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+                                        <div className="loading-dot w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100" />
+                                        <div className="loading-dot w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200" />
                                     </div>
                                     <span className="text-gray-600 text-sm">Thinking...</span>
                                 </div>
@@ -99,9 +99,9 @@ export default function ChatInput({ response, isLoading, onSendMessage, onClearR
                                                 <span className="text-xs text-gray-600">Highlighting in progress</span>
                                                 <span className="text-xs text-gray-500">{Math.ceil(timeLeft / 1000)}s remaining</span>
                                             </div>
-                                            <div className="w-full bg-gray-200 rounded-full h-1.5">
+                                            <div className="progress-bg w-full bg-gray-200 rounded-full h-1.5">
                                                 <motion.div
-                                                    className="bg-blue-500 h-1.5 rounded-full"
+                                                    className="progress-bar bg-blue-500 h-1.5 rounded-full"
                                                     initial={{ width: 0 }}
                                                     animate={{ width: `${((timerDuration - timeLeft) / timerDuration) * 100}%` }}
                                                     transition={{ duration: 0.1, ease: 'linear' }}
@@ -118,7 +118,7 @@ export default function ChatInput({ response, isLoading, onSendMessage, onClearR
 
                 {/* Input Form */}
                 <form onSubmit={handleSubmit}>
-                    <div className={`backdrop-blur-sm bg-[#f1f1f1]/90 flex items-center gap-2 p-[6px] rounded-2xl transition-all duration-300 ${isFocused ? 'shadow-lg bg-[#f1f1f1]/95' : ''
+                    <div className={`chat-container backdrop-blur-sm bg-[#f1f1f1]/90 flex items-center gap-2 p-[6px] rounded-2xl transition-all duration-300 ${isFocused ? 'shadow-lg bg-[#f1f1f1]/95' : ''
                         }`}>
                         <div className="flex items-center gap-2 px-3 text-gray-500">
                             <Sparkles className="size-5" />
@@ -131,7 +131,7 @@ export default function ChatInput({ response, isLoading, onSendMessage, onClearR
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                             placeholder="Ask me anything about my work..."
-                            className="flex-1 bg-transparent outline-none py-3 text-gray-900 placeholder-gray-500"
+                            className="chat-input flex-1 bg-transparent outline-none py-3 text-gray-900 placeholder-gray-500"
                             disabled={isLoading}
                         />
 
@@ -139,7 +139,7 @@ export default function ChatInput({ response, isLoading, onSendMessage, onClearR
                             type="submit"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className={`flex items-center justify-center p-3 rounded-xl transition-all duration-200 ${message.trim() && !isLoading
+                            className={`chat-button flex items-center justify-center p-3 rounded-xl transition-all duration-200 ${message.trim() && !isLoading
                                 ? 'bg-gray-900 text-white hover:bg-gray-800'
                                 : 'bg-white/50 text-gray-400'
                                 }`}

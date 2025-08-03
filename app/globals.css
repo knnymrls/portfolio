@@ -55,3 +55,203 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
 }
+
+/* Light mode button styles */
+.btn-primary {
+  background-color: #333334;
+  color: #f6f8fa;
+}
+
+.btn-primary:hover {
+  background-color: #1a1a1a;
+}
+
+.btn-primary .icon-light {
+  color: #f6f8fa;
+}
+
+.btn-primary div {
+  color: #f6f8fa;
+}
+
+.btn-primary svg {
+  color: #333334;
+}
+
+/* Navigation light mode */
+.nav-button-active {
+  background-color: white;
+}
+
+.nav-button-active span {
+  color: #1f2937;
+}
+
+.nav-button-inactive span {
+  color: #6b7280;
+}
+
+.nav-button-inactive:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: #d1d5db;
+}
+
+/* Background pattern layer */
+.bg-pattern {
+  background-color: #fbfbfb;
+  background-image: url("https://www.transparenttextures.com/patterns/pinstripe-light.png");
+}
+
+@media (prefers-color-scheme: dark) {
+  .bg-pattern {
+    background-color: #0a0a0a;
+    background-image: url("https://www.transparenttextures.com/patterns/pinstripe-dark.png");
+  }
+  
+  /* Text color adjustments for dark mode */
+  body {
+    color: #e5e5e5;
+  }
+
+  /* Hero Section */
+  .hero-text {
+    color: #f1f1f1 !important;
+  }
+
+  /* Section headers */
+  .section-header {
+    color: #b0b0b0 !important;
+  }
+
+  /* Case Study Cards */
+  .case-study-card {
+    background-color: #1a1a1a;
+    border-color: #333333;
+  }
+
+  .case-study-title {
+    color: #ffffff !important;
+  }
+
+  .case-study-description {
+    color: #cccccc !important;
+  }
+
+  .case-study-readtime {
+    color: #999999 !important;
+  }
+
+  /* Navigation */
+  .nav-container {
+    background-color: rgba(26, 26, 26, 0.9) !important;
+    border-color: #333333 !important;
+  }
+
+  .nav-button-active {
+    background-color: #2a2a2a !important;
+  }
+
+  .nav-button-active span {
+    color: #f1f1f1 !important;
+  }
+
+  .nav-button-inactive span {
+    color: #999999 !important;
+  }
+
+  .nav-button-inactive:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: #555555 !important;
+  }
+
+  /* Chat Input */
+  .chat-container {
+    background-color: rgba(26, 26, 26, 0.9) !important;
+    border-color: #333333 !important;
+  }
+
+  .chat-response {
+    background-color: rgba(26, 26, 26, 0.8) !important;
+    border-color: #333333 !important;
+    color: #e5e5e5 !important;
+  }
+
+  .chat-input {
+    background-color: transparent !important;
+    color: #e5e5e5 !important;
+  }
+
+  .chat-input::placeholder {
+    color: #777777 !important;
+  }
+
+  .chat-button {
+    background-color: #f1f1f1 !important;
+    color: #1a1a1a !important;
+  }
+
+  .chat-button:hover {
+    background-color: #e0e0e0 !important;
+  }
+
+  .chat-button:disabled {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #666666 !important;
+  }
+
+  /* Experiments Section */
+  .experiments-container {
+    background-color: #1a1a1a !important;
+    border-color: #333333 !important;
+  }
+
+  .experiments-item {
+    background-color: #2a2a2a !important;
+    border-color: #444444 !important;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    background-color: #f1f1f1 !important;
+    color: #1a1a1a !important;
+  }
+
+  .btn-primary:hover {
+    background-color: #e0e0e0 !important;
+  }
+
+  .btn-primary .icon-light {
+    color: #1a1a1a !important;
+  }
+
+  .btn-primary div {
+    color: #1a1a1a !important;
+  }
+
+  .btn-primary svg {
+    color: #1a1a1a !important;
+  }
+
+  /* Progress bars */
+  .progress-bg {
+    background-color: #333333 !important;
+  }
+
+  .progress-bar {
+    background-color: #007bff !important;
+  }
+
+  /* Loading dots */
+  .loading-dot {
+    background-color: #666666 !important;
+  }
+
+  /* Icons */
+  .icon-light {
+    color: #e5e5e5 !important;
+  }
+
+  .icon-muted {
+    color: #999999 !important;
+  }
+}

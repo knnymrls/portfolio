@@ -38,7 +38,7 @@ export default function CaseStudiesSection({ highlightedProjectId }: CaseStudies
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="font-['Sora',_sans-serif] font-semibold leading-[0] relative shrink-0 text-[#6f6f6f] text-[16px] text-left text-nowrap tracking-[0.32px]"
+                className="section-header font-['Sora',_sans-serif] font-semibold leading-[0] relative shrink-0 text-[#6f6f6f] text-[16px] text-left text-nowrap tracking-[0.32px]"
             >
                 CASE STUDIES
             </motion.div>

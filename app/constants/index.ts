@@ -17,4 +17,5 @@ export const Z_INDEX = {
   NAVIGATION: 50,
   CHAT_INPUT: 40,
   PROJECT_TIMER: 30,
+  CONTENT: 20,
 } as const

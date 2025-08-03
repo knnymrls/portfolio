@@ -33,7 +33,7 @@ export default function CaseStudyCard({
             transition={{ delay: index * 0.1 }}
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
-            className="bg-[#ffffff] relative rounded-[20px] h-full shrink-0 border border-[#e9e9e9]"
+            className="case-study-card bg-[#ffffff] relative rounded-[20px] h-full shrink-0 border border-[#e9e9e9]"
         >
             <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start overflow-clip px-5 py-6 relative w-full">
                 {/* Image Section */}
@@ -73,12 +73,12 @@ export default function CaseStudyCard({
                             <div className="relative shrink-0 size-4">
                                 <div className="w-4 h-4 bg-[#333334] rounded-full" />
                             </div>
-                            <div className="font-['Sora',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#121212] text-[16px] text-left text-nowrap tracking-[0.32px]">
+                            <div className="case-study-title font-['Sora',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#121212] text-[16px] text-left text-nowrap tracking-[0.32px]">
                                 {title}
                             </div>
                         </div>
                         {readTime && (
-                            <div className="font-['Sora',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#6f6f6f] text-[16px] text-left text-nowrap tracking-[0.32px] flex items-center gap-1">
+                            <div className="case-study-readtime font-['Sora',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#6f6f6f] text-[16px] text-left text-nowrap tracking-[0.32px] flex items-center gap-1">
                                 <Clock className="size-4" />
                                 {readTime}
                             </div>
@@ -87,7 +87,7 @@ export default function CaseStudyCard({
 
                     {/* Description and Button Row */}
                     <div className="flex flex-row items-end justify-between gap-4 w-full">
-                        <div className="font-['Sora',_sans-serif] font-normal leading-[0] flex-1 text-[#333334] text-[20px] text-left tracking-[0.4px]">
+                        <div className="case-study-description font-['Sora',_sans-serif] font-normal leading-[0] flex-1 text-[#333334] text-[20px] text-left tracking-[0.4px]">
                             <p
                                 className="block leading-[normal] overflow-hidden text-ellipsis"
                                 style={{

@@ -32,7 +32,7 @@ export default function HeroSection() {
             >
                 <motion.div
                     variants={fadeInUp}
-                    className="font-['Sora',_sans-serif] font-normal leading-[1.5] relative shrink-0 text-[#333334] text-[24px] md:text-[30px] lg:text-[36px] text-left w-full lg:w-[607px]"
+                    className="hero-text font-['Sora',_sans-serif] font-normal leading-[1.5] relative shrink-0 text-[#333334] text-[24px] md:text-[30px] lg:text-[36px] text-left w-full lg:w-[607px]"
                 >
                     <p className="block mb-0">Yo, I'm Kenny Morales</p>
                     <p className="block mb-0">I design thoughtful AI interfaces</p>
@@ -46,10 +46,10 @@ export default function HeroSection() {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-[#333334] box-border content-stretch flex flex-row gap-2 items-center justify-center p-[16px] relative rounded-[13px] shrink-0 hover:bg-[#1a1a1a] transition-colors"
+                        className="btn-primary box-border content-stretch flex flex-row gap-2 items-center justify-center p-[16px] relative rounded-[13px] shrink-0 transition-colors"
                     >
-                        <Mail className="size-4 text-[#f6f8fa]" />
-                        <div className="font-['Sora',_sans-serif] font-semibold leading-[0] relative shrink-0 text-[#f6f8fa] text-[16px] text-left text-nowrap tracking-[0.32px]">
+                        <Mail className="size-4 icon-light" />
+                        <div className="font-['Sora',_sans-serif] font-semibold leading-[0] relative shrink-0 text-[16px] text-left text-nowrap tracking-[0.32px]">
                             Reach out
                         </div>
                     </motion.button>
@@ -57,25 +57,25 @@ export default function HeroSection() {
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-[#f1f1f1] box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 hover:bg-[#e5e5e5] transition-colors"
+                        className="btn-primary box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 transition-colors"
                     >
-                        <Github className="size-7 text-[#333334]" />
+                        <Github className="size-7" />
                     </motion.button>
 
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-[#f1f1f1] box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 hover:bg-[#e5e5e5] transition-colors"
+                        className="btn-primary box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 transition-colors"
                     >
-                        <Linkedin className="size-7 text-[#333334]" />
+                        <Linkedin className="size-7" />
                     </motion.button>
 
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-[#f1f1f1] box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 hover:bg-[#e5e5e5] transition-colors"
+                        className="btn-primary box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 transition-colors"
                     >
-                        <FileText className="size-6 text-[#333334]" />
+                        <FileText className="size-6" />
                     </motion.button>
                 </motion.div>
             </motion.div>
