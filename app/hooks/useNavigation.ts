@@ -1,5 +1,6 @@
 import { useRef } from 'react'
-import { scrollToSection, SectionId, SectionRefs } from '../utils/navigation'
+import { scrollToSection } from '../utils/navigation'
+import { SectionId, SectionRefs } from '../types'
 
 export const useNavigation = () => {
   // Create refs for each section

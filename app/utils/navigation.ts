@@ -1,10 +1,4 @@
-import { RefObject } from 'react'
-import { SectionId, NavigationFunctionDef } from '../types'
-
-// Section refs mapping type
-export type SectionRefs = {
-  [K in SectionId]?: RefObject<HTMLElement>
-}
+import { SectionId, NavigationFunctionDef, SectionRefs } from '../types'
 
 // Navigation function definition for OpenAI
 export const navigationFunction: NavigationFunctionDef = {
@@ -21,11 +15,6 @@ export const navigationFunction: NavigationFunctionDef = {
     },
     required: ['section']
   }
-}
-
-// Section refs mapping type
-export type SectionRefs = {
-  [K in SectionId]?: RefObject<HTMLElement>
 }
 
 // Smooth scroll utility

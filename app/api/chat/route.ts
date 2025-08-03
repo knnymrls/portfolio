@@ -48,9 +48,9 @@ Examples:
     let reply = responseMessage?.content || 'Sorry, I could not generate a response.'
     
     // Parse navigation keywords from response
-    let navigationAction = null
+    let navigationAction: string | undefined = undefined
     let presentProjects = false
-    let highlightProject = null
+    let highlightProject: string | undefined = undefined
 
     const navMatch = reply.match(/NAVIGATE:(\w+(?:-\w+)*)/i)
     if (navMatch) {
@@ -71,9 +71,9 @@ Examples:
 
     const response: ChatResponse = {
       reply,
-      navigationAction,
-      presentProjects,
-      highlightProject
+      ...(navigationAction && { navigationAction }),
+      ...(presentProjects && { presentProjects }),
+      ...(highlightProject && { highlightProject })
     }
 
     return NextResponse.json(response)

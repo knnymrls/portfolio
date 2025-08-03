@@ -6,7 +6,7 @@ import { ExternalLink, Clock } from 'lucide-react'
 interface CaseStudyCardProps {
     title: string
     description: string
-    readTime: string
+    readTime?: string
     color: string
     images?: string[]
     index: number
@@ -77,10 +77,12 @@ export default function CaseStudyCard({
                                 {title}
                             </div>
                         </div>
-                        <div className="font-['Sora',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#6f6f6f] text-[16px] text-left text-nowrap tracking-[0.32px] flex items-center gap-1">
-                            <Clock className="size-4" />
-                            {readTime}
-                        </div>
+                        {readTime && (
+                            <div className="font-['Sora',_sans-serif] font-normal leading-[0] relative shrink-0 text-[#6f6f6f] text-[16px] text-left text-nowrap tracking-[0.32px] flex items-center gap-1">
+                                <Clock className="size-4" />
+                                {readTime}
+                            </div>
+                        )}
                     </div>
 
                     {/* Description and Button Row */}

@@ -1,4 +1,5 @@
 // Core types for the portfolio application
+import { RefObject } from 'react'
 
 export interface Project {
   id: string
@@ -22,6 +23,10 @@ export interface ChatResponse {
 }
 
 export type SectionId = 'hero' | 'case-studies' | 'experiments' | 'top'
+
+export type SectionRefs = {
+  [K in SectionId]?: RefObject<HTMLElement | null>
+}
 
 export type TabType = 'work' | 'ventures' | 'about'
 

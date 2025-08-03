@@ -72,7 +72,7 @@ export default function PortfolioPage() {
         // Handle single project highlight
         if (data.highlightProject && !data.presentProjects) {
           setTimeout(() => {
-            setHighlightedProject(data.highlightProject)
+            setHighlightedProject(data.highlightProject || null)
           }, PRESENTATION_TIMING.SCROLL_DELAY)
         }
       } else {
