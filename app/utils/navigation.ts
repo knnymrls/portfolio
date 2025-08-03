@@ -1,10 +1,13 @@
 import { RefObject } from 'react'
+import { SectionId, NavigationFunctionDef } from '../types'
 
-// Define available sections for navigation
-export type SectionId = 'hero' | 'case-studies' | 'experiments' | 'top'
+// Section refs mapping type
+export type SectionRefs = {
+  [K in SectionId]?: RefObject<HTMLElement>
+}
 
 // Navigation function definition for OpenAI
-export const navigationFunction = {
+export const navigationFunction: NavigationFunctionDef = {
   name: 'scrollToSection',
   description: 'Scroll to a specific section of the portfolio based on user request',
   parameters: {

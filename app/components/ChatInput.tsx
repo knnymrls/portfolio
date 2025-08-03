@@ -3,27 +3,58 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Send, Sparkles } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { PRESENTATION_TIMING, Z_INDEX } from '../constants'
 
 interface ChatInputProps {
     response?: string
     isLoading?: boolean
     onSendMessage?: (message: string) => void
     onClearResponse?: () => void
+    showTimer?: boolean
+    timerDuration?: number
 }
 
-export default function ChatInput({ response, isLoading, onSendMessage, onClearResponse }: ChatInputProps) {
+export default function ChatInput({ response, isLoading, onSendMessage, onClearResponse, showTimer = false, timerDuration = PRESENTATION_TIMING.PROJECT_DURATION }: ChatInputProps) {
     const [message, setMessage] = useState('')
     const [isFocused, setIsFocused] = useState(false)
+    const [timeLeft, setTimeLeft] = useState(timerDuration)
+    const [isTimerActive, setIsTimerActive] = useState(false)
 
     useEffect(() => {
-        if (response && !isLoading && onClearResponse) {
+        if (response && !isLoading && onClearResponse && !showTimer) {
             const timer = setTimeout(() => {
                 onClearResponse()
-            }, 12000)
+            }, PRESENTATION_TIMING.CHAT_AUTO_CLEAR)
 
             return () => clearTimeout(timer)
         }
-    }, [response, isLoading, onClearResponse])
+    }, [response, isLoading, onClearResponse, showTimer])
+
+    // Timer effect for project highlighting
+    useEffect(() => {
+        if (showTimer && response && !isLoading) {
+            setTimeLeft(timerDuration)
+            setIsTimerActive(true)
+            
+            const interval = setInterval(() => {
+                setTimeLeft((prev) => {
+                    if (prev <= 100) {
+                        clearInterval(interval)
+                        setIsTimerActive(false)
+                        return 0
+                    }
+                    return prev - 100
+                })
+            }, 100)
+
+            return () => {
+                clearInterval(interval)
+                setIsTimerActive(false)
+            }
+        } else {
+            setIsTimerActive(false)
+        }
+    }, [showTimer, response, isLoading, timerDuration])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -38,7 +69,8 @@ export default function ChatInput({ response, isLoading, onSendMessage, onClearR
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="fixed bottom-3 left-1/2 transform -translate-x-1/2 z-40 w-full max-w-2xl px-6"
+            className={`fixed bottom-3 left-1/2 transform -translate-x-1/2 w-full max-w-2xl px-6`}
+            style={{ zIndex: Z_INDEX.CHAT_INPUT }}
         >
             <div className="flex flex-col gap-2">
                 {/* Response Display */}
@@ -60,7 +92,25 @@ export default function ChatInput({ response, isLoading, onSendMessage, onClearR
                                     <span className="text-gray-600 text-sm">Thinking...</span>
                                 </div>
                             ) : (
-                                <p className="text-gray-800 leading-relaxed">{response}</p>
+                                <div>
+                                    {isTimerActive && (
+                                        <div className="mb-3 pb-3 border-b border-gray-200">
+                                            <div className="flex items-center justify-between mb-2">
+                                                <span className="text-xs text-gray-600">Highlighting in progress</span>
+                                                <span className="text-xs text-gray-500">{Math.ceil(timeLeft / 1000)}s remaining</span>
+                                            </div>
+                                            <div className="w-full bg-gray-200 rounded-full h-1.5">
+                                                <motion.div
+                                                    className="bg-blue-500 h-1.5 rounded-full"
+                                                    initial={{ width: 0 }}
+                                                    animate={{ width: `${((timerDuration - timeLeft) / timerDuration) * 100}%` }}
+                                                    transition={{ duration: 0.1, ease: 'linear' }}
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+                                    <p className="text-gray-800 leading-relaxed">{response}</p>
+                                </div>
                             )}
                         </motion.div>
                     )}

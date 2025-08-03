@@ -9,15 +9,17 @@ import ExperimentsSection from './components/ExperimentsSection'
 import ChatInput from './components/ChatInput'
 import { useNavigation } from './hooks/useNavigation'
 import { useProjectPresentation } from './hooks/useProjectPresentation'
-import { SectionId } from './utils/navigation'
+import { SectionId, TabType, ChatResponse } from './types'
 import { projects } from './utils/projectData'
+import { PRESENTATION_TIMING } from './constants'
 
 export default function PortfolioPage() {
-  const [activeTab, setActiveTab] = useState<'work' | 'ventures' | 'about'>('work')
+  const [activeTab, setActiveTab] = useState<TabType>('work')
   const [chatResponse, setChatResponse] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
   const [isPresentingProjects, setIsPresentingProjects] = useState(false)
   const [highlightedProject, setHighlightedProject] = useState<string | null>(null)
+  const [currentProjectName, setCurrentProjectName] = useState<string>('')
   
   const { refs, navigateToSection } = useNavigation()
   const { getCurrentProject, startPresentation, stopPresentation } = useProjectPresentation()
@@ -35,17 +37,16 @@ export default function PortfolioPage() {
         body: JSON.stringify({ message }),
       })
 
-      const data = await response.json()
+      const data: ChatResponse = await response.json()
 
       if (response.ok) {
-        console.log('API Response:', data) // Debug log
         setChatResponse(data.reply)
         
         // Handle navigation if requested
         if (data.navigationAction) {
           setTimeout(() => {
             navigateToSection(data.navigationAction as SectionId)
-          }, 500)
+          }, PRESENTATION_TIMING.SCROLL_DELAY)
         }
 
         // Handle project presentation if requested
@@ -57,20 +58,22 @@ export default function PortfolioPage() {
               const project = projects.find(p => p.id === projectId)
               setChatResponse(`Currently highlighting: ${project?.title} - ${description}`)
               setHighlightedProject(projectId)
+              setCurrentProjectName(project?.title || 'Project')
             }).then(() => {
               // Presentation completed
               setIsPresentingProjects(false)
               setHighlightedProject(null)
+              setCurrentProjectName('')
               setChatResponse('That concludes the project showcase! Feel free to ask about any specific project.')
             })
-          }, 1000) // Start presentation after scroll completes
+          }, PRESENTATION_TIMING.PRESENTATION_START_DELAY)
         }
 
         // Handle single project highlight
         if (data.highlightProject && !data.presentProjects) {
           setTimeout(() => {
             setHighlightedProject(data.highlightProject)
-          }, 500)
+          }, PRESENTATION_TIMING.SCROLL_DELAY)
         }
       } else {
         setChatResponse('Sorry, I encountered an error. Please try again.')
@@ -115,6 +118,8 @@ export default function PortfolioPage() {
         isLoading={isLoading} 
         onSendMessage={handleChatMessage} 
         onClearResponse={handleClearResponse}
+        showTimer={isPresentingProjects && !!highlightedProject}
+        timerDuration={PRESENTATION_TIMING.PROJECT_DURATION}
       />
 
     </div>

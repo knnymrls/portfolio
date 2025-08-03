@@ -1,14 +1,4 @@
-export interface Project {
-  id: string
-  title: string
-  description: string
-  summary: string
-  category: 'case-study' | 'experiment'
-  color: string
-  tags: string[]
-  readTime?: string
-  images?: string[]
-}
+import { Project } from '../types'
 
 export const projects: Project[] = [
   {
@@ -23,7 +13,9 @@ export const projects: Project[] = [
     images: [
       'http://localhost:3845/assets/a9792dee424d8b14c8ab19e719dc092baa735c8b.png',
       'http://localhost:3845/assets/a9792dee424d8b14c8ab19e719dc092baa735c8b.png'
-    ]
+    ],
+    defaultSize: 1.2,
+    hoveredSize: 1.8
   },
   {
     id: 'nural',
@@ -33,17 +25,21 @@ export const projects: Project[] = [
     category: 'case-study',
     color: '#4ab33c',
     tags: ['FinTech', 'AI', 'Stock Analysis'],
-    readTime: '5 min'
+    readTime: '5 min',
+    defaultSize: 0.8,
+    hoveredSize: 1.2
   },
   {
     id: 'flock',
     title: 'Flock',
     description: 'Helping teams find time to meet using AI',
     summary: 'A smart scheduling tool that uses machine learning to optimize team meeting times across different time zones. Integrates with popular calendar apps for seamless workflow.',
-    category: 'experiment',
+    category: 'case-study',
     color: '#73d8e3',
     tags: ['Productivity', 'AI', 'Team Collaboration'],
-    readTime: '5 min'
+    readTime: '5 min',
+    defaultSize: 0.8,
+    hoveredSize: 1.2
   },
   {
     id: 'findu-college',
@@ -53,7 +49,9 @@ export const projects: Project[] = [
     category: 'case-study',
     color: '#ffb4a2',
     tags: ['Education', 'College', 'Personalization'],
-    readTime: '15 min'
+    readTime: '15 min',
+    defaultSize: 1.2,
+    hoveredSize: 1.8
   }
 ]
 

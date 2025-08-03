@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import { projects } from '../utils/projectData'
+import { PRESENTATION_TIMING } from '../constants'
 
 export const useProjectPresentation = () => {
   const [isPresenting, setIsPresenting] = useState(false)
@@ -7,8 +8,7 @@ export const useProjectPresentation = () => {
 
   const startPresentation = useCallback(async (onProjectChange?: (projectId: string, description: string) => void) => {
     setIsPresenting(true)
-    setCurrentProjectIndex(0)
-
+    
     // Run through each project
     for (let i = 0; i < projects.length; i++) {
       setCurrentProjectIndex(i)
@@ -18,8 +18,8 @@ export const useProjectPresentation = () => {
         onProjectChange(projects[i].id, projects[i].summary)
       }
       
-      // Wait 10 seconds before next project
-      await new Promise(resolve => setTimeout(resolve, 10000))
+      // Wait before next project
+      await new Promise(resolve => setTimeout(resolve, PRESENTATION_TIMING.PROJECT_DURATION))
     }
 
     // End presentation

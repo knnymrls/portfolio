@@ -1,10 +1,12 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { TabType } from '../types'
+import { Z_INDEX } from '../constants'
 
 interface NavigationProps {
-    activeTab: 'work' | 'ventures' | 'about'
-    onTabChange: (tab: 'work' | 'ventures' | 'about') => void
+    activeTab: TabType
+    onTabChange: (tab: TabType) => void
 }
 
 export default function Navigation({ activeTab, onTabChange }: NavigationProps) {
@@ -13,7 +15,8 @@ export default function Navigation({ activeTab, onTabChange }: NavigationProps) 
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="fixed backdrop-blur-sm bg-[#f1f1f1]/50 flex items-center gap-2 p-[6px] rounded-2xl top-4 left-1/2 transform -translate-x-1/2 z-50"
+            className="fixed backdrop-blur-sm bg-[#f1f1f1]/50 flex items-center gap-2 p-[6px] rounded-2xl top-4 left-1/2 transform -translate-x-1/2"
+            style={{ zIndex: Z_INDEX.NAVIGATION }}
         >
             <button
                 onClick={() => onTabChange('work')}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { navigationFunction } from '../../utils/navigation'
+import { ChatResponse } from '../../types'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -68,12 +69,14 @@ Examples:
       reply = reply.replace(/HIGHLIGHT:\w+(?:-\w+)*/gi, '').trim()
     }
 
-    return NextResponse.json({ 
+    const response: ChatResponse = {
       reply,
       navigationAction,
       presentProjects,
       highlightProject
-    })
+    }
+
+    return NextResponse.json(response)
   } catch (error) {
     console.error('Chat API error:', error)
     return NextResponse.json(
