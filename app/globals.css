@@ -272,3 +272,31 @@ body {
     color: #999999 !important;
   }
 }
+
+/* MDX Section Highlighting */
+.mdx-section {
+  transition: all 0.3s ease-in-out;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.mdx-section:target,
+.mdx-section.highlighted {
+  background-color: rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+}
+
+/* Ensure sections are highlightable */
+[data-highlight-id] {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Dark mode section highlighting */
+@media (prefers-color-scheme: dark) {
+  .mdx-section:target,
+  .mdx-section.highlighted {
+    background-color: rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+  }
+}

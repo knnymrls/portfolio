@@ -1,0 +1,56 @@
+---
+title: AI Code Reviewer
+date: 2024-04-01
+tags: [AI, DevTools, Automation, Python, TypeScript]
+description: Automated code review system using LLMs to provide instant, intelligent feedback
+highlightId: experiment-ai-code-reviewer
+---
+
+# AI Code Reviewer
+
+An experimental tool that uses large language models to provide instant, context-aware code reviews with actionable suggestions.
+
+## Motivation
+
+Code reviews are essential but time-consuming. This experiment explores using AI to:
+- Provide instant feedback
+- Catch common issues
+- Suggest improvements
+- Maintain consistency
+
+## Technical Approach
+
+```typescript
+// Example review generation
+async function reviewCode(diff: string, context: RepoContext) {
+  const analysis = await analyzeDiff(diff);
+  const patterns = await detectPatterns(analysis);
+  const suggestions = await generateSuggestions(patterns, context);
+  
+  return formatReview(suggestions);
+}
+```
+
+## Features Implemented
+
+- Pattern detection
+- Security vulnerability scanning  
+- Performance optimization suggestions
+- Style consistency checks
+- Documentation generation
+
+## Results
+
+- 85% accuracy in finding real issues
+- 3x faster than human review for common problems
+- Successfully deployed in 2 production repos
+
+## Learnings
+
+This experiment taught me about:
+- LLM prompt engineering
+- AST manipulation
+- Code pattern recognition
+- Balancing automation with human judgment
+
+[View on GitHub](https://github.com/kenny/ai-code-reviewer)

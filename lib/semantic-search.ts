@@ -31,29 +31,43 @@ class SemanticSearchEngine {
 
   // Initialize embeddings for all content
   async initialize(force: boolean = false) {
-    if (this.initialized && !force) return
+    if (this.initialized && !force) {
+      console.log('🔍 [SEARCH] Semantic search already initialized, skipping')
+      return
+    }
 
-    console.log('Initializing semantic search engine...')
+    console.log('🚀 [SEARCH] Initializing semantic search engine...')
     
     // Get all content from registry
+    console.log('📁 [SEARCH] Fetching content hierarchy from registry')
     const hierarchy = await contentRegistry.getNavigationStructure()
-    if (!hierarchy) return
+    if (!hierarchy) {
+      console.warn('⚠️ [SEARCH] No content hierarchy found')
+      return
+    }
 
     // Collect all content nodes
     const allContent = hierarchy.allContent
+    console.log(`📄 [SEARCH] Found ${allContent.length} content nodes to embed`)
 
     // Generate embeddings for all content
+    console.log('🧬 [SEARCH] Generating embeddings for all content...')
+    const startTime = Date.now()
     this.contentEmbeddings = await batchEmbedContent(allContent)
+    const embeddingTime = Date.now() - startTime
     
     this.initialized = true
     this.lastUpdate = new Date()
     
-    console.log(`Initialized ${this.contentEmbeddings.length} content embeddings`)
+    console.log(`✅ [SEARCH] Initialized ${this.contentEmbeddings.length} content embeddings in ${embeddingTime}ms`)
   }
 
   // Process a semantic query
   async search(query: SemanticQuery): Promise<SearchResult[]> {
+    console.log(`🔍 [SEARCH] Processing semantic search query: "${query.query}"`)
+    
     if (!this.initialized) {
+      console.log('🔄 [SEARCH] Engine not initialized, initializing now...')
       await this.initialize()
     }
 
@@ -61,6 +75,9 @@ class SemanticSearchEngine {
     let filteredEmbeddings = this.contentEmbeddings
     
     if (query.filters) {
+      console.log('🎯 [SEARCH] Applying filters:', query.filters)
+      const beforeCount = this.contentEmbeddings.length
+      
       filteredEmbeddings = this.contentEmbeddings.filter(item => {
         const content = item.content
         
@@ -88,15 +105,30 @@ class SemanticSearchEngine {
         
         return true
       })
+      
+      console.log(`🗜️ [SEARCH] Filtered from ${beforeCount} to ${filteredEmbeddings.length} items`)
     }
 
     // Perform semantic search
+    console.log(`🤖 [SEARCH] Running semantic search with threshold: ${query.threshold || 0.7}`)
+    const searchStartTime = Date.now()
+    
     const results = await semanticSearch(
       query.query,
       filteredEmbeddings,
       query.threshold || 0.7,
       query.limit || 10
     )
+    
+    const searchTime = Date.now() - searchStartTime
+    console.log(`📊 [SEARCH] Found ${results.length} results in ${searchTime}ms`)
+    
+    if (results.length > 0) {
+      console.log('🏆 [SEARCH] Top results:', results.slice(0, 3).map(r => ({
+        title: r.content.title,
+        similarity: `${Math.round(r.similarity * 100)}%`
+      })))
+    }
 
     // Add reasoning for each result
     return results.map(result => ({
@@ -132,6 +164,7 @@ class SemanticSearchEngine {
     entities: string[]
     filters: any
   }> {
+    console.log(`🧠 [SEARCH] Understanding query intent: "${query}"`)
     const lowerQuery = query.toLowerCase()
     
     // Detect intent
@@ -144,6 +177,8 @@ class SemanticSearchEngine {
     } else if (lowerQuery.includes('compare') || lowerQuery.includes('difference') || lowerQuery.includes('vs')) {
       intent = 'compare'
     }
+    
+    console.log(`🎯 [SEARCH] Detected intent: ${intent}`)
 
     // Extract entities (simplified - in production, use NER)
     const entities: string[] = []
@@ -156,6 +191,10 @@ class SemanticSearchEngine {
           entities.push(content.id)
         }
       })
+    }
+    
+    if (entities.length > 0) {
+      console.log(`🏷️ [SEARCH] Extracted entities:`, entities)
     }
 
     // Extract filters
@@ -176,6 +215,10 @@ class SemanticSearchEngine {
     // Tag filters
     if (lowerQuery.includes('ai') || lowerQuery.includes('machine learning') || lowerQuery.includes('ml')) {
       filters.tags = ['AI', 'Machine Learning', 'ML']
+    }
+    
+    if (Object.keys(filters).length > 0) {
+      console.log('🎯 [SEARCH] Extracted filters:', filters)
     }
     
     return { intent, entities, filters }

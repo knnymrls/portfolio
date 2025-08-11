@@ -20,7 +20,7 @@ export interface ChatResponse {
   navigationAction?: string
   navigatePage?: string
   presentProjects?: boolean
-  highlightProject?: string
+  highlightProject?: string | string[] // Support multiple highlights
   metadata?: {
     planSummary?: string
     estimatedDuration?: number

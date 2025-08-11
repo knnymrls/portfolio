@@ -50,29 +50,29 @@ export default function ChatInput() {
                 <AnimatePresence>
                     {showInitialSuggestions && !response && !isLoading && (
                         <motion.div
-                            initial={{ opacity: 0, y: 10 }}
+                            initial={{ opacity: 0, y: 5 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ delay: 0.5 }}
-                            className="backdrop-blur-md bg-white/90 p-4 rounded-2xl border border-gray-200 shadow-lg"
+                            exit={{ opacity: 0, y: -5 }}
+                            transition={{ delay: 0.3 }}
+                            className="backdrop-blur-sm bg-white/90 p-4 rounded-2xl border border-gray-200/50 shadow-md"
                         >
                             <p className="text-sm text-gray-600 mb-3">Hi! I'm Kenny's portfolio assistant. Get started with:</p>
                             <div className="flex flex-wrap gap-2">
                                 <button
                                     onClick={() => handleInitialSuggestion('Show me your projects')}
-                                    className="px-3 py-1.5 text-sm font-['Sora',_sans-serif] rounded-full bg-white hover:bg-gray-900 hover:text-white border border-gray-200 text-gray-700 transition-all duration-200"
+                                    className="px-3 py-1.5 text-sm font-['Sora',_sans-serif] rounded-full bg-white/70 hover:bg-gray-900 hover:text-white border border-gray-200/30 text-gray-700 transition-all duration-200"
                                 >
                                     Show me your projects
                                 </button>
                                 <button
                                     onClick={() => handleInitialSuggestion('What do you do?')}
-                                    className="px-3 py-1.5 text-sm font-['Sora',_sans-serif] rounded-full bg-white hover:bg-gray-900 hover:text-white border border-gray-200 text-gray-700 transition-all duration-200"
+                                    className="px-3 py-1.5 text-sm font-['Sora',_sans-serif] rounded-full bg-white/70 hover:bg-gray-900 hover:text-white border border-gray-200/30 text-gray-700 transition-all duration-200"
                                 >
                                     What do you do?
                                 </button>
                                 <button
                                     onClick={() => handleInitialSuggestion('Tell me about yourself')}
-                                    className="px-3 py-1.5 text-sm font-['Sora',_sans-serif] rounded-full bg-white hover:bg-gray-900 hover:text-white border border-gray-200 text-gray-700 transition-all duration-200"
+                                    className="px-3 py-1.5 text-sm font-['Sora',_sans-serif] rounded-full bg-white/70 hover:bg-gray-900 hover:text-white border border-gray-200/30 text-gray-700 transition-all duration-200"
                                 >
                                     About you?
                                 </button>
@@ -85,10 +85,11 @@ export default function ChatInput() {
                 <AnimatePresence>
                     {(response || isLoading) && (
                         <motion.div
-                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            initial={{ opacity: 0, y: 5, scale: 0.98 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                            className="chat-response backdrop-blur-md bg-white/90 p-4 rounded-2xl border border-gray-200 shadow-lg"
+                            exit={{ opacity: 0, y: -5, scale: 0.98 }}
+                            transition={{ duration: 0.2 }}
+                            className="chat-response backdrop-blur-sm bg-white/90 p-4 rounded-2xl border border-gray-200/50 shadow-md"
                         >
                             <ChatResponse content={response} isLoading={isLoading} />
                         </motion.div>
@@ -97,8 +98,8 @@ export default function ChatInput() {
 
                 {/* Input Form */}
                 <form onSubmit={handleSubmit}>
-                    <div className={`chat-container backdrop-blur-sm bg-[#f1f1f1]/90 flex items-center gap-2 p-[6px] rounded-2xl transition-all duration-300 ${
-                        isFocused ? 'shadow-lg bg-[#f1f1f1]/95' : ''
+                    <div className={`chat-container backdrop-blur-sm bg-[#f1f1f1]/80 flex items-center gap-2 p-[6px] rounded-2xl border transition-all duration-300 ${
+                        isFocused ? 'shadow-lg border-gray-300/70 bg-[#f1f1f1]/90' : 'border-gray-200/50'
                     }`}>
                         <div className="flex items-center gap-2 px-3 text-gray-500">
                             <Sparkles className="size-5" />
@@ -117,8 +118,8 @@ export default function ChatInput() {
 
                         <motion.button
                             type="submit"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
                             className={`chat-button flex items-center justify-center p-3 rounded-xl transition-all duration-200 ${
                                 message.trim() && !isLoading
                                     ? 'bg-gray-900 text-white hover:bg-gray-800'

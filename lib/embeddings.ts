@@ -1,41 +1,94 @@
 import OpenAI from 'openai'
 import { ContentNode } from './content-registry'
+import { redisCache } from './redis-cache'
+import { logger } from './logger'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-// Cache for embeddings to avoid recomputation
-const embeddingsCache = new Map<string, number[]>()
-
-// Simple in-memory cache for development
-// In production, you'd use Redis or a database
+// Hybrid caching strategy: Redis (primary) + in-memory (fallback)
 export class EmbeddingsStore {
-  private cache: Map<string, { embedding: number[]; timestamp: number }> = new Map()
-  private readonly CACHE_DURATION = 1000 * 60 * 60 * 24 * 7 // 7 days
+  // In-memory fallback cache for when Redis is unavailable
+  private fallbackCache: Map<string, { embedding: number[]; timestamp: number }> = new Map()
+  private readonly CACHE_DURATION = 1000 * 60 * 60 * 24 * 7 // 7 days for fallback
+  private useRedis = true
 
   async get(key: string): Promise<number[] | null> {
-    const cached = this.cache.get(key)
+    // Try Redis first
+    if (this.useRedis) {
+      try {
+        const cached = await redisCache.getEmbedding(key)
+        if (cached) {
+          logger.debug('EMBEDDINGS', `Cache hit (Redis): ${key.substring(0, 20)}...`)
+          return cached.embedding
+        }
+      } catch (error) {
+        logger.warn('EMBEDDINGS', `Redis unavailable, falling back to memory cache`)
+        this.useRedis = false // Temporarily disable Redis
+        setTimeout(() => { this.useRedis = true }, 60000) // Retry after 1 minute
+      }
+    }
+    
+    // Fallback to in-memory cache
+    const cached = this.fallbackCache.get(key)
     if (!cached) return null
     
     // Check if cache is expired
     if (Date.now() - cached.timestamp > this.CACHE_DURATION) {
-      this.cache.delete(key)
+      this.fallbackCache.delete(key)
       return null
     }
     
+    logger.debug('EMBEDDINGS', `Cache hit (memory): ${key.substring(0, 20)}...`)
     return cached.embedding
   }
 
   async set(key: string, embedding: number[]): Promise<void> {
-    this.cache.set(key, {
+    // Save to Redis (async, don't wait)
+    if (this.useRedis) {
+      redisCache.setEmbedding(key, embedding).catch(error => {
+        logger.warn('EMBEDDINGS', `Failed to cache to Redis: ${error}`)
+      })
+    }
+    
+    // Always save to fallback cache
+    this.fallbackCache.set(key, {
       embedding,
       timestamp: Date.now()
     })
+    
+    // Keep fallback cache size reasonable (LRU-like behavior)
+    if (this.fallbackCache.size > 1000) {
+      const firstKey = this.fallbackCache.keys().next().value
+      this.fallbackCache.delete(firstKey)
+    }
   }
 
   async clear(): Promise<void> {
-    this.cache.clear()
+    // Clear Redis cache
+    if (this.useRedis) {
+      await redisCache.clear('embedding:*')
+    }
+    // Clear in-memory cache
+    this.fallbackCache.clear()
+  }
+  
+  async getStats(): Promise<{
+    redisAvailable: boolean
+    memoryCacheSize: number
+    redisCacheStats?: any
+  }> {
+    const stats: any = {
+      redisAvailable: this.useRedis,
+      memoryCacheSize: this.fallbackCache.size
+    }
+    
+    if (this.useRedis) {
+      stats.redisCacheStats = await redisCache.getStats()
+    }
+    
+    return stats
   }
 }
 
@@ -43,12 +96,13 @@ const embeddingsStore = new EmbeddingsStore()
 
 // Generate embedding for a single text
 export async function generateEmbedding(text: string): Promise<number[]> {
-  // Check cache first
-  const cacheKey = `embed_${Buffer.from(text).toString('base64').substring(0, 50)}`
-  const cached = await embeddingsStore.get(cacheKey)
+  // Use the actual text as cache key (Redis cache will hash it)
+  const cached = await embeddingsStore.get(text)
   if (cached) return cached
 
   try {
+    logger.debug('EMBEDDINGS', `Generating new embedding for text: ${text.substring(0, 50)}...`)
+    
     const response = await openai.embeddings.create({
       model: 'text-embedding-3-small',
       input: text,
@@ -57,11 +111,12 @@ export async function generateEmbedding(text: string): Promise<number[]> {
     const embedding = response.data[0].embedding
     
     // Cache the result
-    await embeddingsStore.set(cacheKey, embedding)
+    await embeddingsStore.set(text, embedding)
     
+    logger.success('EMBEDDINGS', `Generated and cached embedding (${embedding.length} dimensions)`)
     return embedding
   } catch (error) {
-    console.error('Error generating embedding:', error)
+    logger.error('EMBEDDINGS', `Failed to generate embedding: ${error}`)
     // Return empty embedding on error (could implement fallback)
     return []
   }
@@ -191,11 +246,43 @@ export async function findRelatedContent(
 export async function batchEmbedContent(
   contentNodes: ContentNode[]
 ): Promise<Array<{ id: string; embedding: number[]; content: ContentNode }>> {
-  const embeddings = await Promise.all(
-    contentNodes.map(node => embedContent(node))
-  )
+  logger.info('EMBEDDINGS', `Batch embedding ${contentNodes.length} content nodes...`)
+  const startTime = Date.now()
   
-  return embeddings
+  // Process in batches to avoid rate limits
+  const BATCH_SIZE = 10
+  const results: Array<{ id: string; embedding: number[]; content: ContentNode }> = []
+  
+  for (let i = 0; i < contentNodes.length; i += BATCH_SIZE) {
+    const batch = contentNodes.slice(i, i + BATCH_SIZE)
+    const batchResults = await Promise.all(
+      batch.map(node => embedContent(node))
+    )
+    results.push(...batchResults)
+    
+    // Small delay between batches to avoid rate limits
+    if (i + BATCH_SIZE < contentNodes.length) {
+      await new Promise(resolve => setTimeout(resolve, 100))
+    }
+  }
+  
+  const duration = Date.now() - startTime
+  logger.success('EMBEDDINGS', `Batch embedding complete in ${duration}ms`)
+  
+  // Try to save all embeddings to Redis in batch (non-blocking)
+  if (results.length > 0) {
+    redisCache.setEmbeddings(
+      results.map(r => ({
+        text: `${r.content.title} ${r.content.description || ''} ${r.content.tags?.join(' ') || ''}`,
+        embedding: r.embedding,
+        metadata: { contentId: r.id }
+      }))
+    ).catch(error => {
+      logger.warn('EMBEDDINGS', `Failed to batch save to Redis: ${error}`)
+    })
+  }
+  
+  return results
 }
 
 // Group content by similarity

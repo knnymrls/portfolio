@@ -36,9 +36,11 @@ export class HighlightManager {
   
   // Highlight a single element
   async highlight(elementId: string, options: HighlightOptions = {}): Promise<void> {
+    console.log(`🔍 [HIGHLIGHT] Attempting to highlight: ${elementId}`)
+    
     const element = document.getElementById(elementId)
     if (!element) {
-      console.warn(`Element with id "${elementId}" not found`)
+      console.warn(`⚠️ [HIGHLIGHT] Element with id "${elementId}" not found`)
       return
     }
     
@@ -50,8 +52,16 @@ export class HighlightManager {
       intensity = 'medium'
     } = options
     
+    console.log(`🎨 [HIGHLIGHT] Highlighting "${elementId}" with:`, {
+      style,
+      duration: `${duration}ms`,
+      dimOthers,
+      intensity
+    })
+    
     // Scroll to element if needed
     if (scrollBehavior !== 'none') {
+      console.log(`📜 [HIGHLIGHT] Scrolling to element with behavior: ${scrollBehavior}`)
       await this.scrollToElement(element, scrollBehavior)
     }
     
@@ -69,6 +79,7 @@ export class HighlightManager {
     // Auto-remove after duration
     if (duration > 0) {
       setTimeout(() => {
+        console.log(`⏰ [HIGHLIGHT] Auto-removing highlight from: ${elementId}`)
         this.removeHighlight(elementId)
       }, duration)
     }
@@ -76,15 +87,25 @@ export class HighlightManager {
   
   // Highlight multiple elements in sequence
   async highlightSequence(sequence: HighlightSequence[]): Promise<void> {
+    console.log(`🎬 [HIGHLIGHT] Starting highlight sequence with ${sequence.length} items`)
+    
     if (this.sequenceInProgress) {
+      console.log('⏸️ [HIGHLIGHT] Stopping existing sequence')
       await this.stopSequence()
     }
     
     this.sequenceInProgress = true
     this.abortController = new AbortController()
     
-    for (const item of sequence) {
-      if (this.abortController.signal.aborted) break
+    for (let i = 0; i < sequence.length; i++) {
+      const item = sequence[i]
+      
+      if (this.abortController.signal.aborted) {
+        console.log('🚫 [HIGHLIGHT] Sequence aborted')
+        break
+      }
+      
+      console.log(`🎯 [HIGHLIGHT] Sequence item ${i + 1}/${sequence.length}: ${item.elementId}`)
       
       // Clear previous highlights
       this.clearAllHighlights()
@@ -94,6 +115,7 @@ export class HighlightManager {
       
       // If description provided, could trigger AI narration
       if (item.description) {
+        console.log(`📢 [HIGHLIGHT] Announcing: ${item.description}`)
         this.announceHighlight(item.elementId, item.description)
       }
       
@@ -105,13 +127,16 @@ export class HighlightManager {
     }
     
     this.sequenceInProgress = false
+    console.log('✅ [HIGHLIGHT] Sequence completed')
     this.clearAllHighlights()
   }
   
   // Highlight multiple elements simultaneously
   async highlightParallel(elementIds: string[], options: HighlightOptions = {}): Promise<void> {
+    console.log(`🎆 [HIGHLIGHT] Highlighting ${elementIds.length} elements in parallel:`, elementIds)
     const promises = elementIds.map(id => this.highlight(id, options))
     await Promise.all(promises)
+    console.log('✅ [HIGHLIGHT] Parallel highlighting complete')
   }
   
   // Remove specific highlight
@@ -126,6 +151,14 @@ export class HighlightManager {
   
   // Clear all highlights
   clearAllHighlights(): void {
+    console.log(`🧹 [HIGHLIGHT] Clearing all ${this.activeHighlights.size} active highlights`)
+    
+    // Abort any in-progress sequences
+    if (this.sequenceInProgress && this.abortController) {
+      this.abortController.abort()
+      this.sequenceInProgress = false
+    }
+    
     this.activeHighlights.clear()
     this.removeOpacityDimming()
   }
@@ -139,10 +172,24 @@ export class HighlightManager {
     this.clearAllHighlights()
   }
   
+  // Clean up all resources (for memory leak prevention)
+  cleanup(): void {
+    console.log('🧹 [HIGHLIGHT] Cleaning up highlight manager resources')
+    this.clearAllHighlights()
+    
+    // Clear any stored references
+    this.activeHighlights = new Set()
+    this.sequenceInProgress = false
+    
+    // Remove any event listeners (if any were added)
+    // Note: Currently using custom events which auto-cleanup
+  }
+  
   // Private methods
   private applySimpleHighlight(elementId: string): void {
     // Get all major content sections
     const sections = document.querySelectorAll('section, article, .case-study-card, [data-highlight-id]')
+    console.log(`🎨 [HIGHLIGHT] Applying simple highlight style to ${elementId}, dimming ${sections.length} sections`)
     
     sections.forEach((section) => {
       const sectionElement = section as HTMLElement
@@ -159,6 +206,7 @@ export class HighlightManager {
         sectionElement.style.transition = 'opacity 0.3s ease-in-out'
       } else {
         // Keep highlighted element at full opacity
+        console.log(`✨ [HIGHLIGHT] Keeping element at full opacity: ${sectionElement.id || 'unnamed'}`)
         sectionElement.style.opacity = '1'
         sectionElement.style.transition = 'opacity 0.3s ease-in-out'
       }
