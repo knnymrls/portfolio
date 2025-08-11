@@ -159,7 +159,7 @@ export class CommandProcessor {
       }
     }
     
-    logger.debug('COMMAND-PROCESSOR', `Detected commands from query: ${JSON.stringify(detectedCommands)}`)
+    logger.debug('AI', `Detected commands from query: ${JSON.stringify(detectedCommands)}`)
     return detectedCommands
   }
   
@@ -172,7 +172,7 @@ export class CommandProcessor {
     // Check if navigation is expected
     if (lowerQuery.includes('show') || lowerQuery.includes('navigate') || lowerQuery.includes('go to')) {
       if (!commands.navigate && !commands.navigatePage && !commands.presentProjects) {
-        logger.warn('COMMAND-PROCESSOR', 'Expected navigation command not found')
+        logger.warn('AI', 'Expected navigation command not found')
         return false
       }
     }
@@ -181,7 +181,7 @@ export class CommandProcessor {
     if (lowerQuery.includes('highlight') || lowerQuery.includes('tell me about') || 
         lowerQuery.includes('nural') || lowerQuery.includes('flock') || lowerQuery.includes('findu')) {
       if (!commands.highlight || commands.highlight.length === 0) {
-        logger.warn('COMMAND-PROCESSOR', 'Expected highlight command not found')
+        logger.warn('AI', 'Expected highlight command not found')
         return false
       }
     }
@@ -208,7 +208,7 @@ export class CommandProcessor {
       
       if (highlights.length > 0) {
         commands.highlight = highlights
-        logger.info('COMMAND-PROCESSOR', `Injected highlight commands: ${highlights.join(', ')}`)
+        logger.info('AI', `Injected highlight commands: ${highlights.join(', ')}`)
       }
     }
     
@@ -219,7 +219,7 @@ export class CommandProcessor {
           lowerResponse.includes('let me show you')) {
         commands.presentProjects = true
         commands.navigate = 'case-studies'
-        logger.info('COMMAND-PROCESSOR', 'Injected project presentation commands')
+        logger.info('AI', 'Injected project presentation commands')
       }
     }
     
@@ -230,14 +230,14 @@ export class CommandProcessor {
    * Process AI response and ensure it has proper commands
    */
   processResponse(query: string, aiResponse: string): ProcessedResponse {
-    logger.debug('COMMAND-PROCESSOR', 'Processing AI response')
+    logger.debug('AI', 'Processing AI response')
     
     // Step 1: Extract existing commands
     let commands = this.extractCommands(aiResponse)
     
     // Step 2: If no commands found, try to detect from query
     if (Object.keys(commands).length === 0) {
-      logger.warn('COMMAND-PROCESSOR', 'No commands found in AI response, detecting from query')
+      logger.warn('AI', 'No commands found in AI response, detecting from query')
       commands = this.detectIntentAndGenerateCommands(query)
     }
     
@@ -251,7 +251,7 @@ export class CommandProcessor {
     
     // Step 5: Log results
     const hasCommands = Object.keys(commands).length > 0
-    logger.info('COMMAND-PROCESSOR', `Processed response - Has commands: ${hasCommands}`, commands)
+    logger.info('AI', `Processed response - Has commands: ${hasCommands}`, commands)
     
     return {
       commands,

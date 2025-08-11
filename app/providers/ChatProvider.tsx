@@ -34,9 +34,9 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       highlightManager.clearAllHighlights()
       elementObserver.cleanup()
       // Clear any pending timeouts/intervals
-      const highestTimeoutId = setTimeout(() => {}, 0)
+      const highestTimeoutId = setTimeout(() => {}, 0) as unknown as number
       for (let i = 0; i < highestTimeoutId; i++) {
-        clearTimeout(i)
+        clearTimeout(i as unknown as NodeJS.Timeout)
       }
     }
   }, [pathname])
@@ -281,6 +281,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
             router.push('/')
             
             // Use observer to wait for elements instead of fixed timeout
+            const elementsToHighlight = projectsToHighlight.map(id => elementIdMap[id] || id)
             const firstElementId = elementsToHighlight[0]
             elementObserver.waitForElement(
               firstElementId,

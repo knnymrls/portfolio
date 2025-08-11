@@ -61,7 +61,9 @@ export class EmbeddingsStore {
     // Keep fallback cache size reasonable (LRU-like behavior)
     if (this.fallbackCache.size > 1000) {
       const firstKey = this.fallbackCache.keys().next().value
-      this.fallbackCache.delete(firstKey)
+      if (firstKey !== undefined) {
+        this.fallbackCache.delete(firstKey)
+      }
     }
   }
 
