@@ -6,6 +6,8 @@ import Navigation from './components/Navigation'
 import HeroSection from './components/HeroSection'
 import CaseStudiesSection from './components/CaseStudiesSection'
 import ExperimentsSection from './components/ExperimentsSection'
+import VenturesSection from './components/VenturesSection'
+import AboutSection from './components/AboutSection'
 import { useNavigation } from './hooks/useNavigation'
 import { useProjectPresentation } from './hooks/useProjectPresentation'
 import { SectionId, TabType } from './types'
@@ -70,17 +72,33 @@ export default function PortfolioPage() {
           className="relative box-border content-stretch flex flex-col gap-[108px] items-start justify-start p-0 top-[165px] w-full max-w-[1000px] mx-auto px-6 pb-32"
           style={{ zIndex: Z_INDEX.CONTENT }}
         >
-          <section ref={refs.heroRef} id="hero">
-            <HeroSection />
-          </section>
+          {activeTab === 'work' && (
+            <>
+              <section ref={refs.heroRef} id="hero">
+                <HeroSection />
+              </section>
 
-          <section ref={refs.caseStudiesRef} id="case-studies">
-            <CaseStudiesSection highlightedProjectId={currentlyHighlightedProject} />
-          </section>
+              <section ref={refs.caseStudiesRef} id="case-studies">
+                <CaseStudiesSection highlightedProjectId={currentlyHighlightedProject} />
+              </section>
 
-          <section ref={refs.experimentsRef} id="experiments">
-            <ExperimentsSection />
-          </section>
+              <section ref={refs.experimentsRef} id="experiments">
+                <ExperimentsSection />
+              </section>
+            </>
+          )}
+
+          {activeTab === 'ventures' && (
+            <section id="ventures">
+              <VenturesSection highlightedVentureId={currentlyHighlightedProject} />
+            </section>
+          )}
+
+          {activeTab === 'about' && (
+            <section id="about">
+              <AboutSection />
+            </section>
+          )}
         </div>
       </div>
     </div>
