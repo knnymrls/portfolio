@@ -21,6 +21,11 @@ export interface ChatResponse {
   navigatePage?: string
   presentProjects?: boolean
   highlightProject?: string
+  metadata?: {
+    planSummary?: string
+    estimatedDuration?: number
+    debug?: any
+  }
 }
 
 export type SectionId = 'hero' | 'case-studies' | 'experiments' | 'top'
