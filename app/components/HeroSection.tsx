@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, Github, Linkedin, FileText } from 'lucide-react'
+import { Mail, FileText } from 'lucide-react'
+import Image from 'next/image'
 
 export default function HeroSection() {
     const fadeInUp = {
@@ -24,7 +25,7 @@ export default function HeroSection() {
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="box-border content-stretch flex flex-col lg:flex-row gap-9 items-start justify-start p-0 relative shrink-0 w-full"
+            className="box-border content-stretch flex flex-col lg:flex-row gap-9 items-center justify-between p-0 relative shrink-0 w-full"
         >
             <motion.div
                 variants={fadeInUp}
@@ -59,7 +60,9 @@ export default function HeroSection() {
                         whileTap={{ scale: 0.95 }}
                         className="btn-primary box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 transition-colors"
                     >
-                        <Github className="size-7" />
+                        <svg className="size-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+                        </svg>
                     </motion.button>
 
                     <motion.button
@@ -67,7 +70,9 @@ export default function HeroSection() {
                         whileTap={{ scale: 0.95 }}
                         className="btn-primary box-border content-stretch flex flex-row gap-2.5 items-center justify-center p-[12px] relative rounded-[13px] shrink-0 transition-colors"
                     >
-                        <Linkedin className="size-7" />
+                        <svg className="size-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
                     </motion.button>
 
                     <motion.button
@@ -80,172 +85,33 @@ export default function HeroSection() {
                 </motion.div>
             </motion.div>
 
-            {/* Interactive Tech Stack Visualization */}
-            <div className="relative w-[400px] h-[300px] hidden lg:block">
-                {/* Floating Tech Icons */}
+            {/* Hero Image */}
+            <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="relative w-[280px] h-[280px] hidden lg:block flex-shrink-0"
+            >
                 <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                    className="absolute top-0 left-0 z-10"
+                    animate={{ 
+                        y: [0, -10, 0]
+                    }}
+                    transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                    className="relative w-full h-full"
                 >
-                    <motion.div
-                        animate={{ 
-                            y: [0, -10, 0],
-                            rotate: [0, 5, 0]
-                        }}
-                        transition={{ 
-                            duration: 4, 
-                            repeat: Infinity, 
-                            ease: "easeInOut" 
-                        }}
-                        className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-4 shadow-lg backdrop-blur-sm"
-                    >
-                        <div className="text-white text-center">
-                            <div className="text-2xl font-bold mb-1">⚡</div>
-                            <div className="text-sm font-semibold">Next.js</div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7, duration: 0.8 }}
-                    className="absolute top-[120px] left-[20px] z-20"
-                >
-                    <motion.div
-                        animate={{ 
-                            y: [0, 10, 0],
-                            rotate: [0, -3, 0]
-                        }}
-                        transition={{ 
-                            duration: 3, 
-                            repeat: Infinity, 
-                            ease: "easeInOut",
-                            delay: 0.5
-                        }}
-                        className="bg-gradient-to-br from-green-500 to-teal-600 rounded-2xl p-4 shadow-lg backdrop-blur-sm"
-                    >
-                        <div className="text-white text-center">
-                            <div className="text-2xl font-bold mb-1">🧠</div>
-                            <div className="text-sm font-semibold">AI/ML</div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.9, duration: 0.8 }}
-                    className="absolute top-[30px] right-0 z-30"
-                >
-                    <motion.div
-                        animate={{ 
-                            y: [0, -15, 0],
-                            rotate: [0, 2, 0]
-                        }}
-                        transition={{ 
-                            duration: 5, 
-                            repeat: Infinity, 
-                            ease: "easeInOut",
-                            delay: 1
-                        }}
-                        className="bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl p-4 shadow-lg backdrop-blur-sm"
-                    >
-                        <div className="text-white text-center">
-                            <div className="text-2xl font-bold mb-1">⚛️</div>
-                            <div className="text-sm font-semibold">React</div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.1, duration: 0.8 }}
-                    className="absolute top-[180px] right-[40px] z-40"
-                >
-                    <motion.div
-                        animate={{ 
-                            y: [0, 12, 0],
-                            rotate: [0, -4, 0]
-                        }}
-                        transition={{ 
-                            duration: 4.5, 
-                            repeat: Infinity, 
-                            ease: "easeInOut",
-                            delay: 1.5
-                        }}
-                        className="bg-gradient-to-br from-indigo-500 to-purple-700 rounded-2xl p-4 shadow-lg backdrop-blur-sm"
-                    >
-                        <div className="text-white text-center">
-                            <div className="text-2xl font-bold mb-1">🔷</div>
-                            <div className="text-sm font-semibold">TypeScript</div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                {/* Floating Code Snippet */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.3, duration: 1 }}
-                    className="absolute bottom-0 left-[100px] z-50"
-                >
-                    <motion.div
-                        animate={{ 
-                            scale: [1, 1.05, 1]
-                        }}
-                        transition={{ 
-                            duration: 6, 
-                            repeat: Infinity, 
-                            ease: "easeInOut" 
-                        }}
-                        className="bg-gray-900/90 backdrop-blur-md rounded-xl p-3 shadow-xl border border-gray-700"
-                    >
-                        <div className="font-mono text-xs text-green-400">
-                            <div className="text-gray-500 mb-1">// Building the future</div>
-                            <div className="text-blue-400">const</div>
-                            <span className="text-white"> magic = </span>
-                            <span className="text-green-300">await</span>
-                            <br />
-                            <div className="ml-2">
-                                <span className="text-purple-400">AI</span>
-                                <span className="text-white">.</span>
-                                <span className="text-yellow-400">create</span>
-                                <span className="text-white">(</span>
-                                <span className="text-orange-400">'amazing'</span>
-                                <span className="text-white">)</span>
-                            </div>
-                        </div>
-                    </motion.div>
-                </motion.div>
-
-                {/* Decorative Particles */}
-                {[...Array(6)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ opacity: 0 }}
-                        animate={{ 
-                            opacity: [0, 1, 0],
-                            scale: [0.5, 1, 0.5],
-                            y: [0, -20, -40]
-                        }}
-                        transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: i * 0.5,
-                            ease: "easeOut"
-                        }}
-                        className="absolute w-2 h-2 bg-blue-400 rounded-full"
-                        style={{
-                            left: `${20 + i * 60}px`,
-                            top: `${250 + (i % 2) * 20}px`,
-                        }}
+                    <Image
+                        src="/hero-img.svg"
+                        alt="Kenny Morales"
+                        fill
+                        className="object-contain"
+                        priority
                     />
-                ))}
-            </div>
+                </motion.div>
+            </motion.div>
         </motion.div>
     )
 } 
