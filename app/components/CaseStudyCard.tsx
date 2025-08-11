@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ExternalLink, Clock } from 'lucide-react'
 
 interface CaseStudyCardProps {
+    id: string
     title: string
     description: string
     readTime?: string
@@ -16,6 +17,7 @@ interface CaseStudyCardProps {
 }
 
 export default function CaseStudyCard({
+    id,
     title,
     description,
     readTime,
@@ -28,6 +30,7 @@ export default function CaseStudyCard({
 }: CaseStudyCardProps) {
     return (
         <motion.div
+            id={`project-${id}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}

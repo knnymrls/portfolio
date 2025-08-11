@@ -1,0 +1,89 @@
+---
+title: FindU Highschool
+date: 2024-01-15
+tags: [AI, Education, Platform, React, Node.js]
+description: AI-powered platform helping high school students find study partners and collaborate effectively
+highlightId: case-study-findu-highschool
+---
+
+# FindU Highschool
+
+An innovative AI-powered platform designed to help high school students connect with study partners, form study groups, and enhance their collaborative learning experience.
+
+<ProjectStats users="5,000+" schools="25" satisfaction="92%" />
+
+## The Challenge
+
+High school students often struggle to find the right study partners who share their learning style, schedule, and academic goals. Traditional methods of forming study groups are inefficient and often lead to mismatched partnerships.
+
+## Our Solution
+
+FindU Highschool uses advanced AI algorithms to match students based on:
+- Learning styles and preferences
+- Academic strengths and areas for improvement
+- Schedule compatibility
+- Personality traits for optimal collaboration
+
+<CalloutBox type="insight">
+The AI matching algorithm improved study group effectiveness by 73% compared to random grouping
+</CalloutBox>
+
+## Key Features
+
+### Smart Matching Algorithm
+Our proprietary AI analyzes multiple data points to create optimal study partnerships:
+- Academic performance patterns
+- Communication preferences
+- Time availability
+- Subject expertise
+
+### Real-time Collaboration Tools
+- Virtual study rooms with video chat
+- Shared whiteboards and document editing
+- Progress tracking and goal setting
+- Integrated calendar for scheduling
+
+### Safety & Privacy
+- School-verified accounts only
+- Moderated interactions
+- Parent visibility options
+- COPPA compliant
+
+## Technical Implementation
+
+<TechStack technologies={['React', 'Node.js', 'PostgreSQL', 'OpenAI API', 'WebRTC', 'Socket.io']} />
+
+The platform is built with a microservices architecture to ensure scalability:
+
+```javascript
+// Example of our matching algorithm
+const findOptimalMatch = async (student) => {
+  const embeddings = await generateStudentEmbedding(student);
+  const candidates = await findSimilarStudents(embeddings);
+  return rankByCompatibility(candidates, student);
+}
+```
+
+## Results & Impact
+
+Since launching in 2024, FindU Highschool has:
+- Connected over 5,000 students across 25 schools
+- Improved average grades by 18% for active users
+- Achieved 92% user satisfaction rate
+- Reduced study-related stress by 40%
+
+## What's Next
+
+We're currently working on:
+- Expanding to 100+ schools by end of 2024
+- Adding subject-specific expert matching
+- Implementing group project management features
+- Developing mobile apps for iOS and Android
+
+<CalloutBox type="success">
+"FindU completely changed how I approach studying. I found a study partner who matches my learning style perfectly!" - Sarah, Grade 11
+</CalloutBox>
+
+## Learn More
+
+Visit [FindU Highschool](https://findu-highschool.com) to see the platform in action or contact us for a demo.

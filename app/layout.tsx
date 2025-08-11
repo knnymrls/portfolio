@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import '@/app/globals.css'
+import '@/app/styles/highlight.css'
+import { ChatProvider } from './providers/ChatProvider'
+import ChatInput from './components/ChatInput'
 
 export const metadata: Metadata = {
   title: 'Kenny Morales - Portfolio',
@@ -19,7 +22,12 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet" />
       </head>
       <body className="antialiased font-['Sora',_sans-serif]">
-        {children}
+        <ChatProvider>
+          <div className="relative min-h-screen">
+            {children}
+            <ChatInput />
+          </div>
+        </ChatProvider>
       </body>
     </html>
   )

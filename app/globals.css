@@ -96,6 +96,23 @@ body {
   border-color: #d1d5db;
 }
 
+/* Animation classes for server components */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
 /* Background pattern layer */
 .bg-pattern {
   background-color: #fbfbfb;

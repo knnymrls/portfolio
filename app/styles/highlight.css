@@ -1,0 +1,274 @@
+/* Universal Highlighting System Styles */
+
+/* Overlay for dimming effect */
+.highlight-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 9998;
+  animation: fadeIn 0.3s ease-in-out;
+  backdrop-filter: blur(2px);
+}
+
+/* Body class when highlighting is active */
+.highlighting-active {
+  overflow-x: hidden;
+}
+
+/* Highlighted elements appear above overlay */
+.highlighted-element {
+  position: relative;
+  z-index: 9999 !important;
+  isolation: isolate;
+}
+
+/* Spotlight effect */
+.highlight-spotlight {
+  position: relative;
+  animation: spotlightPulse 2s ease-in-out infinite;
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.5),
+    0 0 20px rgba(59, 130, 246, 0.4),
+    0 0 40px rgba(59, 130, 246, 0.3),
+    0 0 80px rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.highlight-spotlight::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: spotlightRotate 4s linear infinite;
+}
+
+/* Glow effect */
+.highlight-glow {
+  position: relative;
+  animation: glowPulse 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+  transition: all 0.3s ease-in-out;
+}
+
+.highlight-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  pointer-events: none;
+  animation: glowShimmer 2s linear infinite;
+}
+
+/* Pulse effect */
+.highlight-pulse {
+  position: relative;
+  animation: pulseScale 1s ease-in-out infinite;
+  outline: 2px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 4px;
+  transition: all 0.3s ease-in-out;
+}
+
+.highlight-pulse::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  border-radius: inherit;
+  animation: pulseExpand 1.5s ease-out infinite;
+}
+
+/* Border effect */
+.highlight-border {
+  position: relative;
+  border: 3px solid transparent;
+  background-image: linear-gradient(white, white),
+                    linear-gradient(45deg, #3b82f6, #8b5cf6);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.highlight-border::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0.3;
+  animation: borderRotate 3s linear infinite;
+}
+
+/* Intensity modifiers */
+.highlight-low {
+  --highlight-opacity: 0.3;
+}
+
+.highlight-medium {
+  --highlight-opacity: 0.6;
+}
+
+.highlight-high {
+  --highlight-opacity: 0.9;
+}
+
+/* Apply intensity to effects */
+.highlight-spotlight.highlight-low {
+  box-shadow: 
+    0 0 0 2px rgba(59, 130, 246, 0.3),
+    0 0 10px rgba(59, 130, 246, 0.2),
+    0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.highlight-spotlight.highlight-high {
+  box-shadow: 
+    0 0 0 6px rgba(59, 130, 246, 0.7),
+    0 0 30px rgba(59, 130, 246, 0.6),
+    0 0 60px rgba(59, 130, 246, 0.5),
+    0 0 120px rgba(59, 130, 246, 0.4);
+}
+
+.highlight-glow.highlight-low {
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+}
+
+.highlight-glow.highlight-high {
+  filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.9));
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spotlightPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes spotlightRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes glowShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes pulseScale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulseExpand {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes borderRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .highlight-overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  .highlight-spotlight,
+  .highlight-glow,
+  .highlight-pulse {
+    --highlight-color: #60a5fa;
+  }
+  
+  .highlight-border {
+    background-image: linear-gradient(#1f2937, #1f2937),
+                      linear-gradient(45deg, #60a5fa, #a78bfa);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .highlight-spotlight::before,
+  .highlight-glow::after,
+  .highlight-pulse::before {
+    display: none; /* Reduce performance impact on mobile */
+  }
+  
+  .highlight-spotlight,
+  .highlight-glow,
+  .highlight-pulse,
+  .highlight-border {
+    animation-duration: 2s; /* Slower animations on mobile */
+  }
+}

@@ -1,0 +1,133 @@
+---
+title: Building with AI in 2024 - Lessons from the Trenches
+date: 2024-11-10
+tags: [AI, Development, Insights, OpenAI]
+description: Real insights from building AI-powered applications, including what works, what doesn't, and what surprised me
+highlightId: blog-ai-2024
+---
+
+# Building with AI in 2024: Lessons from the Trenches
+
+After spending the last year building multiple AI-powered applications, I've learned that the reality of AI development is quite different from the hype. Here's what I've discovered.
+
+## The Reality Check
+
+When I started building AI features into my portfolio projects, I expected the hardest part would be the ML algorithms. I was wrong. The real challenges were much more human:
+
+<CalloutBox type="insight">
+The hardest part of AI development isn't the AI - it's designing experiences that feel magical rather than mechanical
+</CalloutBox>
+
+## Key Lessons Learned
+
+### 1. Embeddings Are Your Secret Weapon
+
+Forget keyword matching. Semantic search using embeddings has been a game-changer for every project:
+
+```python
+# This simple function replaced thousands of lines of search logic
+def semantic_search(query, documents):
+    query_embedding = embed(query)
+    similarities = [cosine_similarity(query_embedding, doc.embedding) 
+                   for doc in documents]
+    return sorted(documents, key=lambda x: similarities[x.id])
+```
+
+The magic? Users can search for "AI projects" and find content about "machine learning", "neural networks", and "deep learning" without any manual tagging.
+
+### 2. Context Windows Are Everything
+
+GPT-4's 128k context window sounds huge until you realize:
+- System prompts eat up 2-5k tokens
+- Conversation history grows quickly
+- You need room for the response
+
+My solution: **Smart context management**
+- Summarize older messages
+- Extract key facts into a knowledge base
+- Use embeddings to retrieve only relevant context
+
+### 3. Prompt Engineering Is Software Engineering
+
+Prompts are code. Treat them that way:
+
+```typescript
+// Bad: Inline prompts everywhere
+const response = await openai.complete("You are a helpful assistant...")
+
+// Good: Versioned, tested, modular prompts
+import { ASSISTANT_PROMPT_V2 } from '@/prompts/assistant'
+const response = await openai.complete(ASSISTANT_PROMPT_V2)
+```
+
+### 4. Users Don't Want AI, They Want Magic
+
+Nobody cares that you're using GPT-4. They care that:
+- Their content gets organized automatically
+- They find what they need instantly
+- Complex tasks become simple
+
+<CalloutBox type="warning">
+Stop advertising "AI-powered" - start demonstrating value
+</CalloutBox>
+
+## The Unexpected Discoveries
+
+### Hallucinations Can Be Features
+In my writing assistant, controlled hallucination became "creative suggestions". The key? Being transparent about what's fact vs. inspiration.
+
+### Latency Isn't Always Bad
+Adding a 2-second "thinking" animation actually increased user trust. People expect AI to think, not respond instantly.
+
+### Simple Beats Complex
+My most successful AI feature? A one-click "improve this" button. Not a complex agent system, just simple, focused value.
+
+## Technical Insights
+
+### The Stack That Works
+
+After trying everything, here's my go-to AI stack:
+
+<TechStack technologies={['Next.js', 'OpenAI API', 'Pinecone', 'LangChain', 'Vercel']} />
+
+### Cost Management
+
+AI APIs are expensive. Here's how I keep costs reasonable:
+1. **Cache aggressively** - Same query? Same response
+2. **Use smaller models when possible** - GPT-3.5 for summaries, GPT-4 for complex reasoning
+3. **Stream responses** - Users see progress, you can cut off if needed
+
+## What's Next
+
+The AI landscape is evolving rapidly. Here's what I'm excited about:
+
+### Multi-modal Everything
+Text + images + code in the same context. The possibilities are endless.
+
+### Local Models
+Llama 3 and others are getting good enough to run locally for many use cases.
+
+### Agent Systems
+Moving from single prompts to autonomous agents that can plan and execute complex tasks.
+
+## My Advice for AI Builders
+
+1. **Start with the user problem**, not the AI solution
+2. **Build feedback loops early** - AI improves with data
+3. **Be transparent** about AI limitations
+4. **Focus on augmentation**, not replacement
+5. **Test with real users** - they'll use AI in ways you never imagined
+
+<CalloutBox type="success">
+The best AI applications don't feel like AI at all - they just feel like magic
+</CalloutBox>
+
+## Let's Connect
+
+I'm always excited to talk about AI development. If you're building something cool or have questions about any of the techniques I've mentioned, reach out!
+
+Working on something similar? I'd love to compare notes and share more detailed insights.
+
+---
+
+*This post is part of my ongoing series about building modern applications. Follow me for more insights from the trenches of software development.*

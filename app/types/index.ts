@@ -18,6 +18,7 @@ export interface Project {
 export interface ChatResponse {
   reply: string
   navigationAction?: string
+  navigatePage?: string
   presentProjects?: boolean
   highlightProject?: string
 }

@@ -1,93 +1,55 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Navigation from './components/Navigation'
 import HeroSection from './components/HeroSection'
 import CaseStudiesSection from './components/CaseStudiesSection'
 import ExperimentsSection from './components/ExperimentsSection'
-import ChatInput from './components/ChatInput'
 import { useNavigation } from './hooks/useNavigation'
 import { useProjectPresentation } from './hooks/useProjectPresentation'
-import { SectionId, TabType, ChatResponse } from './types'
+import { SectionId, TabType } from './types'
 import { projects } from './utils/projectData'
 import { PRESENTATION_TIMING, Z_INDEX } from './constants'
 
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState<TabType>('work')
-  const [chatResponse, setChatResponse] = useState<string>('')
-  const [isLoading, setIsLoading] = useState(false)
   const [isPresentingProjects, setIsPresentingProjects] = useState(false)
   const [highlightedProject, setHighlightedProject] = useState<string | null>(null)
-  const [currentProjectName, setCurrentProjectName] = useState<string>('')
 
   const { refs, navigateToSection } = useNavigation()
   const { getCurrentProject, startPresentation, stopPresentation } = useProjectPresentation()
 
-  const handleChatMessage = async (message: string) => {
-    setIsLoading(true)
-    setChatResponse('')
-
-    try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message }),
+  // Listen for project presentation events from ChatProvider
+  useEffect(() => {
+    const handlePresentProjects = (event: CustomEvent) => {
+      setIsPresentingProjects(true)
+      startPresentation((projectId: string, description: string) => {
+        const project = projects.find(p => p.id === projectId)
+        setHighlightedProject(projectId)
+      }).then(() => {
+        setIsPresentingProjects(false)
+        setHighlightedProject(null)
       })
-
-      const data: ChatResponse = await response.json()
-
-      if (response.ok) {
-        setChatResponse(data.reply)
-
-        // Handle navigation if requested
-        if (data.navigationAction) {
-          setTimeout(() => {
-            navigateToSection(data.navigationAction as SectionId)
-          }, PRESENTATION_TIMING.SCROLL_DELAY)
-        }
-
-        // Handle project presentation if requested
-        if (data.presentProjects) {
-          setTimeout(() => {
-            setIsPresentingProjects(true)
-            startPresentation((projectId: string, description: string) => {
-              // Update chat response with current project info
-              const project = projects.find(p => p.id === projectId)
-              setChatResponse(`Currently highlighting: ${project?.title} - ${description}`)
-              setHighlightedProject(projectId)
-              setCurrentProjectName(project?.title || 'Project')
-            }).then(() => {
-              // Presentation completed
-              setIsPresentingProjects(false)
-              setHighlightedProject(null)
-              setCurrentProjectName('')
-              setChatResponse('That concludes the project showcase! Feel free to ask about any specific project.')
-            })
-          }, PRESENTATION_TIMING.PRESENTATION_START_DELAY)
-        }
-
-        // Handle single project highlight
-        if (data.highlightProject && !data.presentProjects) {
-          setTimeout(() => {
-            setHighlightedProject(data.highlightProject || null)
-          }, PRESENTATION_TIMING.SCROLL_DELAY)
-        }
-      } else {
-        setChatResponse('Sorry, I encountered an error. Please try again.')
-      }
-    } catch (error) {
-      setChatResponse('Sorry, I encountered an error. Please try again.')
-    } finally {
-      setIsLoading(false)
     }
-  }
 
-  const handleClearResponse = () => {
-    setChatResponse('')
-  }
+    const handleHighlightElement = (event: CustomEvent) => {
+      const { elementId } = event.detail
+      setHighlightedProject(elementId)
+      // Clear highlight after some time
+      setTimeout(() => {
+        setHighlightedProject(null)
+      }, PRESENTATION_TIMING.PROJECT_DURATION)
+    }
+
+    window.addEventListener('presentProjects', handlePresentProjects as EventListener)
+    window.addEventListener('highlightElement', handleHighlightElement as EventListener)
+
+    return () => {
+      window.removeEventListener('presentProjects', handlePresentProjects as EventListener)
+      window.removeEventListener('highlightElement', handleHighlightElement as EventListener)
+    }
+  }, [startPresentation])
 
   // Get current presenting project ID for highlighting
   const currentProject = getCurrentProject()
@@ -120,15 +82,6 @@ export default function PortfolioPage() {
             <ExperimentsSection />
           </section>
         </div>
-
-        <ChatInput
-          response={chatResponse}
-          isLoading={isLoading}
-          onSendMessage={handleChatMessage}
-          onClearResponse={handleClearResponse}
-          showTimer={isPresentingProjects && !!highlightedProject}
-          timerDuration={PRESENTATION_TIMING.PROJECT_DURATION}
-        />
       </div>
     </div>
   )
