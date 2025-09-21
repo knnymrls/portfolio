@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Sora, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { NavigationBar } from "@/components/ui/NavigationBar";
-import { ChatbotInterface } from "@/components/ui/ChatbotInterface";
+import { AIChat } from "@/components/ai/AIChat";
 import Footer from "@/components/layout/Footer";
 
 const sora = Sora({ subsets: ["latin"] });
@@ -32,7 +32,7 @@ export default function RootLayout({
         <NavigationBar tabs={navigationTabs} />
         <main className="min-h-screen">{children}</main>
         <Footer />
-        <ChatbotInterface />
+        <AIChat />
       </body>
     </html>
   );
