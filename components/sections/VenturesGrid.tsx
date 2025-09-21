@@ -128,7 +128,7 @@ export default function VenturesGrid() {
               <div className="p-5 pb-6 flex flex-col h-full">
                 {/* Logo Area */}
                 <div
-                  className={`flex-1 ${venture.backgroundColor} rounded-[20px] overflow-hidden relative flex items-center justify-center mb-4 min-h-[189px]`}
+                  className={`h-[189px] ${venture.backgroundColor} rounded-[20px] overflow-hidden relative flex items-center justify-center mb-4`}
                 >
                   {venture.customLogo ? (
                     venture.customLogo

@@ -6,9 +6,9 @@ import { ChatbotInterface } from "@/components/ui/ChatbotInterface";
 import Footer from "@/components/layout/Footer";
 
 const sora = Sora({ subsets: ["latin"] });
-const plusJakarta = Plus_Jakarta_Sans({ 
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta"
+  variable: "--font-plus-jakarta",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +19,6 @@ export const metadata: Metadata = {
 const navigationTabs = [
   { label: "Work", href: "/" },
   { label: "Ventures", href: "/ventures" },
-  { label: "About", href: "/about" },
 ];
 
 export default function RootLayout({

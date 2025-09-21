@@ -21,9 +21,9 @@ export function NavigationBar({ tabs, className }: NavigationBarProps) {
     <div
       className={cn(
         "fixed top-6 left-1/2 -translate-x-1/2 z-50",
-        "backdrop-blur-[2px] bg-white",
+        "backdrop-blur-[2px] bg-surface",
         "flex gap-2 items-center justify-center p-1.5",
-        "rounded-[12px] border border-neutral-200",
+        "rounded-[12px] border border-border",
         className
       )}
     >
@@ -44,9 +44,10 @@ export function NavigationBar({ tabs, className }: NavigationBarProps) {
               "transition-all duration-200",
               "w-[103px]",
               "font-['Sora',_sans-serif]",
+              "border border-transparent",
               isActive
-                ? "bg-neutral-200 text-[#333333] font-semibold"
-                : "text-[#6f6f6f] font-normal hover:bg-neutral-100"
+                ? "bg-nav-active text-foreground font-semibold"
+                : "text-surface-secondary font-normal hover:bg-nav-inactive hover:border-border"
             )}
           >
             {tab.label}

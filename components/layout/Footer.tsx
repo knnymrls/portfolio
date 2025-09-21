@@ -1,55 +1,55 @@
-import Link from 'next/link';
-import { Github, Linkedin, Instagram, FileText } from 'lucide-react';
+import Link from "next/link";
+import { Github, Linkedin, Instagram, FileText } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="w-full mt-20 border-t border-border bg-background">
-      <div className="max-w-[1280px] mx-auto px-6 py-16">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+    <footer className="w-full ">
+      <div className="max-w-[1000px] mx-auto px-4 py-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left side - Name and copyright */}
           <div className="text-center md:text-left">
-            <p className="text-sm text-surface-secondary">
-              © {currentYear} Kenny Morales
+            <p className="text-sm font-medium text-surface-secondary">
+              knnymrls - {currentYear}
             </p>
           </div>
 
           {/* Right side - Social links */}
           <div className="flex items-center gap-2">
-            <Link 
+            <Link
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3.5 rounded-[13px] border border-border bg-surface hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
               aria-label="GitHub"
             >
-              <Github className="w-5 h-5 text-foreground" />
+              <Github className="w-4 h-4 text-foreground" />
             </Link>
-            <Link 
+            <Link
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3.5 rounded-[13px] border border-border bg-surface hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
               aria-label="LinkedIn"
             >
-              <Linkedin className="w-5 h-5 text-foreground" />
+              <Linkedin className="w-4 h-4 text-foreground" />
             </Link>
-            <Link 
+            <Link
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3.5 rounded-[13px] border border-border bg-surface hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
               aria-label="Instagram"
             >
-              <Instagram className="w-5 h-5 text-foreground" />
+              <Instagram className="w-4 h-4 text-foreground" />
             </Link>
-            <Link 
+            <Link
               href="/resume"
-              className="p-3.5 rounded-[13px] border border-border bg-surface hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
               aria-label="Resume"
             >
-              <FileText className="w-5 h-5 text-foreground" />
+              <FileText className="w-4 h-4 text-foreground" />
             </Link>
           </div>
         </div>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 
 export interface ProjectCardProps {
   name: string;
@@ -27,7 +26,15 @@ export function ProjectCard({
   customFont,
 }: ProjectCardProps) {
   return (
-    <div className="bg-surface rounded-[20px] border border-border overflow-hidden h-full">
+    <div className="group bg-surface rounded-[20px] border border-border overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-foreground/20 cursor-pointer relative">
+      <Link
+        href={href}
+        className="absolute inset-0 z-10"
+        aria-label={`View ${name} project`}
+      >
+        <span className="sr-only">View {name}</span>
+      </Link>
+
       <div className="p-5 pb-6 flex flex-col h-full">
         {/* Logo Area - Fixed height */}
         <div
@@ -65,7 +72,7 @@ export function ProjectCard({
           </div>
 
           {/* Description - Takes remaining space */}
-          <p className="text-xl text-foreground font-normal tracking-[0.4px] leading-[1.4] flex-1">
+          <p className="text-xl text-foreground font-medium tracking-[0.4px] leading-[1.4] flex-1">
             {description}
           </p>
         </div>
