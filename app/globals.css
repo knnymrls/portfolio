@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbfbfb;
+  --foreground: #333333;
+  --surface: #ffffff;
+  --surface-secondary: #6f6f6f;
+  --border: #e5e5e5;
+  
+  --project-findu: #ff6b6b;
+  --project-mkrs: #2b2b2b;
+  --project-flock: #53b8f7;
+  --project-bloom: #38dd82;
+  
+  --status-active: #10b981;
+  --status-exited: #3b82f6;
+  --status-archived: #6b7280;
+  
+  --nav-active: #e5e5e5;
+  --nav-inactive: rgba(229, 229, 229, 0.6);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-border: var(--border);
+  --color-nav-active: var(--nav-active);
+  --color-nav-inactive: var(--nav-inactive);
+  --color-project-findu: var(--project-findu);
+  --color-project-mkrs: var(--project-mkrs);
+  --color-project-flock: var(--project-flock);
+  --color-project-bloom: var(--project-bloom);
+  --color-status-active: var(--status-active);
+  --color-status-exited: var(--status-exited);
+  --color-status-archived: var(--status-archived);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --surface: #1a1a1a;
+    --surface-secondary: #a0a0a0;
+    --border: #333333;
+    
+    --nav-active: #333333;
+    --nav-inactive: rgba(51, 51, 51, 0.6);
+    
+    /* Project colors remain the same in dark mode */
+    --project-findu: #ff6b6b;
+    --project-mkrs: #2b2b2b;
+    --project-flock: #53b8f7;
+    --project-bloom: #38dd82;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
