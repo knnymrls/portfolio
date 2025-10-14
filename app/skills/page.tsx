@@ -19,19 +19,20 @@ const skillCategories = [
 
 export default function SkillsPage() {
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24">
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white mb-8">
+    <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24" data-highlight-section="skills">
+      <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white mb-8" data-highlight-id="skills-title">
         Skills
       </h1>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2" data-highlight-id="skills-grid">
         {skillCategories.map((category) => (
-          <div key={category.title} className="rounded-lg bg-gray-50 p-6 dark:bg-gray-900">
-            <h2 className="text-2xl font-semibold mb-4">{category.title}</h2>
+          <div key={category.title} className="rounded-lg bg-gray-50 p-6 dark:bg-gray-900" data-highlight-id={`skill-category-${category.title.toLowerCase()}`}>
+            <h2 className="text-2xl font-semibold mb-4" data-highlight-id={`skill-category-title-${category.title.toLowerCase()}`}>{category.title}</h2>
             <div className="flex flex-wrap gap-2">
               {category.skills.map((skill) => (
                 <span
                   key={skill}
                   className="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+                  data-highlight-id={`skill-${skill.toLowerCase().replace(/[\s.]/g, '-')}`}
                 >
                   {skill}
                 </span>

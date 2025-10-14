@@ -1,0 +1,241 @@
+import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
+import CaseStudyHero from '@/components/case-study/CaseStudyHero'
+import CaseStudySection from '@/components/case-study/CaseStudySection'
+import CaseStudyImage from '@/components/case-study/CaseStudyImage'
+import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
+import CodeExplorer from '@/components/case-study/CodeExplorer'
+
+export const metadata = {
+  title: 'Flock Case Study | Kenny Morales',
+  description: 'Helping teams find an ideal time to meet using AI',
+}
+
+<CaseStudyLayout>
+
+<CaseStudyHero
+  title="Flock"
+  description="Helping teams find an ideal time to meet using AI"
+  backgroundColor="bg-project-flock"
+  logoUrl="http://localhost:3845/assets/b4d9c789899891637b311b18b2b39771451b9526.svg"
+  duration="5 min"
+  role="Lead Designer & Full-Stack Developer"
+  timeline="2024"
+  tags={['AI', 'Productivity', 'Scheduling']}
+/>
+
+<CaseStudySection title="Overview">
+
+Flock transforms the frustrating experience of scheduling group meetings into a seamless, AI-powered process. In a world where coordinating calendars across time zones, priorities, and preferences feels like herding cats, Flock intelligently finds the optimal meeting time for everyone involved.
+
+The platform goes beyond simple availability checking—it considers meeting priority, time zone fairness, individual preferences, and even energy levels throughout the day to suggest the best possible meeting time.
+
+</CaseStudySection>
+
+<CaseStudySection title="The Problem">
+
+Scheduling meetings is one of the most universally hated aspects of modern work:
+
+- **Time Zone Nightmare**: Global teams struggle to find times that don't punish certain members
+- **Back-and-Forth Hell**: Average of 8 emails to schedule a single meeting
+- **Priority Blindness**: Not all meetings are equal, but scheduling tools treat them the same
+- **Preference Ignorance**: Some people are morning people, others night owls—tools ignore this
+- **Calendar Fragmentation**: Multiple calendars (work, personal, shared) aren't considered holistically
+
+Existing solutions like Calendly solve availability but ignore the nuance of *optimal* timing. Doodle polls are manual and time-consuming. AI assistants like x.ai are expensive and feel impersonal.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="info">
+
+**Key Insight**: The best meeting time isn't just when everyone is free—it's when everyone can be at their best.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="The Solution">
+
+Flock uses AI to analyze multiple factors and recommend optimal meeting times:
+
+### Smart Calendar Analysis
+Integrates with all major calendar platforms to understand not just availability, but meeting patterns, typical working hours, and preferences.
+
+### Priority-Aware Scheduling
+Understands meeting importance through natural language processing and user input, ensuring critical meetings get prime time slots.
+
+### Time Zone Intelligence
+Automatically distributes meeting "pain" fairly across team members in different time zones over time, so no one person always takes late/early meetings.
+
+### Energy Optimization
+Learns individual energy patterns (morning person vs. night owl) and suggests times when participants are likely to be most engaged.
+
+### One-Click Proposals
+Organizers simply describe the meeting in natural language, and Flock generates optimized time proposals with clear reasoning.
+
+</CaseStudySection>
+
+<CaseStudySection title="Design Process">
+
+### User Research
+Surveyed 150+ knowledge workers and conducted 25 in-depth interviews about their scheduling pain points. Key findings:
+
+- **87%** spend 30+ minutes per week just scheduling meetings
+- **62%** have missed meetings due to time zone confusion
+- **91%** feel some meetings are scheduled at "bad times" regularly
+- **73%** want their calendar tool to be "smarter" about suggestions
+
+### Competitive Analysis
+Analyzed Calendly, Doodle, x.ai, Motion, and Clockwise. Identified gaps in:
+- Contextual intelligence (why is this meeting happening?)
+- Multi-factor optimization (beyond just availability)
+- Fair time zone distribution
+- Learning user preferences over time
+
+### Design Principles
+
+1. **Invisible Intelligence**: AI should work in the background without requiring configuration
+2. **Transparency**: Always explain why a time is suggested
+3. **Speed**: Reduce 8-email threads to 1 click
+4. **Fairness**: Distribute inconvenience equitably
+
+</CaseStudySection>
+
+<CaseStudySection title="Key Features">
+
+### Natural Language Input
+Simply type "Schedule a 1-hour strategy meeting with the product team sometime next week" and Flock handles the rest.
+
+### Smart Suggestions with Reasoning
+Each suggested time comes with clear explanation:
+- "This time works because all participants are typically in deep work mode"
+- "This distributes the 8am meeting burden fairly—Sarah had the last early meeting"
+- "This avoids back-to-back meetings for 4/5 participants"
+
+### Preference Learning
+Flock learns from accepted and declined meetings to understand individual preferences without explicit configuration.
+
+### Group Optimization
+Considers the group as a whole—sometimes inconveniencing one person slightly is worth it if it benefits three others significantly.
+
+### Calendar Blocks Protection
+Respects focus time, lunch breaks, and personal preferences automatically detected from calendar patterns.
+
+### Rescheduling Intelligence
+When rescheduling is needed, suggests minimal-disruption alternatives and can automatically negotiate with other meetings.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="success">
+
+**Impact**: Beta users reported 73% reduction in time spent scheduling and 89% satisfaction with suggested meeting times.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="Visual Design">
+
+The brand uses a calming sky blue (#53b8f7) to convey trust, clarity, and ease—the opposite of scheduling chaos.
+
+### Interface Design
+- **Minimal Cognitive Load**: Most interactions are single-click approvals
+- **Clear Hierarchy**: Priority information front and center
+- **Time Zone Clarity**: Visual indicators show which time zones are affected
+- **Mobile-First**: Many scheduling decisions happen on-the-go
+
+### Micro-interactions
+Smooth animations provide feedback without delay, making the experience feel instant and responsive.
+
+</CaseStudySection>
+
+<CaseStudySection title="Technical Architecture">
+
+### AI/ML Pipeline
+- **Calendar Pattern Recognition**: Identifies user habits and preferences
+- **Natural Language Processing**: Understands meeting context and requirements
+- **Optimization Algorithm**: Multi-objective optimization considering 15+ factors
+- **Continuous Learning**: Improves suggestions based on user feedback
+
+### Integrations
+Seamless connections with:
+- Google Calendar
+- Microsoft Outlook
+- Apple Calendar
+- Zoom, Google Meet, Microsoft Teams for automatic video link generation
+
+### Code Architecture
+
+Explore the core components and structure of the Flock codebase:
+
+<CodeExplorer title="Flock Code Structure" />
+
+</CaseStudySection>
+
+<CaseStudySection title="Challenges & Solutions">
+
+### Challenge: Cold Start Problem
+New users have no preference data. How do we make good suggestions immediately?
+
+**Solution**: Start with sensible defaults based on role and industry benchmarks, then rapidly adapt as we observe behavior.
+
+### Challenge: Privacy Concerns
+Users worried about AI reading all their calendar events.
+
+**Solution**: Transparent data policy, on-device processing where possible, and clear opt-in for AI features with granular controls.
+
+### Challenge: Edge Cases
+Unusual schedules (night shifts, non-traditional work hours, frequent travel).
+
+**Solution**: Explicit preference settings available for edge cases, with AI learning not to override manual preferences.
+
+### Challenge: Group Dynamics
+Sometimes the "optimal" time isn't actually optimal due to team politics or power dynamics.
+
+**Solution**: Ranking weights can be adjusted, and organizers can set certain participants as "required at their convenience."
+
+</CaseStudySection>
+
+<CaseStudySection title="Results & Metrics">
+
+After 6 months in beta:
+
+- **2,500+** active teams using Flock
+- **73%** reduction in time spent scheduling
+- **89%** satisfaction with suggested meeting times
+- **45%** decrease in cancelled/rescheduled meetings
+- **4.7/5** user rating
+- **67%** month-over-month growth
+
+</CaseStudySection>
+
+<CaseStudySection title="User Testimonials">
+
+> "Flock saved me at least 5 hours last month just in scheduling back-and-forth. The AI actually understands that I'm useless before 10am." — Sarah Chen, Product Manager
+
+> "Managing a team across SF, London, and Singapore was a nightmare. Flock makes it fair and actually considers everyone's preferences." — Marcus Johnson, Engineering Director
+
+</CaseStudySection>
+
+<CaseStudySection title="Learnings">
+
+**Trust is Earned**: Users were initially skeptical of AI scheduling. Transparency about reasoning was crucial to adoption.
+
+**Defaults Matter**: Most users never adjust settings. Getting intelligent defaults right was more important than offering many options.
+
+**Speed Beats Perfection**: A good-enough suggestion in 2 seconds beats a perfect suggestion in 20 seconds.
+
+**Fairness is Complex**: What feels "fair" varies by culture, company, and individual. We needed flexibility in our fairness algorithms.
+
+</CaseStudySection>
+
+<CaseStudySection title="Future Roadmap">
+
+- **Meeting Cost Calculator**: Show the financial cost of meetings to encourage efficiency
+- **Automatic Agenda Generation**: AI-drafted agendas based on meeting purpose
+- **Outcome Tracking**: Connect meetings to action items and measure productivity
+- **Predictive Rescheduling**: Proactively suggest rescheduling when patterns suggest low engagement
+- **Integration with Task Management**: Schedule meetings automatically when project dependencies require alignment
+
+</CaseStudySection>
+
+</CaseStudyLayout>
+
+export default function Page({ children }) {
+  return children
+}

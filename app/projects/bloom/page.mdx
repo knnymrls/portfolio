@@ -1,0 +1,349 @@
+import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
+import CaseStudyHero from '@/components/case-study/CaseStudyHero'
+import CaseStudySection from '@/components/case-study/CaseStudySection'
+import CaseStudyImage from '@/components/case-study/CaseStudyImage'
+import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
+import CanvasCodeExplorer from '@/components/case-study/CanvasCodeExplorer'
+
+export const metadata = {
+  title: 'Bloom Case Study | Kenny Morales',
+  description: 'RAG-based search engine to find employees within an enterprise.',
+}
+
+<CaseStudyLayout>
+
+<CaseStudyHero
+  title="Bloom"
+  description="RAG-based search engine to find employees within an enterprise."
+  backgroundColor="bg-project-bloom"
+  logoUrl="http://localhost:3845/assets/277dc8048462d287475705b7ab92ab5869b45d09.svg"
+  duration="15 min"
+  role="Lead Product Designer & AI Engineer"
+  timeline="2024"
+  tags={['AI', 'Enterprise', 'Search', 'RAG']}
+/>
+
+<CaseStudySection title="Overview">
+
+Bloom is an intelligent employee discovery platform for large enterprises, powered by Retrieval-Augmented Generation (RAG) technology. In organizations with thousands of employees, finding the right person with specific expertise or experience is like searching for a needle in a haystack.
+
+Bloom transforms how employees discover and connect with each other by understanding natural language queries and surfacing relevant people based on their actual work, projects, and expertise—not just their job titles.
+
+</CaseStudySection>
+
+<CaseStudySection title="The Problem">
+
+Large enterprises face a critical "expertise location" problem:
+
+- **Hidden Talent**: Organizations don't know who knows what, leading to duplicate work and missed collaboration opportunities
+- **Outdated Directories**: Traditional employee directories are static, relying on self-reported skills that become stale
+- **Title Limitations**: Job titles don't capture the full scope of someone's expertise or experience
+- **Knowledge Silos**: Teams operate in isolation, unaware of parallel work happening elsewhere
+- **Inefficient Onboarding**: New employees struggle to find the right people to learn from
+
+A study found that employees spend an average of **8 hours per week** searching for information or the right person to ask. In a 10,000-person organization, that's 80,000 hours of wasted time weekly.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="info">
+
+**Core Problem**: "Who should I talk to about X?" is one of the most common and costly questions in enterprise organizations.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="The Solution">
+
+Bloom creates a dynamic, AI-powered employee discovery system:
+
+### Natural Language Search
+Ask questions like "Who has experience with React Native in healthcare applications?" and get relevant people, not just keyword matches.
+
+### RAG-Powered Intelligence
+Uses Retrieval-Augmented Generation to search across:
+- Employee profiles and self-descriptions
+- Project documentation and contributions
+- Code repositories and technical artifacts
+- Internal communications and Slack messages (with permission)
+- Meeting notes and presentations
+
+### Dynamic Expertise Graphs
+Continuously updates employee expertise based on actual work, not self-reported skills that become outdated.
+
+### Context-Aware Recommendations
+Understands the searcher's context (team, role, location) to prioritize relevant matches and suggest similar experts.
+
+### Privacy-First Architecture
+Respects organizational permissions and individual privacy settings—only surfaces information the searcher is authorized to see.
+
+</CaseStudySection>
+
+<CaseStudySection title="Design Process">
+
+### Enterprise Research
+Conducted research across 3 Fortune 500 companies with 5,000-50,000 employees:
+- 60+ employee interviews across roles (ICs, managers, executives)
+- Analysis of existing knowledge management tools
+- Shadowing employees during typical "finding someone" workflows
+
+### Key Research Findings
+
+**Pain Points:**
+- 73% of employees say finding the right expert takes too long
+- 68% have started projects unaware someone else was doing similar work
+- 89% rely on personal networks rather than formal directories
+- Only 12% trust their company's employee directory is accurate
+
+**Desired Capabilities:**
+- Search by actual expertise, not job titles
+- Understand project history and contributions
+- See who's approachable and responsive
+- Respect privacy and permissions
+
+### Information Architecture
+
+Built around three core views:
+1. **Search & Discovery**: Natural language search with rich filtering
+2. **Expert Profiles**: Dynamic profiles showing verified expertise
+3. **Expertise Networks**: Visual maps of who knows what and how expertise clusters
+
+</CaseStudySection>
+
+<CaseStudySection title="Key Features">
+
+### Intelligent Search
+Natural language queries like:
+- "Who worked on the 2023 customer retention initiative?"
+- "Find someone who knows Kubernetes and has mentored junior engineers"
+- "Who has experience launching products in Europe?"
+
+### Expertise Verification
+Multi-signal verification of expertise:
+- **Code Contributions**: Automatically detected from repos
+- **Project Involvement**: Extracted from project management tools
+- **Peer Recognition**: Derived from mentions and collaboration patterns
+- **Self-Attestation**: Employee-provided context and background
+
+### Smart Profiles
+Each profile shows:
+- **Expertise Timeline**: How skills have evolved over time
+- **Key Projects**: Major initiatives with impact metrics
+- **Collaboration Network**: Who they work with frequently
+- **Availability Signals**: Response time patterns and current workload
+- **Ask Me About**: Topics the person welcomes questions on
+
+### Team Discovery
+Find entire teams with complementary skills for cross-functional initiatives.
+
+### Trending Expertise
+Surface emerging skills and capabilities within the organization before they become critical needs.
+
+### Expertise Gaps
+Identify missing capabilities and skills gaps across the organization.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="success">
+
+**Pilot Results**: 85% reduction in time to find relevant experts, with 92% of searches returning relevant results on the first try.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="Technical Architecture">
+
+### RAG Pipeline
+
+**1. Data Ingestion**
+- Secure connectors to HRIS, Slack, Jira, GitHub, Confluence, Google Workspace
+- Permission-aware data collection
+- Real-time and batch processing
+
+**2. Embedding Generation**
+- Custom fine-tuned language models for enterprise context
+- Semantic embeddings of documents, code, and communications
+- Chunking strategies optimized for different data types
+
+**3. Vector Database**
+- High-performance vector storage (Pinecone/Weaviate)
+- Hybrid search combining semantic and keyword matching
+- Sub-100ms query performance at scale
+
+**4. LLM Orchestration**
+- GPT-4 for query understanding and result synthesis
+- Custom prompt engineering for enterprise context
+- Fallback strategies for edge cases
+
+**5. Security & Privacy**
+- Row-level security enforcement
+- Audit logging for all searches
+- Data retention policies and right-to-be-forgotten compliance
+
+### Codebase Structure
+
+Explore the Bloom project structure and implementation:
+
+<CanvasCodeExplorer title="Bloom Codebase" />
+
+</CaseStudySection>
+
+<CaseStudySection title="Visual Design">
+
+The vibrant green (#38dd82) conveys growth, vitality, and the flourishing of organizational knowledge.
+
+### Design Philosophy
+
+**Professional but Approachable**: Enterprise tools don't have to feel sterile. Bloom balances polish with warmth.
+
+**Information Density**: Careful balance between showing enough context and avoiding overwhelming users.
+
+**Trust Signals**: Visual indicators of verified expertise, recency, and relevance build confidence in results.
+
+### Interface Components
+
+- **Search Bar**: Prominent, with AI-powered auto-suggestions
+- **Result Cards**: Rich preview of expertise with key highlights
+- **Expertise Tags**: Color-coded by verification level (verified, inferred, self-reported)
+- **Network Graphs**: Interactive visualizations of expertise relationships
+- **Timeline View**: Chronological view of someone's career and projects
+
+</CaseStudySection>
+
+<CaseStudySection title="Privacy & Ethics">
+
+Building an AI system that indexes employee data required careful ethical consideration:
+
+### Privacy Principles
+
+1. **Transparency**: Employees know what data is indexed and how it's used
+2. **Control**: Individuals can opt out or limit what's surfaced about them
+3. **Permission-Aware**: Search results respect existing access controls
+4. **Audit Trail**: Complete logging of who searches for whom
+5. **No Surveillance**: Data is used only for discovery, not performance monitoring
+
+### Opt-In Features
+- Employees can mark certain projects or skills as "public" vs "team-only"
+- "Office hours" feature lets people signal availability for questions
+- Anonymous search option for sensitive queries
+
+</CaseStudySection>
+
+<CaseStudySection title="Challenges & Solutions">
+
+### Challenge: Data Quality
+GIGO—garbage in, garbage out. Messy enterprise data could produce poor results.
+
+**Solution**:
+- Robust data cleaning and normalization pipelines
+- Confidence scoring for all inferences
+- Human-in-the-loop validation for critical expertise tags
+- Continuous feedback loops to improve data quality
+
+### Challenge: Cold Start
+New employees or those without much digital footprint are invisible.
+
+**Solution**:
+- Onboarding questionnaire to seed initial profile
+- Peer endorsement system
+- Integration with HR records for baseline information
+- Proactive prompts to update profile after major milestones
+
+### Challenge: Gaming the System
+Employees might try to stuff profiles with buzzwords to appear in more searches.
+
+**Solution**:
+- Verification requirements for featured expertise
+- Algorithm adjusts for keyword stuffing
+- Reputation system based on actual engagement
+- Peer review mechanisms
+
+### Challenge: Cross-Organizational Complexity
+Different business units have different terminology for similar concepts.
+
+**Solution**:
+- Custom taxonomy mapping per organization
+- Synonym detection and query expansion
+- Entity resolution across systems
+- Feedback-driven vocabulary refinement
+
+</CaseStudySection>
+
+<CaseStudySection title="Results & Impact">
+
+After 6-month pilot across 3 enterprise customers (15,000 total employees):
+
+### Quantitative Results
+- **85%** reduction in time to find relevant expert (from 45min to 7min average)
+- **92%** relevance rate for first-page results
+- **67%** of searches resulted in successful connection
+- **34%** increase in cross-team collaboration
+- **$2.4M** estimated annual savings per 10,000 employees (based on time saved)
+
+### Qualitative Feedback
+- **94%** employee satisfaction with search results
+- **88%** found experts they didn't know existed
+- **76%** reported feeling more connected to the organization
+- **4.6/5** average rating
+
+### Organizational Impact
+- Reduced duplicate projects by 23%
+- Accelerated onboarding by 40%
+- Improved knowledge retention during departures
+- Enhanced innovation through unexpected connections
+
+</CaseStudySection>
+
+<CaseStudySection title="User Stories">
+
+> "I needed someone who understood legacy mainframe systems for a migration project. Bloom found a senior engineer in a different division I never would have known about. Saved the project." — IT Director, Financial Services
+
+> "As a new hire, Bloom helped me figure out who to shadow and learn from based on my specific interests. Transformed my first month." — Junior Engineer, Tech Company
+
+> "We discovered three teams were building similar data pipelines. Bloom helped us consolidate efforts and actually build something better together." — VP of Engineering
+
+</CaseStudySection>
+
+<CaseStudySection title="Learnings">
+
+**Trust Takes Time**: Employees were initially uncomfortable with AI indexing their work. Transparency and clear privacy controls were essential.
+
+**Human Connection Still Matters**: Technology facilitates discovery, but the actual connection and relationship-building is still human-to-human. We're a bridge, not a replacement.
+
+**Context is Everything**: Generic search doesn't work. Understanding organizational structure, culture, and terminology was critical.
+
+**Recency Matters**: Stale information is worse than no information. Real-time updates were non-negotiable.
+
+**Discovery ≠ Spam**: We had to carefully design the system so people didn't feel overwhelmed by connection requests.
+
+</CaseStudySection>
+
+<CaseStudySection title="Future Vision">
+
+### Short-Term (6-12 months)
+- **Proactive Suggestions**: "Based on your current project, you might want to talk to..."
+- **Skills Gap Analysis**: Help HR identify training needs
+- **Mentorship Matching**: AI-powered mentor recommendations
+- **Team Formation**: Suggest optimal team compositions for new projects
+
+### Long-Term (1-3 years)
+- **Organizational Intelligence**: Surface insights about knowledge flow and bottlenecks
+- **Succession Planning**: Identify expertise dependencies and risks
+- **Acquisition Integration**: Rapidly map expertise from acquired companies
+- **External Network**: Extend to partners, contractors, and ecosystem
+
+### Moonshot
+- **Universal Work Graph**: Map the entire knowledge economy across organizations, enabling talent mobility and collaboration at unprecedented scale
+
+</CaseStudySection>
+
+<CaseStudySection title="Conclusion">
+
+Bloom represents a fundamental shift in how organizations think about their most valuable asset—their people's knowledge and expertise. By making this knowledge discoverable and accessible, we unlock collaboration, reduce duplication, and help employees feel more connected to their organization.
+
+The future of work is not just about productivity tools, but about human connection and knowledge sharing at scale. Bloom is a step toward that future.
+
+</CaseStudySection>
+
+</CaseStudyLayout>
+
+export default function Page({ children }) {
+  return children
+}

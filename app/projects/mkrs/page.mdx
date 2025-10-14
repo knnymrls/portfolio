@@ -1,0 +1,189 @@
+import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
+import CaseStudyHero from '@/components/case-study/CaseStudyHero'
+import CaseStudySection from '@/components/case-study/CaseStudySection'
+import CaseStudyImage from '@/components/case-study/CaseStudyImage'
+import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
+
+export const metadata = {
+  title: 'mkrs.world Case Study | Kenny Morales',
+  description: 'The new way communities interact with each other',
+}
+
+<CaseStudyLayout>
+
+<CaseStudyHero
+  title="mkrs.world"
+  description="The new way communities interact with each other"
+  backgroundColor="bg-project-mkrs"
+  customLogo={<img alt="mkrs logo" className="w-auto h-[43px]" src="http://localhost:3845/assets/4c07fdb2019e63a1964a7782e4ee4f011eb1dcfb.svg" />}
+  duration="5 min"
+  role="Product Designer & Frontend Developer"
+  timeline="2023"
+  tags={['Community', 'Web3', 'Social']}
+/>
+
+<CaseStudySection title="Overview">
+
+mkrs.world reimagines how online communities form, connect, and collaborate. In an era of fragmented social platforms and declining engagement in traditional forums, mkrs.world creates a space where makers, creators, and builders can discover each other and form meaningful connections based on shared interests and projects.
+
+The platform focuses on **action-oriented community building**—connecting people not just through conversation but through collaboration and creation.
+
+</CaseStudySection>
+
+<CaseStudySection title="The Problem">
+
+Online communities face several critical challenges:
+
+- **Discoverability Crisis**: Finding like-minded people with complementary skills is difficult across fragmented platforms
+- **Passive Engagement**: Most platforms prioritize consumption over creation and collaboration
+- **Context Collapse**: General-purpose social networks mix personal and professional contexts awkwardly
+- **Ownership & Control**: Creators lack true ownership of their communities and content
+
+Existing platforms like Discord excel at communication but lack discovery mechanisms. Twitter/X has discovery but poor tools for sustained collaboration. LinkedIn is professional but feels transactional.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="info">
+
+**Core Philosophy**: Communities should form around what people *make* together, not just what they talk about.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="The Solution">
+
+mkrs.world creates a new paradigm for community interaction:
+
+### Project-Centric Profiles
+Users showcase themselves through their projects and creations rather than traditional bios and credentials. Your work speaks louder than your words.
+
+### Smart Matching
+AI-powered discovery connects makers with complementary skills and aligned interests, facilitating collaboration opportunities.
+
+### Collaborative Spaces
+Purpose-built environments for teams to work together, share progress, and maintain momentum on shared projects.
+
+### Reputation & Recognition
+A merit-based system that recognizes contributions and quality work, building trust within the community.
+
+</CaseStudySection>
+
+<CaseStudySection title="Design Process">
+
+### Research Phase
+Conducted ethnographic studies of existing maker communities across Discord, Twitter, Reddit, and specialized forums. Interviewed 40+ active community members about their pain points and ideal workflows.
+
+### Key Insights
+- **Serendipity Matters**: Best connections often come from unexpected discoveries
+- **Show, Don't Tell**: People want to see work, not read about capabilities
+- **Low Friction**: Collaboration dies when tools are too complex or fragmented
+- **Trust Takes Time**: Community reputation systems must be earned, not bought
+
+### Design Principles
+
+1. **Creation-First**: Every feature should encourage making something
+2. **Radical Transparency**: Project progress and contributions should be visible
+3. **Minimal Friction**: Reduce steps between connection and collaboration
+4. **Owned by Users**: Community members should feel genuine ownership
+
+</CaseStudySection>
+
+<CaseStudySection title="Key Features">
+
+### Visual Project Gallery
+A Pinterest-meets-GitHub interface where projects are presented visually with rich media, making it easy to browse and discover inspiring work.
+
+### Skill Tags & Filtering
+Sophisticated tagging system that goes beyond job titles to capture specific tools, techniques, and interests.
+
+### Collaboration Requests
+One-click system to propose collaborations with clear scope, timeline, and expectations upfront.
+
+### Community Spaces
+Self-organizing sub-communities around specific interests (e.g., "AI Artists", "Indie Game Devs", "Hardware Hackers") with their own norms and governance.
+
+### Activity Streams
+Real-time updates showing what makers are working on, encouraging spontaneous feedback and support.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="success">
+
+**Early Traction**: Within 3 months of launch, over 1,200 makers joined and started 180+ collaborative projects, with an average session time of 23 minutes.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="Visual Design">
+
+The design language embraces a **dark, minimal aesthetic** (#2b2b2b) that:
+- Puts user-generated content in the spotlight
+- Feels professional and focused
+- Reduces eye strain for long sessions
+- Signals seriousness about creation
+
+Typography uses Plus Jakarta Sans for a modern, friendly yet professional feel. Generous whitespace and clear hierarchy ensure information doesn't overwhelm.
+
+</CaseStudySection>
+
+<CaseStudySection title="Technical Implementation">
+
+Built on modern web technologies with a focus on performance and real-time collaboration:
+- **Next.js** for optimal performance and SEO
+- **Real-time updates** using WebSocket connections
+- **IPFS integration** for decentralized content storage
+- **Smart contract** layer for community governance (optional for communities)
+
+</CaseStudySection>
+
+<CaseStudySection title="Challenges & Solutions">
+
+### Challenge: Cold Start Problem
+How do you build a network effect when starting from zero?
+
+**Solution**: Seeded initial communities with curated makers and creators, creating high-quality content that attracted others organically.
+
+### Challenge: Moderation at Scale
+How to maintain quality without heavy-handed moderation?
+
+**Solution**: Community-driven moderation with reputation thresholds and democratic decision-making tools.
+
+### Challenge: Monetization Without Exploitation
+How to sustain the platform without becoming extractive?
+
+**Solution**: Optional premium features for power users, but core collaboration features remain free forever.
+
+</CaseStudySection>
+
+<CaseStudySection title="Results & Metrics">
+
+- **1,200+** active makers in first 3 months
+- **180+** collaborative projects initiated
+- **23 min** average session duration (3x industry average)
+- **68%** weekly return rate
+- **4.8/5** Net Promoter Score
+
+</CaseStudySection>
+
+<CaseStudySection title="Learnings">
+
+**Community Building is Slow**: Unlike consumer apps, community platforms need time to develop culture and norms. Patience is essential.
+
+**Quality > Quantity**: 100 engaged makers are worth more than 10,000 passive users. Early focus on quality set the right tone.
+
+**Empower, Don't Control**: Best communities self-organize. Our job is to provide tools, not dictate culture.
+
+</CaseStudySection>
+
+<CaseStudySection title="Future Vision">
+
+- **Integrated Monetization**: Tools for makers to monetize their collaborations directly
+- **AI Collaboration Agent**: AI assistant that suggests potential collaborators and projects
+- **Physical Events**: IRL meetups for online communities to strengthen bonds
+- **DAO Integration**: Full community ownership through decentralized governance
+
+</CaseStudySection>
+
+</CaseStudyLayout>
+
+export default function Page({ children }) {
+  return children
+}

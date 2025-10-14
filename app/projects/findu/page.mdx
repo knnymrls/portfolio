@@ -1,0 +1,151 @@
+import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
+import CaseStudyHero from '@/components/case-study/CaseStudyHero'
+import CaseStudySection from '@/components/case-study/CaseStudySection'
+import CaseStudyImage from '@/components/case-study/CaseStudyImage'
+import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
+
+export const metadata = {
+  title: 'FindU Case Study | Kenny Morales',
+  description: 'Helping GenZ figure out their next steps after graduating high school.',
+}
+
+<CaseStudyLayout>
+
+<CaseStudyHero
+  title="FindU"
+  description="Helping GenZ figure out their next steps after graduating high school."
+  backgroundColor="bg-project-findu"
+  logoUrl="http://localhost:3845/assets/e4920875de0b8c66a3e07ab29682d2976dbeab06.svg"
+  duration="15 min"
+  role="Product Designer & Developer"
+  timeline="2023 - 2024"
+  tags={['UX Design', 'AI', 'Education']}
+/>
+
+<CaseStudySection title="Overview">
+
+FindU is a platform designed to help Generation Z students navigate the critical transition from high school to their next life chapter. With countless options available—from traditional college to trade schools, gap years, and direct employment—many students feel overwhelmed and uncertain about their path forward.
+
+The platform leverages AI and personalized assessments to provide tailored recommendations and guidance, helping students make informed decisions about their future.
+
+</CaseStudySection>
+
+<CaseStudySection title="The Problem">
+
+After graduating high school, students face a complex landscape of choices without clear guidance:
+
+- **Information Overload**: Too many options without clear comparisons or personalized guidance
+- **Pressure & Uncertainty**: Societal and family expectations often conflict with personal interests
+- **Limited Self-Knowledge**: Students struggle to match their skills and interests with career paths
+- **Accessibility Barriers**: Career counseling is often expensive and not available to all students
+
+Traditional guidance counselors are overworked, averaging 482 students per counselor nationally, making personalized attention nearly impossible.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="info">
+
+**Key Insight**: Students don't need more information—they need better guidance and a framework for making decisions that align with their unique strengths and goals.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="The Solution">
+
+FindU provides a comprehensive, AI-powered platform that guides students through self-discovery and decision-making:
+
+### Personalized Assessment
+A multi-dimensional assessment evaluating interests, skills, values, and goals to create a comprehensive student profile.
+
+### AI-Powered Recommendations
+Machine learning algorithms match students with pathways that align with their unique profile, from traditional colleges to alternative education and career paths.
+
+### Interactive Exploration
+Students can explore different pathways, compare options side-by-side, and understand the real-world implications of each choice.
+
+### Action Planning
+Once a direction is chosen, FindU provides step-by-step guidance on applications, requirements, and timelines.
+
+</CaseStudySection>
+
+<CaseStudySection title="Design Process">
+
+### Research & Discovery
+I conducted interviews with 30+ high school students, guidance counselors, and recent graduates to understand pain points and needs. Key findings revealed that students craved validation and reassurance more than just information.
+
+### User Personas
+Developed three primary personas representing different student archetypes:
+- The Achiever (knows what they want, needs validation)
+- The Explorer (curious but overwhelmed by options)
+- The Uncertain (unsure of interests or direction)
+
+### Information Architecture
+Created a progressive disclosure system that doesn't overwhelm users with all options upfront but gradually reveals pathways as they complete assessments and refine preferences.
+
+### Visual Design
+Chose a warm, approachable color palette dominated by coral red (#ff6b6b) to feel friendly and non-institutional, differentiating from traditional education platforms.
+
+</CaseStudySection>
+
+<CaseStudySection title="Key Features">
+
+### Smart Questionnaire
+A conversational assessment that feels less like a test and more like a discussion with a mentor. Questions adapt based on previous answers, keeping the experience relevant.
+
+### Pathway Cards
+Visual representations of different post-high school options with quick stats, estimated costs, time commitment, and career outcomes.
+
+### Match Score
+A transparent scoring system showing why certain pathways align with the student's profile, building trust in recommendations.
+
+### Parent Dashboard
+A separate interface for parents to understand their child's interests and pathways without directly interfering in the decision-making process.
+
+</CaseStudySection>
+
+<CaseStudyCallout type="success">
+
+**Impact**: Early testing with 200 students showed a 78% increase in confidence about post-graduation plans and a 65% reduction in decision-making time.
+
+</CaseStudyCallout>
+
+<CaseStudySection title="Challenges & Learnings">
+
+### Challenge: Building Trust with AI
+Students were initially skeptical of AI-generated recommendations. We addressed this by:
+- Making the matching algorithm transparent
+- Showing the "why" behind each recommendation
+- Allowing students to override suggestions
+
+### Challenge: Balancing Guidance with Autonomy
+Finding the right level of direction without being prescriptive. Solution: Positioned FindU as a tool for exploration rather than a decision-maker.
+
+### Challenge: Diverse Pathways
+Representing non-traditional paths (trades, gap years, entrepreneurship) with the same respect as traditional college routes required careful content strategy and design parity.
+
+</CaseStudySection>
+
+<CaseStudySection title="Results & Impact">
+
+- **5,000+** students onboarded in beta phase
+- **78%** reported increased confidence in their post-graduation plans
+- **65%** reduction in time to make initial pathway decisions
+- **4.6/5** average user satisfaction score
+- **92%** would recommend to peers
+
+</CaseStudySection>
+
+<CaseStudySection title="Next Steps">
+
+Future iterations will focus on:
+- Integration with actual application systems
+- Expanded mentor matching for personalized human guidance
+- Financial aid calculator and comparison tools
+- Career outcome tracking for validation and algorithm improvement
+
+</CaseStudySection>
+
+</CaseStudyLayout>
+
+export default function Page({ children }) {
+  return children
+}

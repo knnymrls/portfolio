@@ -93,7 +93,7 @@ export function ChatbotInterface() {
               {/* Welcome message */}
               <div className="mb-6">
                 <p className="text-surface-secondary mb-4">
-                  Hi! I'm Kenny's AI assistant. I can help you learn more about his work, skills, and experience.
+                  Hi! I&apos;m Kenny&apos;s AI assistant. I can help you learn more about his work, skills, and experience.
                 </p>
                 
                 {/* Quick actions */}

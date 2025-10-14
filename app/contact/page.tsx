@@ -24,13 +24,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24">
+    <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24" data-highlight-section="contact">
       <div className="mx-auto max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white mb-8">
+        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white mb-8" data-highlight-id="contact-title">
           Contact Me
         </h1>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
+        <form onSubmit={handleSubmit} className="space-y-6" data-highlight-id="contact-form">
+          <div data-highlight-id="contact-field-name">
             <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
               Name
             </label>
@@ -44,7 +44,7 @@ export default function ContactPage() {
               className="mt-2 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
             />
           </div>
-          <div>
+          <div data-highlight-id="contact-field-email">
             <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
               Email
             </label>
@@ -58,7 +58,7 @@ export default function ContactPage() {
               className="mt-2 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
             />
           </div>
-          <div>
+          <div data-highlight-id="contact-field-message">
             <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
               Message
             </label>
@@ -72,7 +72,7 @@ export default function ContactPage() {
               className="mt-2 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
             />
           </div>
-          <Button type="submit" size="lg" className="w-full">
+          <Button type="submit" size="lg" className="w-full" data-highlight-id="contact-submit">
             Send Message
           </Button>
         </form>

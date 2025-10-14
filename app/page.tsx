@@ -1,6 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import CaseStudies from "@/components/sections/CaseStudies";
-import HeroImage from "../public/images/hero-img.png";
+import HeroImage from "../public/images/hero-kenny.png";
 
 export default function Home() {
   return (
@@ -8,8 +8,8 @@ export default function Home() {
       <Hero
         title={
           <>
-            Yo, I'm Kenny Morales
-            <br />I design and develop AI interfaces that create value.
+            Yo, I&apos;m Kenny Morales
+            <br />I design thoughtful AI interfaces that elevate user experiences
           </>
         }
         imageSrc={HeroImage}

@@ -34,7 +34,7 @@ export async function POST(req: Request) {
             targets: z
               .array(z.string())
               .describe(
-                'Array of elements to highlight - can be: "hero", "projects", "ventures", "social", "contact", "navigation", specific project names, or CSS selectors'
+                'Array of elements to highlight. Use data-highlight-id values for precision: "hero-title", "hero-image", "hero-actions", "cta-contact", "social-github", "social-linkedin", "social-instagram", "case-studies-title", "projects-grid", "project-findu", "project-mkrs", "project-flock", "project-bloom", "skills-title", "skills-grid", "skill-category-frontend", "skill-react", "about-title", "about-content", "about-intro", "contact-title", "contact-form", "contact-field-name", "contact-field-email", "contact-submit". Can also use sections: "hero", "case-studies", "skills", "about", "contact", or CSS selectors starting with # . or ['
               ),
             duration: z
               .number()
@@ -64,8 +64,8 @@ export async function POST(req: Request) {
           },
         }),
       },
-      maxTokens: 500,
       temperature: 0.7,
+      maxSteps: 5, // Allow multi-step tool calling and text generation
       // Simplified tool calling approach
       toolChoice: "auto", // Let AI decide when to use tools
     });
