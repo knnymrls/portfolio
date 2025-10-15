@@ -28,7 +28,7 @@ export default function Hero({
       className="w-full pt-[165px] pb-[108px]"
       data-highlight-section="hero"
     >
-      <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center justify-between">
+      <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start lg:items-center justify-between">
         {/* Left content */}
         <div className="flex flex-col gap-9 flex-1">
           <h1
