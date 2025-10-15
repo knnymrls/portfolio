@@ -540,7 +540,8 @@ export function AIChat() {
         className={cn(
           "fixed bottom-6 left-1/2 -translate-x-1/2 z-50",
           "w-[726px] max-w-[calc(100vw-2rem)]",
-          "transition-all duration-300 ease-out"
+          "transition-all duration-300 ease-out",
+          "hidden lg:block"
         )}
       >
         {/* Current action indicator */}

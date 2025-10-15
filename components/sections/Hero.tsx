@@ -40,7 +40,7 @@ export default function Hero({
 
           {/* CTA and social links */}
           <div
-            className="flex items-center gap-3 flex-wrap"
+            className="flex flex-col lg:flex-row items-start lg:items-center gap-3"
             data-highlight-id="hero-actions"
           >
             <Link
@@ -54,48 +54,50 @@ export default function Hero({
               </span>
             </Link>
 
-            <Link
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="GitHub"
-              data-highlight-id="social-github"
-            >
-              <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                aria-label="GitHub"
+                data-highlight-id="social-github"
+              >
+                <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
+              </Link>
 
-            <Link
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="LinkedIn"
-              data-highlight-id="social-linkedin"
-            >
-              <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
+              <Link
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                aria-label="LinkedIn"
+                data-highlight-id="social-linkedin"
+              >
+                <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
+              </Link>
 
-            <Link
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="Instagram"
-              data-highlight-id="social-instagram"
-            >
-              <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
+              <Link
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                aria-label="Instagram"
+                data-highlight-id="social-instagram"
+              >
+                <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
+              </Link>
 
-            <Link
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              href={"/resume" as any}
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="Resume"
-              data-highlight-id="social-resume"
-            >
-              <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
+              <Link
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                href={"/resume" as any}
+                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                aria-label="Resume"
+                data-highlight-id="social-resume"
+              >
+                <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -107,7 +109,7 @@ export default function Hero({
           {/* Mobile image */}
           {mobileImageUrl && (
             <div
-              className="relative mx-auto lg:hidden"
+              className="relative lg:hidden"
               style={{
                 width: `${mobileImageSize.width}px`,
                 height: `${mobileImageSize.height}px`,
