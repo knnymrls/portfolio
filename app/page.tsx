@@ -15,7 +15,7 @@ export default function Home() {
           imageUrl="/figma-assets/621192cb53b585feaad1cfb6334638d014c1b398.png"
           imageAlt="Kenny Morales"
           imageSize={{ width: 278, height: 315 }}
-          mobileImageUrl="/figma-assets/43c8ce632cc8dab8fa0d0592fbc2c219822f86f4.png"
+          mobileImageUrl="/figma-assets/5e4d54043fab4eeea1ed4388a8cb2e663efa82f6.png"
           mobileImageSize={{ width: 116, height: 116 }}
         />
         <CaseStudies />
