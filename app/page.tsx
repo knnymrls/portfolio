@@ -11,9 +11,11 @@ export default function Home() {
             <br />I design thoughtful AI interfaces that elevate user experiences
           </>
         }
-        imageUrl="/figma-assets/43c8ce632cc8dab8fa0d0592fbc2c219822f86f4.png"
+        imageUrl="/figma-assets/621192cb53b585feaad1cfb6334638d014c1b398.png"
         imageAlt="Kenny Morales"
-        imageSize={{ width: 88, height: 88 }}
+        imageSize={{ width: 315, height: 315 }}
+        mobileImageUrl="/figma-assets/43c8ce632cc8dab8fa0d0592fbc2c219822f86f4.png"
+        mobileImageSize={{ width: 88, height: 88 }}
       />
       <CaseStudies />
     </div>

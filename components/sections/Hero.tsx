@@ -10,6 +10,8 @@ interface HeroProps {
   imageSrc?: any;
   imageAlt?: string;
   imageSize?: { width: number; height: number };
+  mobileImageUrl?: string;
+  mobileImageSize?: { width: number; height: number };
 }
 
 export default function Hero({
@@ -18,6 +20,8 @@ export default function Hero({
   imageSrc,
   imageAlt = "Hero image",
   imageSize = { width: 315, height: 315 },
+  mobileImageUrl,
+  mobileImageSize = { width: 88, height: 88 },
 }: HeroProps) {
   return (
     <section
@@ -100,8 +104,26 @@ export default function Hero({
           className="shrink-0 order-first lg:order-last"
           data-highlight-id="hero-image"
         >
+          {/* Mobile image */}
+          {mobileImageUrl && (
+            <div
+              className="relative mx-auto lg:hidden"
+              style={{
+                width: `${mobileImageSize.width}px`,
+                height: `${mobileImageSize.height}px`,
+              }}
+            >
+              <img
+                src={mobileImageUrl}
+                alt={imageAlt}
+                className="w-full h-full object-contain"
+              />
+            </div>
+          )}
+
+          {/* Desktop image */}
           <div
-            className="relative mx-auto"
+            className={`relative mx-auto ${mobileImageUrl ? 'hidden lg:block' : ''}`}
             style={{
               width: `${imageSize.width}px`,
               height: `${imageSize.height}px`,
