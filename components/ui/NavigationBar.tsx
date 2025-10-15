@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 export interface NavigationTab {
   label: string;
-  href: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  href: any;
 }
 
 interface NavigationBarProps {

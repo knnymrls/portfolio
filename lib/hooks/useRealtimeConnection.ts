@@ -180,9 +180,9 @@ export function useRealtimeConnection({
               if (onToolCall) {
                 onToolCall({
                   type: "function_call",
-                  call_id: event.call_id,
-                  name: event.name,
-                  arguments: event.arguments,
+                  call_id: event.call_id as string,
+                  name: event.name as string,
+                  arguments: event.arguments as string,
                 });
               }
               break;

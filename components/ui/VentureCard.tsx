@@ -8,7 +8,8 @@ export interface VentureCardProps {
   role: string;
   year: string;
   status: 'active' | 'exited' | 'archived';
-  href: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  href: any;
   logo?: string;
   className?: string;
 }

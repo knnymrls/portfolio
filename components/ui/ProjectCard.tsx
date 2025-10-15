@@ -4,7 +4,8 @@ export interface ProjectCardProps {
   name: string;
   description: string;
   duration: string;
-  href: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  href: any;
   backgroundColor: string;
   logoUrl?: string;
   logoAlt?: string;
