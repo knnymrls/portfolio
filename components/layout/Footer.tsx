@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Instagram, FileText } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,35 +21,35 @@ export default function Footer() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="GitHub"
             >
-              <Github className="w-4 h-4 text-foreground" />
+              <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
             <Link
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="LinkedIn"
             >
-              <Linkedin className="w-4 h-4 text-foreground" />
+              <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
             <Link
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="Instagram"
             >
-              <Instagram className="w-4 h-4 text-foreground" />
+              <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
             <Link
               href="/resume"
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="Resume"
             >
-              <FileText className="w-4 h-4 text-foreground" />
+              <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
           </div>
         </div>

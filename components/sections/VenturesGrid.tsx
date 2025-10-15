@@ -1,22 +1,15 @@
 "use client";
 
 // Import the image assets from the Figma design
-const imgFindULogo =
-  "http://localhost:3845/assets/0d287b1ddbb976e04e2e2371d152126f4c30f8a1.svg";
-const imgFrame170 =
-  "http://localhost:3845/assets/e271bd235a8c2c6de838d09fa90a6005a0092860.svg";
-const imgVector =
-  "http://localhost:3845/assets/f793e65874fb2858a3edf45439bf525d3d71793f.svg";
-const imgVector1 =
-  "http://localhost:3845/assets/7bd9f54cfd64d8c8c40026dbd7a03342ce9e1c69.svg";
-const imgImage6 =
-  "http://localhost:3845/assets/098dda3e73c8bb1dc322f64412bc252d4fbca4d4.png";
-const imgImage8 =
-  "http://localhost:3845/assets/841b1888d4679de4fed4eb7e59127475cbb5dcfe.png";
-const imgImage9 =
-  "http://localhost:3845/assets/50625161ec76d4b80b18aa037a5576decb98163a.png";
-const imgImage11 =
-  "http://localhost:3845/assets/73d089e8ff68b0f570f308fd10e13ee8aebc16f2.png";
+const imgFindULogo = "/figma-assets/0d287b1ddbb976e04e2e2371d152126f4c30f8a1.svg";
+const imgMkrs = "/figma-assets/c0fc9236599dbf1af7c99963111b15e84f10abce.svg";
+const imgFrame170 = "/figma-assets/e271bd235a8c2c6de838d09fa90a6005a0092860.svg";
+const imgVector = "/figma-assets/f793e65874fb2858a3edf45439bf525d3d71793f.svg";
+const imgVector1 = "/figma-assets/7bd9f54cfd64d8c8c40026dbd7a03342ce9e1c69.svg";
+const imgImage6 = "/figma-assets/098dda3e73c8bb1dc322f64412bc252d4fbca4d4.png";
+const imgImage8 = "/figma-assets/841b1888d4679de4fed4eb7e59127475cbb5dcfe.png";
+const imgImage9 = "/figma-assets/50625161ec76d4b80b18aa037a5576decb98163a.png";
+const imgImage11 = "/figma-assets/73d089e8ff68b0f570f308fd10e13ee8aebc16f2.png";
 
 const ventures = [
   {
@@ -35,11 +28,8 @@ const ventures = [
     dateRange: "Jun 25' - Present",
     description: "Working on a software consulting agency with a focus on AI.",
     backgroundColor: "bg-[#2b2b2b]",
-    customLogo: (
-      <div className="font-['P22_Mackinac_Pro:Medium',_sans-serif] text-[36px] text-center text-white">
-        mkrs.
-      </div>
-    ),
+    logoUrl: imgMkrs,
+    logoClassName: "w-[94px] h-[27px]",
   },
   {
     name: "Creators",

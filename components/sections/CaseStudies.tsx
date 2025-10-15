@@ -120,6 +120,13 @@ const FlockLogo = () => {
         />
       </div>
 
+      {/* Coming soon tag */}
+      <div className="absolute top-3 right-3 bg-white rounded-lg px-3 py-1.5">
+        <span className="text-sm font-medium" style={{ color: "#00649D" }}>
+          Coming soon
+        </span>
+      </div>
+
       {/* Animated iPhone mockup - only on hover */}
       <AnimatePresence>
         {isHovered && (

@@ -43,7 +43,7 @@ export default function Hero({
               className="h-12 bg-foreground text-background px-6 rounded-[13px] flex items-center gap-2 hover:opacity-90 transition-opacity"
               data-highlight-id="cta-contact"
             >
-              <Image src="/icons/send.svg" alt="" width={16} height={16} />
+              <Image src="/icons/send.svg" alt="" width={16} height={16} className="dark:invert" />
               <span className="text-lg font-medium tracking-[0.36px]">
                 Reach out
               </span>
@@ -53,42 +53,42 @@ export default function Hero({
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="GitHub"
               data-highlight-id="social-github"
             >
-              <Image src="/icons/github.svg" alt="" width={20} height={20} />
+              <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
 
             <Link
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="LinkedIn"
               data-highlight-id="social-linkedin"
             >
-              <Image src="/icons/linkedin.svg" alt="" width={20} height={20} />
+              <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
 
             <Link
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="Instagram"
               data-highlight-id="social-instagram"
             >
-              <Image src="/icons/instagram.svg" alt="" width={20} height={20} />
+              <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
 
             <Link
               href="/resume"
-              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="Resume"
               data-highlight-id="social-resume"
             >
-              <Image src="/icons/file.svg" alt="" width={20} height={20} />
+              <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
           </div>
         </div>
