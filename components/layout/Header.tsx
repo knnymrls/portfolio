@@ -5,7 +5,8 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
-const navigation = [
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const navigation: Array<{ name: string; href: any }> = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },

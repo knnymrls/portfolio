@@ -11,7 +11,18 @@ const imgImage8 = "/figma-assets/841b1888d4679de4fed4eb7e59127475cbb5dcfe.png";
 const imgImage9 = "/figma-assets/50625161ec76d4b80b18aa037a5576decb98163a.png";
 const imgImage11 = "/figma-assets/73d089e8ff68b0f570f308fd10e13ee8aebc16f2.png";
 
-const ventures = [
+interface Venture {
+  name: string;
+  role: string;
+  dateRange: string;
+  description: string;
+  backgroundColor: string;
+  logoUrl?: string;
+  logoClassName?: string;
+  customLogo?: React.ReactNode;
+}
+
+const ventures: Venture[] = [
   {
     name: "FindU",
     role: "Co-founder",

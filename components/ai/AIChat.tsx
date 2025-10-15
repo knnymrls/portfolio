@@ -239,7 +239,7 @@ export function AIChat() {
 
   const [isStreaming, setIsStreaming] = useState(false);
 
-  const { messages, sendMessage, isLoading: isChatLoading } = useChat({
+  const { messages, sendMessage } = useChat({
     onFinish() {
       setCurrentAction(null);
       setIsStreaming(false);
@@ -490,7 +490,7 @@ export function AIChat() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputValue.trim() || isChatLoading) return;
+    if (!inputValue.trim() || isStreaming) return;
 
     // Expand chat if not already expanded
     if (!isExpanded) {
@@ -605,7 +605,7 @@ export function AIChat() {
                   }
 
                   // Show loading state when AI is thinking
-                  if (isChatLoading && messages.length === 0) {
+                  if (isStreaming && messages.length === 0) {
                     return (
                       <motion.div
                         initial={{ opacity: 0 }}
@@ -628,13 +628,16 @@ export function AIChat() {
                   // Separate text and tool content
                   const textContent = lastAssistantMessage.parts
                     .filter(
-                      (part: { type: string }) => part.type === "text"
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      (part: any) => part.type === "text"
                     )
-                    .map((part: { text: string }) => part.text)
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    .map((part: any) => part.text)
                     .join(" ");
 
                   const toolCalls = lastAssistantMessage.parts.filter(
-                    (part: { type?: string }) =>
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    (part: any) =>
                       part.type?.startsWith("tool-") &&
                       part.type !== "tool-suggestFollowUps"
                   );
@@ -650,10 +653,8 @@ export function AIChat() {
                       {toolCalls.length > 0 && (
                         <div className="space-y-1">
                           {toolCalls.map(
-                            (
-                              part: { state?: string },
-                              i: number
-                            ) => (
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            (part: any, i: number) => (
                               <div
                                 key={i}
                                 className="text-xs text-surface-secondary italic"
@@ -669,7 +670,7 @@ export function AIChat() {
                       )}
 
                       {/* Text content in the middle */}
-                      {isChatLoading && !textContent ? (
+                      {isStreaming && !textContent ? (
                         <div className="flex items-center gap-2 text-surface-secondary">
                           <Spinner className="size-4" />
                           <span className="text-sm">Thinking...</span>
@@ -793,7 +794,7 @@ export function AIChat() {
               {/* Submit button */}
               <button
                 type="submit"
-                disabled={!inputValue.trim() || isChatLoading}
+                disabled={!inputValue.trim() || isStreaming}
                 className={cn(
                   "absolute right-3 top-1/2 -translate-y-1/2",
                   "w-8 h-8 rounded-[12px]",
@@ -805,7 +806,7 @@ export function AIChat() {
                 )}
                 aria-label="Send message"
               >
-                {isChatLoading ? (
+                {isStreaming ? (
                   <Spinner className="size-3.5" />
                 ) : (
                   <ArrowUp size={14} strokeWidth={3} />

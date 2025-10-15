@@ -6,7 +6,8 @@ import Image from "next/image";
 interface HeroProps {
   title: string | React.ReactNode;
   imageUrl?: string;
-  imageSrc?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  imageSrc?: any;
   imageAlt?: string;
   imageSize?: { width: number; height: number };
 }
@@ -83,7 +84,8 @@ export default function Hero({
             </Link>
 
             <Link
-              href="/resume"
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              href={"/resume" as any}
               className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="Resume"
               data-highlight-id="social-resume"

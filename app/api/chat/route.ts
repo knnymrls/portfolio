@@ -65,7 +65,6 @@ export async function POST(req: Request) {
         }),
       },
       temperature: 0.7,
-      maxSteps: 5, // Allow multi-step tool calling and text generation
       // Simplified tool calling approach
       toolChoice: "auto", // Let AI decide when to use tools
     });

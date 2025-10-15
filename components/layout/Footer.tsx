@@ -45,7 +45,8 @@ export default function Footer() {
               <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
             </Link>
             <Link
-              href="/resume"
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              href={"/resume" as any}
               className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
               aria-label="Resume"
             >
