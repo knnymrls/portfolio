@@ -1,6 +1,5 @@
 import Hero from "@/components/sections/Hero";
 import CaseStudies from "@/components/sections/CaseStudies";
-import HeroImage from "../public/images/hero-kenny.png";
 
 export default function Home() {
   return (
@@ -12,8 +11,9 @@ export default function Home() {
             <br />I design thoughtful AI interfaces that elevate user experiences
           </>
         }
-        imageSrc={HeroImage}
+        imageUrl="/figma-assets/43c8ce632cc8dab8fa0d0592fbc2c219822f86f4.png"
         imageAlt="Kenny Morales"
+        imageSize={{ width: 88, height: 88 }}
       />
       <CaseStudies />
     </div>
