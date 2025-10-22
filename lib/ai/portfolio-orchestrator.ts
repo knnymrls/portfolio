@@ -1,6 +1,5 @@
 import {
   Experimental_Agent as Agent,
-  Message,
   stepCountIs,
 } from "ai";
 import { openai } from "@ai-sdk/openai";
@@ -28,7 +27,8 @@ export function createPortfolioAgent() {
   });
 }
 
-export function createPortfolioAgentResponse(messages: Message[]) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function createPortfolioAgentResponse(messages: any[]) {
   const agent = createPortfolioAgent();
   return agent.respond({ messages });
 }
