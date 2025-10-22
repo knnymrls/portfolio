@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSystemPromptWithKnowledge } from "@/lib/knowledge-utils";
 import dns from "dns";
+import { buildRealtimeCallPayload } from "@/lib/ai/portfolio-orchestrator";
 
 // Force IPv4 DNS resolution
 dns.setDefaultResultOrder("ipv4first");
@@ -29,92 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Configure the session with portfolio knowledge and tools
-    const sessionConfig = {
-      type: "realtime",
-      model: "gpt-realtime-mini",
-      output_modalities: ["audio", "text"],
-      audio: {
-        input: {
-          format: {
-            type: "audio/pcm",
-            rate: 24000,
-          },
-          turn_detection: {
-            type: "semantic_vad",
-          },
-        },
-        output: {
-          format: {
-            type: "audio/pcm",
-          },
-          voice: "sage",
-        },
-      },
-      instructions: getSystemPromptWithKnowledge(),
-      tools: [
-        {
-          type: "function",
-          name: "navigateToSection",
-          description: "Navigate to a specific section of the portfolio",
-          parameters: {
-            type: "object",
-            properties: {
-              section: {
-                type: "string",
-                enum: ["home", "skills", "ventures", "about", "contact"],
-                description:
-                  'The section to navigate to - use "home" for case studies, work samples, or project showcases',
-              },
-            },
-            required: ["section"],
-          },
-        },
-        {
-          type: "function",
-          name: "highlightContent",
-          description:
-            "Highlight specific content elements on the page to draw attention to them",
-          parameters: {
-            type: "object",
-            properties: {
-              targets: {
-                type: "array",
-                items: { type: "string" },
-                description:
-                  'Array of elements to highlight - can be: "hero", "projects", "ventures", "social", "contact", "navigation", specific project names, or CSS selectors',
-              },
-              duration: {
-                type: "number",
-                description:
-                  "Duration in milliseconds to keep highlighted (default: 4000)",
-              },
-            },
-            required: ["targets"],
-          },
-        },
-        {
-          type: "function",
-          name: "suggestFollowUps",
-          description:
-            "Suggest contextual follow-up questions for the user based on the conversation",
-          parameters: {
-            type: "object",
-            properties: {
-              questions: {
-                type: "array",
-                items: { type: "string" },
-                minItems: 3,
-                maxItems: 3,
-                description:
-                  "Exactly 3 follow-up questions that would be helpful based on the current context",
-              },
-            },
-            required: ["questions"],
-          },
-        },
-      ],
-    };
+    const sessionConfig = buildRealtimeCallPayload();
 
     // Create FormData for the multipart request
     const formData = new FormData();

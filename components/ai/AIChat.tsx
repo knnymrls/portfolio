@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp, Mic, MicOff } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,36 @@ import { useRouter, usePathname } from "next/navigation";
 import { generateSmartFollowUps } from "@/lib/ai-follow-ups";
 import { useRealtimeWebSocket, ToolCall } from "@/lib/hooks/useRealtimeWebSocket";
 import { Spinner } from "@/components/ui/spinner";
+import {
+  resolvePortfolioPath,
+  PortfolioNavigationTarget,
+} from "@/lib/ai/portfolio-routing";
+
+const HIGHLIGHT_ALIASES: Record<string, string[]> = {
+  home: ['[data-highlight-section="hero"]', "case-studies-title"],
+  hero: ["hero-title", "hero-image", "hero-actions"],
+  "hero section": ["hero-title", "hero-image", "hero-actions"],
+  findu: ["project-findu"],
+  "find u": ["project-findu"],
+  "find uk study": ["project-findu"],
+  "findu case study": ["project-findu"],
+  mkrs: ["project-mkrs"],
+  "mkrs agency": ["project-mkrs"],
+  "mkrs case study": ["project-mkrs"],
+  flock: ["project-flock"],
+  "flock case study": ["project-flock"],
+  bloom: ["project-bloom"],
+  "bloom case study": ["project-bloom"],
+  ventures: ['[data-highlight-section="ventures"]'],
+  startups: ['[data-highlight-section="ventures"]'],
+  projects: ["projects-grid", "case-studies-title"],
+  "case studies": ["case-studies-title", "projects-grid"],
+  "work tab": ['[data-highlight-section="hero"]', "case-studies-title"],
+  contact: ["contact-form", "contact-title"],
+  socials: ["social-github", "social-linkedin", "social-instagram"],
+  skills: ["skills-grid", "skills-title"],
+  about: ["about-content", "about-title"],
+};
 
 export function AIChat() {
   const [currentAction, setCurrentAction] = useState<AIAction | null>(null);
@@ -24,14 +54,35 @@ export function AIChat() {
   const [isVoiceMode, setIsVoiceMode] = useState(false);
   const [voiceMessages, setVoiceMessages] = useState<Array<{ role: 'user' | 'assistant', content: string }>>([]);
 
-  // Enhanced function to highlight elements on the page
-  const highlightElements = (targets: string[], duration = 4000) => {
+  const clearHighlights = useCallback(() => {
     if (typeof window === "undefined") return;
+    document.querySelectorAll(".ai-highlight").forEach((el) => {
+      el.classList.remove("ai-highlight");
+    });
+    document.querySelectorAll(".ai-dimmed").forEach((el) => {
+      el.classList.remove("ai-dimmed");
+    });
+  }, []);
+
+  // Enhanced function to highlight elements on the page
+  const highlightElements = useCallback((targets: string[], duration = 4000) => {
+    if (typeof window === "undefined") return;
+    if (!targets || !Array.isArray(targets)) return;
+
+    const expandedTargets = targets.flatMap((rawTarget) => {
+      if (!rawTarget) return [];
+      const normalized = rawTarget.trim().toLowerCase();
+      const aliases = HIGHLIGHT_ALIASES[normalized];
+      if (aliases && aliases.length > 0) {
+        return aliases;
+      }
+      return [rawTarget];
+    });
 
     // Smart element selection based on targets
     const highlightedElements: Element[] = [];
 
-    targets.forEach((target) => {
+    expandedTargets.forEach((target) => {
       let elements: Element[] = [];
 
       // Priority 1: Check for data-highlight-id attribute
@@ -227,19 +278,14 @@ export function AIChat() {
     // Auto-clear after duration
     if (duration > 0) {
       setTimeout(() => {
-        document.querySelectorAll(".ai-highlight").forEach((el) => {
-          el.classList.remove("ai-highlight");
-        });
-        document.querySelectorAll(".ai-dimmed").forEach((el) => {
-          el.classList.remove("ai-dimmed");
-        });
+        clearHighlights();
       }, duration);
     }
-  };
+  }, [clearHighlights]);
 
   const [isStreaming, setIsStreaming] = useState(false);
 
-  const { messages, sendMessage } = useChat({
+  const { messages, sendMessage, setMessages, stop, clearError } = useChat({
     onFinish() {
       setCurrentAction(null);
       setIsStreaming(false);
@@ -253,19 +299,40 @@ export function AIChat() {
         const args = JSON.parse(toolCall.arguments);
 
         switch (toolCall.name) {
-          case "navigateToSection":
-            setCurrentAction({
-              type: "navigate",
-              description: `Navigating to ${args.section} section...`,
-              target: args.section,
-            });
-            const path = args.section === "home" ? "/" : `/${args.section}`;
-            router.push(path as Parameters<typeof router.push>[0]);
-            realtime.sendToolResult(toolCall.call_id, {
-              navigated: true,
-              section: args.section,
-            });
+          case "navigateToSection": {
+            const rawSection = args.section;
+
+            if (typeof rawSection === "string") {
+              const section = rawSection as PortfolioNavigationTarget;
+              const targetPath = resolvePortfolioPath(section);
+
+              if (targetPath) {
+                setCurrentAction({
+                  type: "navigate",
+                  description: `Navigating to ${section} section...`,
+                  target: section,
+                });
+                router.push(targetPath as Parameters<typeof router.push>[0]);
+                realtime.sendToolResult(toolCall.call_id, {
+                  navigated: true,
+                  section,
+                });
+              } else {
+                console.warn("Unknown navigation target:", section);
+                realtime.sendToolResult(toolCall.call_id, {
+                  navigated: false,
+                  section,
+                });
+              }
+            } else {
+              console.warn("Invalid navigation target payload:", rawSection);
+              realtime.sendToolResult(toolCall.call_id, {
+                navigated: false,
+                section: rawSection,
+              });
+            }
             break;
+          }
 
           case "highlightContent":
             setCurrentAction({
@@ -298,10 +365,47 @@ export function AIChat() {
       setIsVoiceMode(false);
     },
   });
-  
-  // Add voice transcripts to messages when they complete
+
   const prevUserTranscriptRef = useRef("");
   const prevAiTranscriptRef = useRef("");
+
+  const resetAssistant = useCallback(() => {
+    stop?.();
+    clearError?.();
+    setMessages([]);
+    setVoiceMessages([]);
+    setAiSuggestedQuestions([]);
+    setCurrentAction(null);
+    setIsStreaming(false);
+    setInputValue("");
+    setIsExpanded(false);
+    clearHighlights();
+    prevUserTranscriptRef.current = "";
+    prevAiTranscriptRef.current = "";
+
+    if (isVoiceMode) {
+      realtime.disconnect();
+      setIsVoiceMode(false);
+    }
+  }, [
+    stop,
+    clearError,
+    setMessages,
+    setVoiceMessages,
+    setAiSuggestedQuestions,
+    setCurrentAction,
+    setIsStreaming,
+    setInputValue,
+    setIsExpanded,
+    clearHighlights,
+    isVoiceMode,
+    setIsVoiceMode,
+    realtime,
+    prevUserTranscriptRef,
+    prevAiTranscriptRef,
+  ]);
+  
+  // Add voice transcripts to messages when they complete
 
   useEffect(() => {
     // Add user voice message when transcript completes
@@ -366,7 +470,7 @@ export function AIChat() {
         let hasNavigation = false;
         const highlightRequests: Array<{
           type: string;
-          state: string;
+          state?: string;
           input?: { targets: string[]; duration?: number };
         }> = [];
 
@@ -387,25 +491,29 @@ export function AIChat() {
 
           if (
             typedPart.type === "tool-navigateToSection" &&
-            typedPart.state === "input-available" &&
             typedPart.input
           ) {
             hasNavigation = true;
             console.log("Navigation tool found:", typedPart);
 
+            const destination = typedPart.input.section;
             setCurrentAction({
               type: "navigate",
-              description: `Navigating to ${typedPart.input.section} section...`,
-              target: typedPart.input.section,
+              description: `Navigating to ${destination} section...`,
+              target: destination,
             });
 
-            // Perform the navigation
-            const path =
-              typedPart.input.section === "home" ? "/" : `/${typedPart.input.section}`;
-            router.push(path as Parameters<typeof router.push>[0]);
+            const targetPath = destination
+              ? resolvePortfolioPath(destination as PortfolioNavigationTarget)
+              : null;
+
+            if (targetPath) {
+              router.push(targetPath as Parameters<typeof router.push>[0]);
+            } else {
+              console.warn("Unknown destination from assistant message:", destination);
+            }
           } else if (
             typedPart.type === "tool-highlightContent" &&
-            typedPart.state === "input-available" &&
             typedPart.input
           ) {
             highlightRequests.push(typedPart as typeof highlightRequests[0]);
@@ -462,7 +570,7 @@ export function AIChat() {
 
       }
     }
-  }, [messages, router]);
+  }, [messages, router, highlightElements]);
 
   // Toggle voice mode
   const toggleVoiceMode = async () => {
@@ -530,7 +638,7 @@ export function AIChat() {
     }
     
     return [];
-  }, [aiSuggestedQuestions, isStreaming, lastAssistantMessage?.id, pathname, lastMessageText]);
+  }, [aiSuggestedQuestions, isStreaming, lastAssistantMessage, pathname, lastMessageText]);
 
   return (
     <>
@@ -573,6 +681,18 @@ export function AIChat() {
               className="mb-2 overflow-hidden"
             >
               <div className="bg-surface/95 backdrop-blur-md border border-border rounded-[20px] p-4 max-h-[400px] overflow-y-auto scrollbar-hide">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-surface-secondary">
+                    Kenny&apos;s AI Concierge
+                  </span>
+                  <button
+                    type="button"
+                    onClick={resetAssistant}
+                    className="text-xs font-medium text-surface-secondary hover:text-foreground transition-colors"
+                  >
+                    Reset
+                  </button>
+                </div>
                 {(() => {
                   // In voice mode, show voice messages
                   if (isVoiceMode) {

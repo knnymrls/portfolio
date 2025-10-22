@@ -58,7 +58,8 @@ export function useRealtimeWebSocket({
       // Get ephemeral token from our backend
       const tokenResponse = await fetch("/api/realtime/token");
       if (!tokenResponse.ok) {
-        throw new Error("Failed to get ephemeral token");
+        const errorData = await tokenResponse.json().catch(() => ({ error: "Unknown error" }));
+        throw new Error(`Failed to get ephemeral token: ${errorData.error || tokenResponse.statusText}`);
       }
 
       const { token } = await tokenResponse.json();
