@@ -548,7 +548,7 @@ export function AIChat() {
             const destination = typedPart.input.section;
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const targetId = (typedPart.input as any).targetId;
-            
+
             setCurrentAction({
               type: "navigate",
               description: `Navigating to ${destination} section...`,
