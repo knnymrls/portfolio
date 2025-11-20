@@ -1,23 +1,17 @@
 import Hero from "@/components/sections/Hero";
 import CaseStudies from "@/components/sections/CaseStudies";
+import HeroImage from "../public/images/hero-img.png";
 
 export default function Home() {
   return (
     <>
       <div className="max-w-[1000px] mx-auto px-4">
         <Hero
-          title={
-            <>
-              Yo, I&apos;m Kenny Morales
-              <br />I design thoughtful AI interfaces that elevate user experiences
-            </>
-          }
-          imageUrl="/figma-assets/621192cb53b585feaad1cfb6334638d014c1b398.png"
-          imageAlt="Kenny Morales"
-          imageSize={{ width: 278, height: 315 }}
-          mobileImageUrl="/figma-assets/5e4d54043fab4eeea1ed4388a8cb2e663efa82f6.png"
-          mobileImageSize={{ width: 88, height: 88 }}
+          title="Yo, I'm Kenny Morales, I design thoughtful AI interfaces that elevate user experiences."
+          imageUrl={HeroImage.src}
+          imageAlt="Kenny working on a project"
         />
+
         <CaseStudies />
       </div>
 

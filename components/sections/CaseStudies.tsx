@@ -1,18 +1,11 @@
 "use client";
 
 import { ProjectCard, ProjectCardProps } from "@/components/ui/ProjectCard";
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const FindULogo = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const FindULogo = ({ isHovered }: { isHovered: boolean }) => {
   return (
-    <div
-      className="relative w-full h-full"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative w-full h-full">
       {/* FindU Logo - Always visible */}
       <div className="absolute inset-0 flex items-center justify-center">
         <img
@@ -62,15 +55,9 @@ const FindULogo = () => {
   );
 };
 
-const MkrsLogo = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const MkrsLogo = ({ isHovered }: { isHovered: boolean }) => {
   return (
-    <div
-      className="relative w-full h-full"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative w-full h-full">
       {/* mkrs.world logo - Always visible */}
       <div className="absolute inset-0 flex items-center justify-center">
         <img
@@ -102,15 +89,9 @@ const MkrsLogo = () => {
   );
 };
 
-const FlockLogo = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
+const FlockLogo = ({ isHovered }: { isHovered: boolean }) => {
   return (
-    <div
-      className="relative w-full h-full"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="relative w-full h-full">
       {/* Flock logo - Always visible */}
       <div className="absolute inset-0 flex items-center justify-center">
         <img
@@ -149,7 +130,13 @@ const FlockLogo = () => {
   );
 };
 
-const projects: ProjectCardProps[] = [
+// We modify projects to accept a render prop for customLogo instead of a direct element
+// or we can just handle the state in ProjectCard.
+// Actually, let's make ProjectCard handle the hover state and pass it down.
+// But ProjectCard needs to know WHAT to render.
+// Let's change the type of customLogo in ProjectCardProps to accept a function or ReactNode.
+
+const projects: (Omit<ProjectCardProps, "customLogo"> & { customLogo?: React.ReactNode | ((isHovered: boolean) => React.ReactNode) })[] = [
   {
     name: "FindU",
     description:
@@ -157,7 +144,7 @@ const projects: ProjectCardProps[] = [
     duration: "15 min",
     href: "/projects/findu",
     backgroundColor: "bg-project-findu",
-    customLogo: <FindULogo />,
+    customLogo: (isHovered: boolean) => <FindULogo isHovered={isHovered} />,
   },
   {
     name: "mkrs.world",
@@ -165,7 +152,7 @@ const projects: ProjectCardProps[] = [
     duration: "5 min",
     href: "/projects/mkrs",
     backgroundColor: "bg-project-mkrs",
-    customLogo: <MkrsLogo />,
+    customLogo: (isHovered: boolean) => <MkrsLogo isHovered={isHovered} />,
     customFont: { fontFamily: "var(--font-plus-jakarta), sans-serif" },
   },
   {
@@ -174,7 +161,7 @@ const projects: ProjectCardProps[] = [
     duration: "5 min",
     href: "/projects/flock",
     backgroundColor: "bg-project-flock",
-    customLogo: <FlockLogo />,
+    customLogo: (isHovered: boolean) => <FlockLogo isHovered={isHovered} />,
   },
   {
     name: "Bloom",

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface VentureCardProps {
@@ -77,11 +76,6 @@ export function VentureCard({
           <span className="text-sm text-surface-secondary">
             {role}
           </span>
-          <div className="relative z-20">
-            <div className="bg-surface rounded-[12px] border border-border p-2.5 flex items-center justify-center group-hover:bg-border/20 transition-colors">
-              <ArrowUpRight className="w-4 h-4 text-foreground" />
-            </div>
-          </div>
         </div>
       </div>
     </div>

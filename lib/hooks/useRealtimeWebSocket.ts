@@ -45,7 +45,6 @@ export function useRealtimeWebSocket({
   const wsRef = useRef<WebSocket | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const audioStreamRef = useRef<MediaStream | null>(null);
-  const audioWorkletRef = useRef<AudioWorkletNode | null>(null);
 
   // Connect to the Realtime API via WebSocket
   const connect = useCallback(async () => {

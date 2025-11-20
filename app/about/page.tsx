@@ -1,24 +1,20 @@
+import Hero from "@/components/sections/Hero";
+import AboutJourney from "@/components/sections/AboutJourney";
+import DraggableBox from "@/components/sections/DraggableBox";
+import HeroImage from "../../public/images/hero-img.png"; // Using the generic hero image for the top, bio has personal one
+
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24" data-highlight-section="about">
-      <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white mb-8" data-highlight-id="about-title">
-        About Me
-      </h1>
-      <div className="prose prose-lg dark:prose-invert max-w-none" data-highlight-id="about-content">
-        <p data-highlight-id="about-intro">
-          I&apos;m a passionate Full Stack Developer with expertise in modern web technologies.
-          My journey in tech started with curiosity and has evolved into a career focused on creating efficient, scalable, and user-friendly applications.
-        </p>
-        <p data-highlight-id="about-specialization">
-          I specialize in React, Next.js, TypeScript, and Node.js, with a strong foundation in both frontend and backend development.
-          My approach combines clean code practices with creative problem-solving to deliver exceptional digital experiences.
-        </p>
-        <h2 data-highlight-id="about-experience-title">Experience</h2>
-        <p data-highlight-id="about-experience-content">
-          Throughout my career, I&apos;ve worked on diverse projects ranging from e-commerce platforms to real-time collaboration tools.
-          I believe in continuous learning and staying updated with the latest industry trends and best practices.
-        </p>
-      </div>
+    <div className="max-w-[1000px] mx-auto px-4">
+      <Hero
+        title="I build things for the web, sometimes they work, usually they're fun."
+        imageUrl={HeroImage.src}
+        imageAlt="Kenny working on a project"
+      />
+      
+      <DraggableBox />
+      
+      <AboutJourney />
     </div>
   );
 }

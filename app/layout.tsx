@@ -19,6 +19,7 @@ export const metadata: Metadata = {
 const navigationTabs = [
   { label: "Work", href: "/" },
   { label: "Ventures", href: "/ventures" },
+  { label: "About", href: "/about" },
 ];
 
 export default function RootLayout({

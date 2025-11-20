@@ -1,25 +1,28 @@
-import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
-import CaseStudyHero from '@/components/case-study/CaseStudyHero'
-import CaseStudySection from '@/components/case-study/CaseStudySection'
-import CaseStudyImage from '@/components/case-study/CaseStudyImage'
-import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
+import CaseStudyLayout from "@/components/case-study/CaseStudyLayout";
+import FindUHero from "@/components/case-study/findu/FindUHero";
+import CaseStudySection from "@/components/case-study/CaseStudySection";
+import CaseStudyImage from "@/components/case-study/CaseStudyImage";
+import CaseStudyCallout from "@/components/case-study/CaseStudyCallout";
+import CaseStudyStats from "@/components/case-study/CaseStudyStats";
+import CaseStudyPersonas from "@/components/case-study/CaseStudyPersonas";
+import CaseStudyColorPalette from "@/components/case-study/CaseStudyColorPalette";
+import CaseStudyProcessTimeline from "@/components/case-study/CaseStudyProcessTimeline";
+import CaseStudyTestimonial from "@/components/case-study/CaseStudyTestimonial";
 
 export const metadata = {
-  title: 'FindU Case Study | Kenny Morales',
-  description: 'Helping GenZ figure out their next steps after graduating high school.',
-}
+  title: "FindU Case Study | Kenny Morales",
+  description:
+    "Helping GenZ figure out their next steps after graduating high school.",
+};
 
 <CaseStudyLayout>
 
-<CaseStudyHero
+<FindUHero
   title="FindU"
   description="Helping GenZ figure out their next steps after graduating high school."
-  backgroundColor="bg-project-findu"
-  logoUrl="http://localhost:3845/assets/e4920875de0b8c66a3e07ab29682d2976dbeab06.svg"
-  duration="15 min"
   role="Product Designer & Developer"
   timeline="2023 - 2024"
-  tags={['UX Design', 'AI', 'Education']}
+  tags={["UX Design", "AI", "Education", "Next.js", "React"]}
 />
 
 <CaseStudySection title="Overview">
@@ -27,6 +30,14 @@ export const metadata = {
 FindU is a platform designed to help Generation Z students navigate the critical transition from high school to their next life chapter. With countless options available—from traditional college to trade schools, gap years, and direct employment—many students feel overwhelmed and uncertain about their path forward.
 
 The platform leverages AI and personalized assessments to provide tailored recommendations and guidance, helping students make informed decisions about their future.
+
+<CaseStudyImage
+  src="/images/projects/findu-mockup.png"
+  alt="FindU Mobile Interface showing personalized recommendations"
+  caption="The FindU mobile interface guides students through their discovery journey."
+  width={800}
+  height={600}
+/>
 
 </CaseStudySection>
 
@@ -54,50 +65,148 @@ Traditional guidance counselors are overworked, averaging 482 students per couns
 FindU provides a comprehensive, AI-powered platform that guides students through self-discovery and decision-making:
 
 ### Personalized Assessment
+
 A multi-dimensional assessment evaluating interests, skills, values, and goals to create a comprehensive student profile.
 
 ### AI-Powered Recommendations
+
 Machine learning algorithms match students with pathways that align with their unique profile, from traditional colleges to alternative education and career paths.
 
 ### Interactive Exploration
+
 Students can explore different pathways, compare options side-by-side, and understand the real-world implications of each choice.
 
 ### Action Planning
+
 Once a direction is chosen, FindU provides step-by-step guidance on applications, requirements, and timelines.
 
 </CaseStudySection>
 
 <CaseStudySection title="Design Process">
 
-### Research & Discovery
-I conducted interviews with 30+ high school students, guidance counselors, and recent graduates to understand pain points and needs. Key findings revealed that students craved validation and reassurance more than just information.
+<CaseStudyProcessTimeline
+  steps={[
+    {
+      title: "Research & Discovery",
+      description:
+        "Conducted interviews with 30+ high school students, guidance counselors, and recent graduates to understand pain points and needs. Key findings revealed that students craved validation and reassurance more than just information.",
+    },
+    {
+      title: "User Personas",
+      description:
+        "Developed three primary personas representing different student archetypes to guide our design decisions.",
+    },
+    {
+      title: "Information Architecture",
+      description:
+        "Created a progressive disclosure system that doesn't overwhelm users with all options upfront but gradually reveals pathways as they complete assessments and refine preferences.",
+    },
+    {
+      title: "Visual Design & Branding",
+      description:
+        "Established a visual identity that felt approachable and distinct from the typical institutional look of educational tools.",
+    },
+  ]}
+/>
 
 ### User Personas
-Developed three primary personas representing different student archetypes:
-- The Achiever (knows what they want, needs validation)
-- The Explorer (curious but overwhelmed by options)
-- The Uncertain (unsure of interests or direction)
 
-### Information Architecture
-Created a progressive disclosure system that doesn't overwhelm users with all options upfront but gradually reveals pathways as they complete assessments and refine preferences.
+We developed three primary personas representing different student archetypes:
 
-### Visual Design
-Chose a warm, approachable color palette dominated by coral red (#ff6b6b) to feel friendly and non-institutional, differentiating from traditional education platforms.
+<CaseStudyPersonas
+  personas={[
+    {
+      name: "The Achiever",
+      type: "Goal-Oriented",
+      quote:
+        "I know I want to succeed, but I'm terrified of making the wrong choice.",
+      traits: ["High GPA", "Extracurriculars", "Anxious", "Determined"],
+      painPoints: [
+        "Validation seeking",
+        "Fear of failure",
+        "Analysis paralysis",
+      ],
+    },
+    {
+      name: "The Explorer",
+      type: "Curious Mind",
+      quote: "There are so many cool things to do, how do I pick just one?",
+      traits: ["Creative", "Undecided", "Optimistic", "Overwhelmed"],
+      painPoints: [
+        "Too many options",
+        "Lack of focus",
+        "Difficulty prioritizing",
+      ],
+    },
+    {
+      name: "The Uncertain",
+      type: "Need Direction",
+      quote: "Everyone asks what I'm doing next, and I honestly have no idea.",
+      traits: ["Disengaged", "Stressed", "Avoidant", "Unsure"],
+      painPoints: ["Lack of self-knowledge", "External pressure", "Apathy"],
+    },
+  ]}
+/>
+
+### Visual Identity
+
+To make the platform feel welcoming and less stressful than traditional college applications, we chose a vibrant, warm color palette.
+
+<CaseStudyColorPalette
+  colors={[
+    {
+      name: "Coral Red",
+      hex: "#FF6B6B",
+      description: "Primary Action Color",
+      textColor: "#fff",
+    },
+    {
+      name: "Soft White",
+      hex: "#FBFBFB",
+      description: "Background",
+      textColor: "#000",
+    },
+    {
+      name: "Deep Charcoal",
+      hex: "#333333",
+      description: "Primary Text",
+      textColor: "#fff",
+    },
+    {
+      name: "Status Green",
+      hex: "#10B981",
+      description: "Success State",
+      textColor: "#fff",
+    },
+  ]}
+/>
 
 </CaseStudySection>
 
 <CaseStudySection title="Key Features">
 
 ### Smart Questionnaire
+
 A conversational assessment that feels less like a test and more like a discussion with a mentor. Questions adapt based on previous answers, keeping the experience relevant.
 
 ### Pathway Cards
+
 Visual representations of different post-high school options with quick stats, estimated costs, time commitment, and career outcomes.
 
+<CaseStudyImage
+  src="/images/projects/findu/a9792dee424d8b14c8ab19e719dc092baa735c8b.png"
+  alt="FindU Pathway Cards Design"
+  caption="Pathway cards allow students to quickly compare different future options."
+  width={800}
+  height={450}
+/>
+
 ### Match Score
+
 A transparent scoring system showing why certain pathways align with the student's profile, building trust in recommendations.
 
 ### Parent Dashboard
+
 A separate interface for parents to understand their child's interests and pathways without directly interfering in the decision-making process.
 
 </CaseStudySection>
@@ -111,24 +220,47 @@ A separate interface for parents to understand their child's interests and pathw
 <CaseStudySection title="Challenges & Learnings">
 
 ### Challenge: Building Trust with AI
+
 Students were initially skeptical of AI-generated recommendations. We addressed this by:
+
 - Making the matching algorithm transparent
 - Showing the "why" behind each recommendation
 - Allowing students to override suggestions
 
 ### Challenge: Balancing Guidance with Autonomy
-Finding the right level of direction without being prescriptive. Solution: Positioned FindU as a tool for exploration rather than a decision-maker.
 
-### Challenge: Diverse Pathways
-Representing non-traditional paths (trades, gap years, entrepreneurship) with the same respect as traditional college routes required careful content strategy and design parity.
+Finding the right level of direction without being prescriptive. Solution: Positioned FindU as a tool for exploration rather than a decision-maker.
 
 </CaseStudySection>
 
 <CaseStudySection title="Results & Impact">
 
-- **5,000+** students onboarded in beta phase
-- **78%** reported increased confidence in their post-graduation plans
-- **65%** reduction in time to make initial pathway decisions
+<CaseStudyStats
+  stats={[
+    {
+      value: "5,000+",
+      label: "Students",
+      description: "Onboarded in beta phase",
+    },
+    {
+      value: "78%",
+      label: "Confidence Increase",
+      description: "In post-grad plans",
+    },
+    {
+      value: "65%",
+      label: "Faster Decisions",
+      description: "Reduction in time",
+    },
+  ]}
+/>
+
+<CaseStudyTestimonial
+  quote="This is the first time I've felt like I actually have a say in my future, rather than just doing what I'm told."
+  author="Sarah M."
+  role="High School Junior"
+/>
+
 - **4.6/5** average user satisfaction score
 - **92%** would recommend to peers
 
@@ -137,6 +269,7 @@ Representing non-traditional paths (trades, gap years, entrepreneurship) with th
 <CaseStudySection title="Next Steps">
 
 Future iterations will focus on:
+
 - Integration with actual application systems
 - Expanded mentor matching for personalized human guidance
 - Financial aid calculator and comparison tools
@@ -147,5 +280,5 @@ Future iterations will focus on:
 </CaseStudyLayout>
 
 export default function Page({ children }) {
-  return children
+  return children;
 }

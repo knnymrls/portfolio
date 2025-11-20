@@ -1,4 +1,4 @@
-import { AIAction } from "@/types/ai";
+// import { AIAction } from "@/types/ai";
 
 export type NavigationTarget = 
   | "home"

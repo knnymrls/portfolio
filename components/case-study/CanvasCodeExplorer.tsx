@@ -270,7 +270,7 @@ function FileIcon({ node, onDoubleClick, isSelected, onClick }: FileIconProps) {
   );
 }
 
-export default function CanvasCodeExplorer({ title = "src" }: CanvasCodeExplorerProps) {
+export default function CanvasCodeExplorer({ }: CanvasCodeExplorerProps) {
   const [currentPath, setCurrentPath] = useState<FileNode[]>([srcData]);
   const [previewFile, setPreviewFile] = useState<FileNode | null>(null);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);

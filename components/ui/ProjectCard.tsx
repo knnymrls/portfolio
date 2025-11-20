@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React, { useState } from "react";
 
 export interface ProjectCardProps {
   name: string;
@@ -10,7 +11,7 @@ export interface ProjectCardProps {
   logoUrl?: string;
   logoAlt?: string;
   logoClassName?: string;
-  customLogo?: React.ReactNode;
+  customLogo?: React.ReactNode | ((isHovered: boolean) => React.ReactNode);
   customFont?: React.CSSProperties;
   'data-highlight-id'?: string;
 }
@@ -28,23 +29,30 @@ export function ProjectCard({
   customFont,
   'data-highlight-id': dataHighlightId,
 }: ProjectCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <div className="group bg-surface rounded-[20px] border border-border overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-foreground/20 cursor-pointer relative" data-highlight-id={dataHighlightId}>
+    <div 
+      className="group bg-surface rounded-[20px] border border-border overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-foreground/20 cursor-pointer relative" 
+      data-highlight-id={dataHighlightId}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <Link
         href={href}
-        className="absolute inset-0 z-10"
+        className="absolute inset-0 z-30" // Increased z-index to be above everything else
         aria-label={`View ${name} project`}
       >
         <span className="sr-only">View {name}</span>
       </Link>
 
-      <div className="p-5 pb-6 flex flex-col h-full">
+      <div className="p-5 pb-6 flex flex-col h-full pointer-events-none"> {/* Disable pointer events on content so Link receives them, but check if this affects hover state tracking on parent */}
         {/* Logo Area - Fixed height */}
         <div
           className={`h-[280px] ${backgroundColor} rounded-[20px] overflow-hidden relative z-20 flex items-center justify-center mb-4`}
         >
           {customLogo ? (
-            customLogo
+            typeof customLogo === 'function' ? customLogo(isHovered) : customLogo
           ) : logoUrl ? (
             <img
               alt={logoAlt || `${name} logo`}
