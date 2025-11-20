@@ -11,8 +11,13 @@ export default function CaseStudySection({
   children,
   className = '',
 }: CaseStudySectionProps) {
+  // Generate a slug from the title for deep linking
+  const id = title 
+    ? title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') 
+    : undefined;
+
   return (
-    <section className={`mb-12 ${className}`}>
+    <section id={id} className={`mb-12 ${className} scroll-mt-24`}>
       {title && (
         <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground">
           {title}

@@ -41,9 +41,51 @@ const HIGHLIGHT_ALIASES: Record<string, string[]> = {
   about: ["about-content", "about-title"],
 };
 
+// Helper to parse markdown-style bold text
+const formatMessageText = (text: string) => {
+  if (!text) return null;
+  return text.split(/(\*\*.*?\*\*)/g).map((part, i) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={i} className="font-semibold text-primary">{part.slice(2, -2)}</strong>;
+    }
+    return part;
+  });
+};
+
 export function AIChat() {
   const [currentAction, setCurrentAction] = useState<AIAction | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  // Auto-open and close sequence on mount
+  useEffect(() => {
+    const openTimer = setTimeout(() => {
+      setIsExpanded((prev) => {
+        if (!prev && !hasInteracted) return true;
+        return prev;
+      });
+    }, 800);
+
+    const closeTimer = setTimeout(() => {
+      setIsExpanded((prev) => {
+        // Only auto-close if no interaction and no active conversation
+        if (prev && !hasInteracted && messages.length === 0) return false;
+        return prev;
+      });
+    }, 5000);
+
+    return () => {
+      clearTimeout(openTimer);
+      clearTimeout(closeTimer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Run once on mount
+
+  const handleInteraction = useCallback(() => {
+    if (!hasInteracted) {
+      setHasInteracted(true);
+    }
+  }, [hasInteracted]);
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -285,12 +327,21 @@ export function AIChat() {
 
   const [isStreaming, setIsStreaming] = useState(false);
 
-  const { messages, sendMessage, setMessages, stop, clearError } = useChat({
+  const { messages, sendMessage, setMessages, stop } = useChat({
+    // @ts-expect-error - body/onFinish are supported by the runtime but missing from types in this version
+    body: { pathname },
     onFinish() {
       setCurrentAction(null);
       setIsStreaming(false);
     },
   });
+
+  const STARTER_QUESTIONS = [
+    { text: "Tell me about FindU", label: "FindU Case Study" },
+    { text: "What are your skills?", label: "View Skills" },
+    { text: "Show me your ventures", label: "Browse Ventures" },
+    { text: "Contact information", label: "Contact Info" },
+  ];
 
   // Realtime connection for voice mode
   const realtime = useRealtimeWebSocket({
@@ -371,7 +422,6 @@ export function AIChat() {
 
   const resetAssistant = useCallback(() => {
     stop?.();
-    clearError?.();
     setMessages([]);
     setVoiceMessages([]);
     setAiSuggestedQuestions([]);
@@ -389,7 +439,6 @@ export function AIChat() {
     }
   }, [
     stop,
-    clearError,
     setMessages,
     setVoiceMessages,
     setAiSuggestedQuestions,
@@ -404,7 +453,7 @@ export function AIChat() {
     prevUserTranscriptRef,
     prevAiTranscriptRef,
   ]);
-  
+
   // Add voice transcripts to messages when they complete
 
   useEffect(() => {
@@ -497,6 +546,9 @@ export function AIChat() {
             console.log("Navigation tool found:", typedPart);
 
             const destination = typedPart.input.section;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const targetId = (typedPart.input as any).targetId;
+            
             setCurrentAction({
               type: "navigate",
               description: `Navigating to ${destination} section...`,
@@ -508,7 +560,20 @@ export function AIChat() {
               : null;
 
             if (targetPath) {
-              router.push(targetPath as Parameters<typeof router.push>[0]);
+              const fullPath = targetId ? `${targetPath}#${targetId}` : targetPath;
+              router.push(fullPath as Parameters<typeof router.push>[0]);
+
+              // If there's a targetId, try to scroll to it after a delay
+              if (targetId) {
+                setTimeout(() => {
+                  const element = document.getElementById(targetId);
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                    // Also highlight it
+                    highlightElements([targetId], 4000);
+                  }
+                }, 800); // Wait for navigation
+              }
             } else {
               console.warn("Unknown destination from assistant message:", destination);
             }
@@ -619,7 +684,7 @@ export function AIChat() {
   const lastAssistantMessage = [...messages]
     .reverse()
     .find((msg) => msg.role === "assistant");
-    
+
   const lastMessageText = lastAssistantMessage?.parts
     ?.filter((part: unknown) => (part as { type: string }).type === "text")
     ?.map((part: unknown) => (part as { text: string }).text)
@@ -631,12 +696,12 @@ export function AIChat() {
     if (aiSuggestedQuestions.length > 0) {
       return aiSuggestedQuestions;
     }
-    
+
     // Use smart generation based on response content when streaming is done
     if (!isStreaming && lastAssistantMessage && lastMessageText) {
       return generateSmartFollowUps(lastMessageText, pathname);
     }
-    
+
     return [];
   }, [aiSuggestedQuestions, isStreaming, lastAssistantMessage, pathname, lastMessageText]);
 
@@ -674,10 +739,10 @@ export function AIChat() {
         <AnimatePresence>
           {isExpanded && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              initial={{ opacity: 0, height: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, height: "auto", scale: 1, y: 0 }}
+              exit={{ opacity: 0, height: 0, scale: 0.95, y: 10 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
               className="mb-2 overflow-hidden"
             >
               <div className="bg-surface/95 backdrop-blur-md border border-border rounded-[20px] p-4 max-h-[400px] overflow-y-auto scrollbar-hide">
@@ -725,24 +790,78 @@ export function AIChat() {
                     );
                   }
 
-                  // Show loading state when AI is thinking
-                  if (isStreaming && messages.length === 0) {
-                    return (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="flex items-center gap-2 text-surface-secondary"
-                      >
-                        <Spinner className="size-4" />
-                        <span className="text-sm">Thinking...</span>
-                      </motion.div>
-                    );
-                  }
-
                   // Find the most recent assistant message
                   const lastAssistantMessage = [...messages]
                     .reverse()
                     .find((msg) => msg.role === "assistant");
+
+                  // Show starter questions if no messages and not streaming
+                  if (messages.length === 0 && !isStreaming) {
+                    return (
+                      <div className="space-y-4">
+                        <div className="text-base leading-relaxed text-foreground">
+                          <p className="flex items-center gap-2">
+                            <span>
+                              Hi! I&apos;m Kenny&apos;s AI assistant. I can help you explore the portfolio, answer questions about my experience, or discuss my ventures.
+                            </span>
+                          </p>
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {STARTER_QUESTIONS.map((q) => (
+                            <button
+                              key={q.text}
+                              type="button"
+                              onClick={() => {
+                                handleInteraction();
+                                setIsStreaming(true);
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                sendMessage({ text: q.text } as any);
+                              }}
+                              className="px-3 py-2.5 rounded-[10px] border border-border bg-surface hover:bg-nav-inactive text-left transition-all hover:scale-[1.02] cursor-pointer"
+                            >
+                              <span className="block text-xs font-medium text-surface-secondary mb-0.5">
+                                {q.label}
+                              </span>
+                              <span className="block text-sm text-foreground">
+                                {q.text}
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  // Show loading state if streaming or if we have messages but no assistant response yet
+                  if (isStreaming || (messages.length > 0 && !lastAssistantMessage)) {
+                    return (
+                      <div className="space-y-4">
+                        {/* Show any partial text content that has arrived */}
+                        {lastAssistantMessage && (
+                          <div className="text-base leading-relaxed text-foreground">
+                            {formatMessageText(lastMessageText)}
+                            <motion.span
+                              animate={{ opacity: [1, 0.5, 1] }}
+                              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                              className="inline-block w-1 h-4 bg-foreground ml-1 align-middle"
+                            />
+                          </div>
+                        )}
+
+                        {/* Show thinking indicator if no text yet */}
+                        {!lastAssistantMessage && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="flex items-center gap-2 text-surface-secondary"
+                          >
+                            <Spinner className="size-4" />
+                            <span className="text-sm">Thinking...</span>
+                          </motion.div>
+                        )}
+                      </div>
+                    );
+                  }
 
                   if (!lastAssistantMessage) return null;
 
@@ -798,7 +917,7 @@ export function AIChat() {
                         </div>
                       ) : (textContent || (!textContent && toolCalls.length === 0)) && (
                         <div className="text-base leading-relaxed text-foreground">
-                          {textContent || "I'm here to help you explore Kenny's portfolio!"}
+                          {formatMessageText(textContent || "I'm here to help you explore Kenny's portfolio!")}
                           {isStreaming && (
                             <motion.span
                               animate={{ opacity: [1, 0.5, 1] }}
@@ -813,23 +932,25 @@ export function AIChat() {
                       {!isStreaming && followUpQuestions.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {followUpQuestions.map((question, i) => (
-                          <button
-                            key={i}
-                            type="button"
-                            onClick={() => {
-                              // Expand chat if not already expanded
-                              if (!isExpanded) {
-                                setIsExpanded(true);
-                              }
+                            <button
+                              key={i}
+                              type="button"
+                              onClick={() => {
+                                // Expand chat if not already expanded
+                                if (!isExpanded) {
+                                  setIsExpanded(true);
+                                }
 
-                              // Submit the question directly
-                              sendMessage({ text: question });
-                            }}
-                            className="px-3 py-2 rounded-[8px] border border-border bg-border hover:bg-nav-inactive cursor-pointer transition-colors text-sm text-foreground"
-                          >
-                            {question}
-                          </button>
-                        ))}
+                                // Submit the question directly
+                                setIsStreaming(true);
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                sendMessage({ text: question } as any);
+                              }}
+                              className="px-3 py-2 rounded-[8px] border border-border bg-border hover:bg-nav-inactive cursor-pointer transition-colors text-sm text-foreground"
+                            >
+                              {question}
+                            </button>
+                          ))}
                         </div>
                       )}
                     </motion.div>
@@ -865,12 +986,21 @@ export function AIChat() {
 
             <div className={cn(
               "relative bg-surface rounded-[12px]",
-              (realtime.isModelSpeaking || realtime.isAudioPlaying) ? "border-0" : "border border-border"
+              (realtime.isModelSpeaking || realtime.isAudioPlaying)
+                ? "border-0"
+                : "border border-border transition-colors focus-within:border-foreground"
             )}>
               <input
                 type="text"
                 value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                onChange={(e) => {
+                  setInputValue(e.target.value);
+                  handleInteraction();
+                }}
+                onFocus={() => {
+                  setIsExpanded(true);
+                  handleInteraction();
+                }}
                 placeholder={
                   isVoiceMode
                     ? "Speak or type your question..."
@@ -887,30 +1017,30 @@ export function AIChat() {
 
               {/* Voice toggle button */}
               <button
-              type="button"
-              onClick={toggleVoiceMode}
-              disabled={realtime.isConnecting}
-              className={cn(
-                "absolute right-14 top-1/2 -translate-y-1/2",
-                "w-8 h-8 rounded-[12px]",
-                "flex items-center justify-center",
-                "transition-all duration-200",
-                "disabled:opacity-50 disabled:cursor-not-allowed",
-                "hover:scale-105 active:scale-95",
-                isVoiceMode
-                  ? "bg-foreground text-background"
-                  : "bg-border text-foreground hover:bg-nav-inactive"
-              )}
-              aria-label={isVoiceMode ? "Disable voice mode" : "Enable voice mode"}
-            >
-              {realtime.isConnecting ? (
-                <Spinner className="size-3.5" />
-              ) : isVoiceMode ? (
-                <Mic size={14} strokeWidth={3} />
-              ) : (
-                <MicOff size={14} strokeWidth={3} />
-              )}
-            </button>
+                type="button"
+                onClick={toggleVoiceMode}
+                disabled={realtime.isConnecting}
+                className={cn(
+                  "absolute right-14 top-1/2 -translate-y-1/2",
+                  "w-8 h-8 rounded-[12px]",
+                  "flex items-center justify-center",
+                  "transition-all duration-200",
+                  "disabled:opacity-50 disabled:cursor-not-allowed",
+                  "hover:scale-105 active:scale-95",
+                  isVoiceMode
+                    ? "bg-foreground text-background"
+                    : "bg-border text-foreground hover:bg-nav-inactive"
+                )}
+                aria-label={isVoiceMode ? "Disable voice mode" : "Enable voice mode"}
+              >
+                {realtime.isConnecting ? (
+                  <Spinner className="size-3.5" />
+                ) : isVoiceMode ? (
+                  <Mic size={14} strokeWidth={3} />
+                ) : (
+                  <MicOff size={14} strokeWidth={3} />
+                )}
+              </button>
 
               {/* Submit button */}
               <button

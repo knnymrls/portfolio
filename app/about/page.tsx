@@ -11,9 +11,9 @@ export default function AboutPage() {
         imageUrl={HeroImage.src}
         imageAlt="Kenny working on a project"
       />
-      
+
       <DraggableBox />
-      
+
       <AboutJourney />
     </div>
   );

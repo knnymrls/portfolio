@@ -147,6 +147,7 @@ export default function VenturesGrid() {
               key={index}
               className="bg-surface rounded-[20px] border border-border overflow-hidden h-full cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-[1.02] group"
               onClick={() => handleVentureClick(venture)}
+              data-highlight-id={`venture-${venture.name.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')}`}
             >
               <div className="p-5 pb-6 flex flex-col h-full">
                 {/* Logo Area */}

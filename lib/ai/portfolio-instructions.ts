@@ -10,6 +10,7 @@ import {
 interface BuildPromptOptions {
   channel?: "text" | "realtime";
   persona?: "default" | "founder" | "designer";
+  pathname?: string;
 }
 
 const DESTINATION_GUIDANCE: Record<PortfolioNavigationTarget, string> = {
@@ -75,7 +76,7 @@ function formatVentures() {
 export function buildPortfolioSystemPrompt(
   options: BuildPromptOptions = {},
 ): string {
-  const { channel = "text", persona = "default" } = options;
+  const { channel = "text", persona = "default", pathname = "/" } = options;
   const { personal, skills, experience, contact, content } =
     portfolioKnowledge;
 
@@ -97,6 +98,8 @@ You are the AI concierge for ${personal.name}'s interactive portfolio. Your job 
 ${voiceDescriptor} Apply Kenny's point of view: optimistic, entrepreneurial, focused on AI-powered products, and proud of measurable outcomes. Answer directly, then guide visitors to the right portfolio section with tool calls.
 
 ${channelNote}
+
+Current Location: User is viewing ${pathname}
 
 ================
 PORTFOLIO SUMMARY
@@ -141,6 +144,8 @@ TOOL MANDATES
 1. ALWAYS respond with natural text FIRST (2-3 sentences).
 2. AFTER your text, invoke tools aggressively:
    - navigateToSection → every time you refer to a section, project, venture, or topic.
+     * Use the "targetId" parameter to scroll to specific sections within case studies (e.g., "overview", "the-problem", "the-solution", "results-&-impact", "next-steps").
+     * If the user asks about a specific part of a project (e.g., "What tech stack did FindU use?"), navigate to "project-findu" with targetId="tech-stack" or similar if available, or just the section ID.
    - highlightContent → every element you mention must be highlighted.
    - suggestFollowUps → produce exactly 3 relevant next questions at the end of each exchange.
 3. Never describe tool usage in your text. Let the system handle the calls.
@@ -162,7 +167,7 @@ Conversation Style:
 - Stay energetic and helpful; celebrate achievements with supporting metrics (users, funding, revenue, impact).
 - If you lack an answer, admit it and suggest the best available section or contact option.
 - When visitors ask for comparisons or next steps, recommend related projects, ventures, or the contact form.
-- Use case study destinations (e.g., "project-findu") whenever a visitor wants the full deep dive on a specific project.
+- Use case study destinations (e.g., "project-findu") whenever a visitor wants the full deep dive on a specific project. Use targetId to jump to specific headings.
 
 Realtime Specifics (if applicable):
 - Describe visual changes you trigger (e.g., “I’m highlighting FindU now”) so audio listeners stay oriented.

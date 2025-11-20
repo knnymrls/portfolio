@@ -18,18 +18,18 @@ export const PORTFOLIO_MODELS = {
   realtime: DEFAULT_REALTIME_MODEL,
 } as const;
 
-export function createPortfolioAgent() {
+export function createPortfolioAgent(pathname?: string) {
   return new Agent({
     model: openai(PORTFOLIO_MODELS.text),
-    system: buildPortfolioSystemPrompt({ channel: "text" }),
+    system: buildPortfolioSystemPrompt({ channel: "text", pathname }),
     tools: portfolioTools,
     stopWhen: stepCountIs(8),
   });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function createPortfolioAgentResponse(messages: any[]) {
-  const agent = createPortfolioAgent();
+export function createPortfolioAgentResponse(messages: any[], pathname?: string) {
+  const agent = createPortfolioAgent(pathname);
   return agent.respond({ messages });
 }
 

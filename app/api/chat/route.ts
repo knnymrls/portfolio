@@ -2,7 +2,7 @@ import { createPortfolioAgentResponse } from "@/lib/ai/portfolio-orchestrator";
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    const { messages, pathname } = await req.json();
 
     if (!messages || !Array.isArray(messages)) {
       return new Response(
@@ -11,7 +11,7 @@ export async function POST(req: Request) {
       );
     }
 
-    return createPortfolioAgentResponse(messages);
+    return createPortfolioAgentResponse(messages, pathname);
   } catch (error) {
     console.error("Error in chat API:", error);
     return new Response(

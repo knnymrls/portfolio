@@ -61,10 +61,22 @@ export const navigateToSectionTool = tool({
           'Use "project-*" values when focusing on a specific case study.',
         ].join(" "),
       ),
+    targetId: z
+      .string()
+      .optional()
+      .describe(
+        "Optional ID of a specific element to scroll to (e.g., 'overview', 'the-solution', 'results-&-impact'). Derived from section titles.",
+      ),
+    reason: z
+      .string()
+      .optional()
+      .describe("Short explanation of why you are navigating to this section."),
   }),
-  execute: async ({ section }) => ({
+  execute: async ({ section, targetId, reason }) => ({
     navigated: true,
     section: section as PortfolioNavigationTarget,
+    targetId,
+    reason,
   }),
 });
 
@@ -122,6 +134,15 @@ export const portfolioRealtimeTools = [
           enum: [...PORTFOLIO_DESTINATIONS],
           description:
             'Use "home", "skills", "ventures", "about", "contact", or a case-study slug such as "project-findu".',
+        },
+        targetId: {
+          type: "string",
+          description:
+            "Optional ID of a specific element to scroll to (e.g., 'overview', 'the-solution').",
+        },
+        reason: {
+          type: "string",
+          description: "Short explanation of why you are navigating.",
         },
       },
       required: ["section"],
