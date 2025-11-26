@@ -19,8 +19,8 @@ export default function CaseStudyImage({
   className = '',
 }: CaseStudyImageProps) {
   return (
-    <figure className={`my-8 ${className}`}>
-      <div className="rounded-2xl overflow-hidden bg-surface-secondary/5">
+    <figure className={`my-12 ${className}`}>
+      <div className="rounded-2xl overflow-hidden">
         {width && height ? (
           <Image
             src={src}

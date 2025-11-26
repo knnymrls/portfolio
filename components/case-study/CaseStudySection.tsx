@@ -16,10 +16,13 @@ export default function CaseStudySection({
     ? title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') 
     : undefined;
 
+  // Main sections (with title) get more top spacing to separate from previous content
+  const sectionSpacing = title ? 'mt-20 mb-8' : 'mb-8';
+
   return (
-    <section id={id} className={`mb-12 ${className} scroll-mt-24`}>
+    <section id={id} className={`${sectionSpacing} ${className} scroll-mt-24`}>
       {title && (
-        <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-foreground">
+        <h2 className="font-medium text-base text-surface-secondary tracking-[0.32px] uppercase mb-8">
           {title}
         </h2>
       )}

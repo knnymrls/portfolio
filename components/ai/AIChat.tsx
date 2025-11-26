@@ -72,6 +72,26 @@ export function AIChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  // Keyboard shortcut: Cmd/Ctrl + K to toggle chat
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+        event.preventDefault();
+        setIsExpanded((prev) => !prev);
+        if (!isExpanded) {
+          setIsInputFocused(true);
+        }
+      }
+      // Escape to close
+      if (event.key === "Escape" && isExpanded && !isStreaming) {
+        setIsExpanded(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isExpanded, isStreaming, setIsExpanded]);
+
   // Close chat when clicking outside (but not if input is focused)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -166,15 +186,25 @@ export function AIChat() {
             >
               <div className="bg-surface/95 backdrop-blur-md border border-border rounded-[20px] p-4 max-h-[60vh] overflow-y-auto scrollbar-hide">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-surface-secondary">
-                    Kenny&apos;s AI Concierge
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src="/images/kenny-avatar.png"
+                      alt="Kenny"
+                      className="w-6 h-6 bg-white border border-border rounded-full object-cover"
+                    />
+                    <span className="text-sm font-semibold text-foreground">
+                      Kenny
+                    </span>
+                  </div>
                   <button
                     type="button"
                     onClick={() => setIsExpanded(false)}
-                    className="text-xs font-medium text-surface-secondary hover:text-foreground transition-colors"
+                    className="flex items-center gap-2 text-xs font-medium text-surface-secondary hover:text-foreground transition-colors"
                   >
                     Close
+                    <kbd className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-medium bg-foreground/10 rounded border border-foreground/20">
+                      <span className="text-[10px]">⌘</span>K
+                    </kbd>
                   </button>
                 </div>
                 {(() => {
@@ -329,6 +359,7 @@ export function AIChat() {
           }}
           onBlur={() => setIsInputFocused(false)}
           isStreaming={isStreaming}
+          isChatExpanded={isExpanded}
         />
       </div>
     </>

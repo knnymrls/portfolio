@@ -36,7 +36,10 @@ export const caseStudyComponents: MDXComponents = {
     <h2 className="text-3xl font-bold mb-4 text-foreground">{children}</h2>
   ),
   h3: ({ children }) => (
-    <h3 className="text-2xl font-semibold mb-3 text-foreground">{children}</h3>
+    <h3 className="text-2xl font-semibold mt-10 mb-4 text-foreground">{children}</h3>
+  ),
+  h4: ({ children }) => (
+    <h4 className="text-lg font-semibold mt-8 mb-3 text-foreground/90">{children}</h4>
   ),
   p: ({ children }) => (
     <p className="text-base text-foreground/90 leading-relaxed mb-4">

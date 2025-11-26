@@ -1,8 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+
+  const buttonMotion = {
+    whileHover: { scale: 1.08, y: -2 },
+    whileTap: { scale: 0.95 },
+    transition: { type: "spring", stiffness: 400, damping: 17 },
+  };
 
   return (
     <footer className="w-full ">
@@ -17,41 +26,39 @@ export default function Footer() {
 
           {/* Right side - Social links */}
           <div className="flex items-center gap-2">
-            <Link
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="GitHub"
-            >
-              <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
-            <Link
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="LinkedIn"
-            >
-              <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
-            <Link
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="Instagram"
-            >
-              <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
-            <Link
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              href={"/resume" as any}
-              className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-              aria-label="Resume"
-            >
-              <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
-            </Link>
+            <motion.div {...buttonMotion}>
+              <Link
+                href="https://github.com/knnymrls"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                aria-label="GitHub"
+              >
+                <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
+              </Link>
+            </motion.div>
+            <motion.div {...buttonMotion}>
+              <Link
+                href="https://www.linkedin.com/in/knnymrls/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                aria-label="LinkedIn"
+              >
+                <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
+              </Link>
+            </motion.div>
+            <motion.div {...buttonMotion}>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="h-10 w-10 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                aria-label="Resume"
+              >
+                <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>

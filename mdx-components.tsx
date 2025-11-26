@@ -17,6 +17,11 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </h3>
     ),
+    h4: ({ children }) => (
+      <h4 className="text-lg md:text-xl font-semibold mt-6 mb-3 text-foreground/90">
+        {children}
+      </h4>
+    ),
     p: ({ children }) => (
       <p className="text-base leading-relaxed mb-4 text-foreground">
         {children}

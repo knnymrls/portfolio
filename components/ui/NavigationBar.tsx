@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export interface NavigationTab {
@@ -17,16 +19,25 @@ interface NavigationBarProps {
 
 export function NavigationBar({ tabs, className }: NavigationBarProps) {
   const pathname = usePathname();
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div
+    <motion.div
       className={cn(
         "fixed top-4 left-1/2 -translate-x-1/2 z-50",
         "backdrop-blur-[2px] bg-surface",
-        "flex gap-2 items-center justify-center p-1.5",
+        "flex gap-2 items-center justify-center",
         "rounded-[12px] border border-border",
         className
       )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      initial={false}
+      animate={{
+        padding: isHovered ? "6px" : "4px",
+        opacity: isHovered ? 1 : 0.85,
+      }}
+      transition={{ duration: 0.15, ease: "easeOut" }}
     >
       {tabs.map((tab) => {
         const isActive =
@@ -39,22 +50,37 @@ export function NavigationBar({ tabs, className }: NavigationBarProps) {
             key={tab.href}
             href={tab.href}
             className={cn(
-              "flex items-center justify-center",
-              "px-3 py-3 rounded-[12px]",
+              "relative flex items-center justify-center",
+              "px-3 rounded-[12px]",
               "text-base leading-none tracking-[0.32px]",
-              "transition-all duration-200",
-              "w-[103px]",
               "font-['Sora',_sans-serif]",
-              "border border-transparent",
+              "transition-colors duration-200",
               isActive
-                ? "bg-nav-active text-foreground font-semibold"
-                : "text-surface-secondary font-normal hover:bg-nav-inactive hover:border-border"
+                ? "text-foreground font-semibold"
+                : "text-surface-secondary font-normal hover:text-foreground/70 hover:bg-nav-inactive hover:border-border"
             )}
+            style={{
+              paddingTop: isHovered ? 12 : 10,
+              paddingBottom: isHovered ? 12 : 10,
+              width: isHovered ? 103 : 95,
+              transition: "padding 0.15s ease-out, width 0.15s ease-out, color 0.2s ease-out, background-color 0.2s ease-out",
+            }}
           >
-            {tab.label}
+            {isActive && (
+              <motion.div
+                layoutId="nav-indicator"
+                className="absolute inset-0 bg-nav-active rounded-[10px]"
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 30,
+                }}
+              />
+            )}
+            <span className="relative z-10">{tab.label}</span>
           </Link>
         );
       })}
-    </div>
+    </motion.div>
   );
 }
