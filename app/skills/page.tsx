@@ -3,31 +3,23 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-// Featured skills with accent colors
+// Featured skills
 const featuredSkills = [
   {
     name: "React & Next.js",
     description: "Building performant, SEO-friendly web applications",
-    color: "bg-[#61DAFB]/10 border-[#61DAFB]/30 hover:border-[#61DAFB]",
-    icon: "⚛️",
   },
   {
     name: "AI Integration",
     description: "OpenAI, LangChain, RAG systems, and prompt engineering",
-    color: "bg-[#10A37F]/10 border-[#10A37F]/30 hover:border-[#10A37F]",
-    icon: "🤖",
   },
   {
     name: "TypeScript",
     description: "Type-safe code that scales with your team",
-    color: "bg-[#3178C6]/10 border-[#3178C6]/30 hover:border-[#3178C6]",
-    icon: "📘",
   },
   {
     name: "UI/UX Design",
     description: "From Figma wireframes to polished interfaces",
-    color: "bg-[#F24E1E]/10 border-[#F24E1E]/30 hover:border-[#F24E1E]",
-    icon: "🎨",
   },
 ];
 
@@ -80,12 +72,12 @@ const skillCategories = [
 ];
 
 const softSkills = [
-  { name: "Product Strategy", emoji: "🎯" },
-  { name: "Team Leadership", emoji: "👥" },
-  { name: "Startup Operations", emoji: "🚀" },
-  { name: "Client Communication", emoji: "💬" },
-  { name: "Mentoring", emoji: "🌱" },
-  { name: "Public Speaking", emoji: "🎤" },
+  "Product Strategy",
+  "Team Leadership",
+  "Startup Operations",
+  "Client Communication",
+  "Mentoring",
+  "Public Speaking",
 ];
 
 function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
@@ -155,19 +147,14 @@ export default function SkillsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`${skill.color} rounded-[20px] border p-6 transition-all duration-300 cursor-default`}
+              className="bg-surface rounded-[20px] border border-border p-6 hover:border-foreground/20 transition-colors cursor-default"
             >
-              <div className="flex items-start gap-4">
-                <span className="text-3xl">{skill.icon}</span>
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-1">
-                    {skill.name}
-                  </h3>
-                  <p className="text-sm text-surface-secondary">
-                    {skill.description}
-                  </p>
-                </div>
-              </div>
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                {skill.name}
+              </h3>
+              <p className="text-sm text-surface-secondary">
+                {skill.description}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -213,19 +200,17 @@ export default function SkillsPage() {
           BEYOND THE CODE
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="flex flex-wrap gap-3">
           {softSkills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
+            <motion.span
+              key={skill}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.7 + index * 0.05 }}
-              whileHover={{ scale: 1.02 }}
-              className="bg-surface border border-border rounded-[16px] p-4 flex items-center gap-3 hover:border-foreground/20 transition-colors cursor-default"
+              className="text-sm text-foreground bg-surface border border-border px-4 py-2 rounded-full hover:border-foreground/20 transition-colors cursor-default"
             >
-              <span className="text-2xl">{skill.emoji}</span>
-              <span className="text-sm font-medium text-foreground">{skill.name}</span>
-            </motion.div>
+              {skill}
+            </motion.span>
           ))}
         </div>
       </section>
