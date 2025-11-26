@@ -105,7 +105,7 @@ export default function Hero({
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <Link
+                <a
                   href="/resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -114,7 +114,7 @@ export default function Hero({
                   data-highlight-id="social-resume"
                 >
                   <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
-                </Link>
+                </a>
               </motion.div>
             </div>
           </div>
