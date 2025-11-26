@@ -13,6 +13,7 @@ export interface ProjectCardProps {
   logoClassName?: string;
   customLogo?: React.ReactNode | ((isHovered: boolean) => React.ReactNode);
   customFont?: React.CSSProperties;
+  status?: "active" | "coming-soon";
   'data-highlight-id'?: string;
 }
 
@@ -27,24 +28,32 @@ export function ProjectCard({
   logoClassName,
   customLogo,
   customFont,
+  status = "active",
   'data-highlight-id': dataHighlightId,
 }: ProjectCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const isComingSoon = status === "coming-soon";
 
   return (
-    <div 
-      className="group bg-surface rounded-[20px] border border-border overflow-hidden h-full transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:border-foreground/20 cursor-pointer relative" 
+    <div
+      className={`group bg-surface rounded-[20px] border border-border overflow-hidden h-full transition-all duration-300 relative ${
+        isComingSoon
+          ? "cursor-default opacity-80"
+          : "hover:scale-[1.02] hover:shadow-lg hover:border-foreground/20 cursor-pointer"
+      }`}
       data-highlight-id={dataHighlightId}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link
-        href={href}
-        className="absolute inset-0 z-30" // Increased z-index to be above everything else
-        aria-label={`View ${name} project`}
-      >
-        <span className="sr-only">View {name}</span>
-      </Link>
+      {!isComingSoon && (
+        <Link
+          href={href}
+          className="absolute inset-0 z-30"
+          aria-label={`View ${name} project`}
+        >
+          <span className="sr-only">View {name}</span>
+        </Link>
+      )}
 
       <div className="p-5 pb-6 flex flex-col h-full pointer-events-none"> {/* Disable pointer events on content so Link receives them, but check if this affects hover state tracking on parent */}
         {/* Logo Area - Fixed height */}
@@ -76,9 +85,15 @@ export function ProjectCard({
               {name}
             </h3>
             <div className="flex items-center gap-3">
-              <span className="text-base text-surface-secondary font-normal tracking-[0.32px] whitespace-nowrap">
-                {duration}
-              </span>
+              {isComingSoon ? (
+                <span className="text-xs font-medium text-surface-secondary bg-surface-secondary/10 px-2 py-1 rounded-full whitespace-nowrap">
+                  Coming Soon
+                </span>
+              ) : (
+                <span className="text-base text-surface-secondary font-normal tracking-[0.32px] whitespace-nowrap">
+                  {duration}
+                </span>
+              )}
             </div>
           </div>
 

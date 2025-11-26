@@ -26,41 +26,11 @@
       "customFont": {
         "fontFamily": "var(--font-plus-jakarta), sans-serif"
       },
-      "status": "active",
+      "status": "coming-soon",
       "order": 2,
       "ai": {
         "highlightId": "project-mkrs",
         "summary": "Mkrs.world is a platform for students to connect and collaborate across colleges."
-      }
-    },
-    {
-      "id": "flock",
-      "name": "Flock",
-      "description": "Helping teams find time to meet using AI",
-      "duration": "5 min",
-      "href": "/projects/flock",
-      "backgroundColor": "bg-project-flock",
-      "customLogoComponent": "FlockLogo",
-      "status": "coming-soon",
-      "order": 3,
-      "ai": {
-        "highlightId": "project-flock",
-        "summary": "Flock is an AI-powered scheduling tool helping teams find optimal meeting times."
-      }
-    },
-    {
-      "id": "bloom",
-      "name": "Bloom",
-      "description": "AI-powered stock portfolio with dynamic UI and AI insights",
-      "duration": "15 min",
-      "href": "/projects/bloom",
-      "backgroundColor": "bg-project-bloom",
-      "logoUrl": "/images/projects/bloom-logo.svg",
-      "status": "coming-soon",
-      "order": 4,
-      "ai": {
-        "highlightId": "project-bloom",
-        "summary": "Bloom is an AI-powered stock portfolio platform with dynamic UI and investment insights."
       }
     }
   ]

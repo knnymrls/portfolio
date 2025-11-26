@@ -141,10 +141,11 @@ const projects: (Omit<ProjectCardProps, "customLogo"> & { customLogo?: React.Rea
     name: "FindU",
     description:
       "Helping GenZ figure out their next steps after graduating high school.",
-    duration: "15 min",
+    duration: "12 min",
     href: "/projects/findu",
     backgroundColor: "bg-project-findu",
     customLogo: (isHovered: boolean) => <FindULogo isHovered={isHovered} />,
+    status: "active",
   },
   {
     name: "mkrs.world",
@@ -154,37 +155,7 @@ const projects: (Omit<ProjectCardProps, "customLogo"> & { customLogo?: React.Rea
     backgroundColor: "bg-project-mkrs",
     customLogo: (isHovered: boolean) => <MkrsLogo isHovered={isHovered} />,
     customFont: { fontFamily: "var(--font-plus-jakarta), sans-serif" },
-  },
-  {
-    name: "Flock",
-    description: "Helping teams find time to meet using AI",
-    duration: "5 min",
-    href: "/projects/flock",
-    backgroundColor: "bg-project-flock",
-    customLogo: (isHovered: boolean) => <FlockLogo isHovered={isHovered} />,
-  },
-  {
-    name: "Bloom",
-    description: "AI-powered stock portfolio with dynamic UI and AI insights",
-    duration: "15 min",
-    href: "/projects/bloom",
-    backgroundColor: "bg-project-bloom",
-    customLogo: (
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <img
-            src="/images/projects/bloom-logo.svg"
-            alt="Bloom logo"
-            style={{ width: "249px", height: "64px" }}
-          />
-        </div>
-        <div className="absolute top-3 right-3 bg-white rounded-lg px-3 py-1.5">
-          <span className="text-sm font-medium" style={{ color: "#007E38" }}>
-            Coming soon
-          </span>
-        </div>
-      </div>
-    ),
+    status: "coming-soon",
   },
 ];
 
