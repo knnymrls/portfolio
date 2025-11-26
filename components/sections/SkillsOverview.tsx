@@ -3,21 +3,20 @@
 import { motion } from "framer-motion";
 
 const skills = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Tailwind CSS",
-  "Node.js",
-  "PostgreSQL",
-  "GraphQL",
-  "OpenAI API",
-  "LangChain",
-  "RAG Systems",
-  "Figma",
-  "UI/UX Design",
-  "Framer Motion",
-  "Supabase",
-  "REST APIs",
+  { name: "React", featured: true },
+  { name: "Next.js", featured: true },
+  { name: "TypeScript", featured: true },
+  { name: "Node.js", featured: false },
+  { name: "OpenAI API", featured: true },
+  { name: "LangChain", featured: false },
+  { name: "RAG Systems", featured: true },
+  { name: "Tailwind CSS", featured: false },
+  { name: "PostgreSQL", featured: false },
+  { name: "Figma", featured: true },
+  { name: "UI/UX Design", featured: false },
+  { name: "Framer Motion", featured: false },
+  { name: "Supabase", featured: false },
+  { name: "GraphQL", featured: false },
 ];
 
 export default function SkillsOverview() {
@@ -28,36 +27,31 @@ export default function SkillsOverview() {
           SKILLS
         </h2>
 
-        {/* Marquee container */}
-        <div className="relative overflow-hidden py-4">
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
-
-          {/* Scrolling track */}
-          <motion.div
-            className="flex gap-4 whitespace-nowrap"
-            animate={{ x: [0, -1500] }}
-            transition={{
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 25,
-                ease: "linear",
-              },
-            }}
-          >
-            {/* Duplicate skills for seamless loop */}
-            {[...skills, ...skills, ...skills].map((skill, i) => (
-              <span
-                key={`${skill}-${i}`}
-                className="text-2xl md:text-3xl font-medium text-foreground/80 hover:text-foreground transition-colors cursor-default"
-              >
-                {skill}
-                <span className="text-surface-secondary/50 mx-4">·</span>
+        {/* Flowing skill tags */}
+        <div className="flex flex-wrap gap-3">
+          {skills.map((skill, idx) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.03 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 20px rgba(255,255,255,0.1)",
+              }}
+              className={`
+                px-4 py-2 rounded-full border border-border
+                bg-surface hover:bg-surface/80
+                cursor-default transition-all duration-200
+                ${skill.featured ? "text-lg md:text-xl" : "text-base"}
+              `}
+            >
+              <span className="text-foreground/90 hover:text-foreground transition-colors">
+                {skill.name}
               </span>
-            ))}
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

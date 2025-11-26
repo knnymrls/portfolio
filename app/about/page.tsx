@@ -1,7 +1,7 @@
 import Hero from "@/components/sections/Hero";
-import AboutJourney from "@/components/sections/AboutJourney";
+import AboutBio from "@/components/sections/AboutBio";
 import DraggableBox from "@/components/sections/DraggableBox";
-import HeroImage from "../../public/images/hero-img.png"; // Using the generic hero image for the top, bio has personal one
+import HeroImage from "../../public/images/hero-img.png";
 
 export default function AboutPage() {
   return (
@@ -12,9 +12,9 @@ export default function AboutPage() {
         imageAlt="Kenny working on a project"
       />
 
-      <DraggableBox />
+      <AboutBio />
 
-      <AboutJourney />
+      <DraggableBox />
     </div>
   );
 }
