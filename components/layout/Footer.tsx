@@ -16,9 +16,9 @@ export default function Footer() {
   return (
     <footer className="w-full ">
       <div className="max-w-[1000px] mx-auto px-4 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex flex-row items-center justify-between gap-6">
           {/* Left side - Name and copyright */}
-          <div className="text-center md:text-left">
+          <div className="text-left">
             <p className="text-sm font-medium text-surface-secondary">
               knnymrls - {currentYear}
             </p>
