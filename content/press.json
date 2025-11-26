@@ -1,0 +1,94 @@
+{
+  "items": [
+    {
+      "id": "silicon-prairie-news",
+      "name": "Silicon Prairie News",
+      "backgroundColor": "bg-[#f59222]",
+      "logoUrl": "/figma-assets/a0d2865fff9d77a7f3b389745ae464f0b8b246a3.png",
+      "logoClassName": "w-[121px] h-[121px]",
+      "title": "FindU named Top Startup in the Prairie",
+      "description": "Silicon Prairie News covers the rapid growth of FindU and its impact on high school education across the Midwest region.",
+      "date": "October 2024",
+      "articleUrl": "#",
+      "order": 1,
+      "ai": {
+        "summary": "Silicon Prairie News featured FindU as top startup impacting Midwest high school education."
+      }
+    },
+    {
+      "id": "npsa",
+      "name": "NPSA",
+      "backgroundColor": "bg-[#a5a7a9]",
+      "logoUrl": "/figma-assets/eebc416a56e9c6422d1994d359becce58e8b37cc.png",
+      "logoClassName": "w-[101px] h-[105px]",
+      "title": "Innovation Award Winner 2024",
+      "description": "Recognized for outstanding contribution to student success technologies and educational accessibility.",
+      "date": "September 2024",
+      "articleUrl": "#",
+      "order": 2,
+      "ai": {
+        "summary": "NPSA Innovation Award 2024 for contributions to student success and educational accessibility."
+      }
+    },
+    {
+      "id": "new-york-post",
+      "name": "New York Post",
+      "backgroundColor": "bg-[#cb0000]",
+      "logoUrl": "/figma-assets/4dcee9d4caa19b2b19013c2b54a754d5acc12d3b.png",
+      "logoClassName": "w-[150px] h-[150px]",
+      "title": "Gen Z Founders Changing EdTech",
+      "description": "A feature story on how young entrepreneurs are reshaping the educational landscape for their peers.",
+      "date": "August 2024",
+      "articleUrl": "#",
+      "order": 3,
+      "ai": {
+        "summary": "New York Post feature on Gen Z entrepreneurs reshaping EdTech."
+      }
+    },
+    {
+      "id": "fox-business",
+      "name": "Fox Business",
+      "backgroundColor": "bg-neutral-100",
+      "logoUrl": "/figma-assets/1db2cfac7bec21c6d3051fdc52267ec049527503.png",
+      "logoClassName": "w-[124px] h-[62px]",
+      "title": "The Future of Career Counseling",
+      "description": "Discussing the shift from traditional guidance counselors to AI-driven personalized support systems.",
+      "date": "July 2024",
+      "articleUrl": "#",
+      "order": 4,
+      "ai": {
+        "summary": "Fox Business coverage on AI-driven career counseling replacing traditional guidance."
+      }
+    },
+    {
+      "id": "business-insider",
+      "name": "Business Insider",
+      "backgroundColor": "bg-[#002aff]",
+      "logoUrl": "/figma-assets/778cd92189b051f83d245401eada88227bd8b23f.png",
+      "logoClassName": "w-[156px] h-[53px]",
+      "title": "30 Under 30: Education Tech",
+      "description": "Highlighted as one of the most promising new startups in the educational technology sector.",
+      "date": "June 2024",
+      "articleUrl": "#",
+      "order": 5,
+      "ai": {
+        "summary": "Business Insider 30 Under 30 EdTech highlight as promising startup."
+      }
+    },
+    {
+      "id": "unl",
+      "name": "University of Nebraska-Lincoln",
+      "backgroundColor": "bg-neutral-100",
+      "logoUrl": "/figma-assets/5aaaebbbbab89cd3d1705a752e12a7e5824f7b1d.png",
+      "logoClassName": "w-[96px] h-[96px]",
+      "title": "Student Spotlight: Kenny Morales",
+      "description": "University profile on balancing full-time studies with building a venture-backed startup.",
+      "date": "May 2024",
+      "articleUrl": "#",
+      "order": 6,
+      "ai": {
+        "summary": "UNL student spotlight on balancing studies with venture-backed startup."
+      }
+    }
+  ]
+}

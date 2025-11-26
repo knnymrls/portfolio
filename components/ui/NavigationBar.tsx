@@ -21,7 +21,7 @@ export function NavigationBar({ tabs, className }: NavigationBarProps) {
   return (
     <div
       className={cn(
-        "fixed top-6 left-1/2 -translate-x-1/2 z-50",
+        "fixed top-4 left-1/2 -translate-x-1/2 z-50",
         "backdrop-blur-[2px] bg-surface",
         "flex gap-2 items-center justify-center p-1.5",
         "rounded-[12px] border border-border",

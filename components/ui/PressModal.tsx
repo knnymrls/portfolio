@@ -4,20 +4,12 @@ import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { ArrowUpRight, Calendar, Newspaper } from 'lucide-react';
 import { motion } from 'framer-motion';
+import type { PressItem } from "@/lib/content/loader";
 
 interface PressModalProps {
   isOpen: boolean;
   onClose: () => void;
-  item: {
-    name: string;
-    backgroundColor: string;
-    logoUrl: string;
-    logoClassName: string;
-    title?: string;
-    description?: string;
-    date?: string;
-    articleUrl?: string;
-  } | null;
+  item: PressItem | null;
 }
 
 export default function PressModal({ isOpen, onClose, item }: PressModalProps) {

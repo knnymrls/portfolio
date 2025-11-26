@@ -20,21 +20,22 @@ export default function CaseStudyImage({
 }: CaseStudyImageProps) {
   return (
     <figure className={`my-8 ${className}`}>
-      <div className="rounded-xl overflow-hidden border border-border bg-surface">
+      <div className="rounded-2xl overflow-hidden bg-surface-secondary/5">
         {width && height ? (
           <Image
             src={src}
             alt={alt}
             width={width}
             height={height}
-            className="w-full h-auto"
+            className="w-full h-auto object-cover"
           />
         ) : (
-          <img src={src} alt={alt} className="w-full h-auto" />
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={src} alt={alt} className="w-full h-auto object-cover" />
         )}
       </div>
       {caption && (
-        <figcaption className="mt-3 text-sm text-surface-secondary text-center">
+        <figcaption className="mt-4 text-sm text-surface-secondary text-center">
           {caption}
         </figcaption>
       )}

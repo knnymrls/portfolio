@@ -1,0 +1,303 @@
+---
+slug: findu
+title: FindU
+description: Helping GenZ figure out their next steps after graduating high school.
+status: published
+
+hero:
+  backgroundColor: bg-project-findu
+  customLogoComponent: FindUHero
+
+role: Product Designer & Developer
+timeline: 2023 - 2024
+duration: 12 min
+tags:
+  - UX Design
+  - AI
+  - Education
+
+metrics:
+  - value: "5,000+"
+    label: Students
+    description: Onboarded in beta phase
+  - value: "78%"
+    label: Confidence Increase
+    description: In post-grad plans
+  - value: "65%"
+    label: Faster Decisions
+    description: Reduction in time
+
+technologies:
+  - React Native
+  - Node.js
+  - PostgreSQL
+  - OpenAI API
+
+ai:
+  route: /projects/findu
+  highlightId: project-findu
+  summary: |
+    FindU, or "Tinder for Colleges," started as a classroom project and became a startup co-founded by Kenny and Wilson Overfield. It helps high school students figure out what to do after graduation by making college discovery engaging through a swiping interface. After interviewing 50+ students, they discovered the core problem: students don't want to spend time researching colleges due to fear of failure, feeling overwhelmed, and not knowing what's out there. The solution focuses on personalization over arbitrary rankings. The app went through 7 major design iterations based on hundreds of student interviews. Key features include swiping through personalized college matches, scholarship matching, messaging with counselors, an AI assistant, and task management. They raised funding and grew the team to 15+ people.
+  keywords:
+    - education
+    - AI
+    - GenZ
+    - college
+    - career guidance
+    - personalization
+    - edtech
+    - Tinder for Colleges
+    - swiping
+    - high school
+    - startup
+    - React Native
+    - matching algorithm
+    - scholarships
+    - Wilson Overfield
+    - cofounder
+  achievements:
+    - Started as classroom project, turned into funded startup
+    - Interviewed 50+ students to understand pain points
+    - Built team of 15+ people
+    - 5,000+ students onboarded
+    - Went through 7 major design iterations
+    - Built scholarship matching, messaging, AI assistant, and task features
+    - Raised seed funding
+---
+
+<CaseStudySection title="Overview">
+
+Off the title you might be wondering, well what is FindU? FindU—or as we jokingly describe it, "Tinder for Colleges"—started off as a classroom project and turned into a startup run by myself and my cofounder Wilson Overfield.
+
+It solves the issue of students not knowing what to do after high school, and is currently focused on helping students get into college. We've raised money for FindU and built a team of more than 15 people, and learned so so much along the way!
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&h=600&fit=crop"
+  alt="Students collaborating on campus"
+  caption="Our target users: high school students navigating their next steps"
+  width={1200}
+  height={600}
+/>
+
+<CaseStudySection title="Problem">
+
+After graduating high school, there really is this next choice of "what do I want to do with my life". We started off FindU trying to figure out what were the main pain points which led us to interview 50 students from all different groups.
+
+### Customer Interviews
+
+We spent weeks talking to students—honor roll kids, athletes, first-gen college students, kids who had no idea what they wanted to do. We did one-on-ones, group sessions, and even just casual conversations in coffee shops. Each interview we'd write down key quotes on sticky notes and group them by theme.
+
+What surprised us was how similar everyone's struggles were, regardless of background. The straight-A student and the kid barely passing were both equally lost when it came to figuring out what's next.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1200&h=800&fit=crop"
+  alt="Customer interview sticky notes and whiteboard"
+  caption="Synthesizing insights from 50+ student interviews"
+  width={1200}
+  height={800}
+/>
+
+<CaseStudySection>
+
+### What We Heard
+
+The same things kept coming up in our discussions:
+
+- "I don't know how financial aid works"
+- "How do I get scholarships"
+- "I just don't know where I want to go"
+- "My parents want me to go to a 'good school' but I don't even know what that means"
+- "I feel like I'm already behind"
+
+This is particularly interesting because these were more of the *effects* of inaction by the students. Which led us to really diagnose the problem to be: **Students don't want to spend time researching colleges.**
+
+Now this really stems from a variety of reasons like a fear of failure, feeling overwhelmed, and simply just not knowing what is out there. In short, the information is out there, it's just not packaged in a way that would make it more accessible to students.
+
+</CaseStudySection>
+
+<CaseStudySection title="Solution">
+
+### Swiping
+
+Here is where the "Tinder for Colleges" comes in. The main goal was to make a product that was engaging and students could relate to. Now traditionally students would use tools like Niche and US News which ultimately gives schools in a list and ranks them. So when students are looking for colleges they usually end up looking at the top 100 universities in the US, in a basic list.
+
+We realized that the top 100 universities might not be a great option for students so we really wanted to hone in on **personalization**. Which is where the Tinder aspect came in—students would make a profile and then swipe through schools that fit *them* rather than the arbitrary rankings.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=800&fit=crop"
+  alt="Mobile app interface"
+  caption="The swiping interface that makes college discovery feel familiar"
+  width={1200}
+  height={800}
+/>
+
+<CaseStudySection title="Design Evolution">
+
+Now to really nail down the design I went through countless iterations to try to find the perfect way of presenting schools.
+
+### Version 1
+
+On our first version the biggest limitation really came from my lack of design skills. You'll see things like different icon sizes, varying icon packs, and overall just a bad use of space. From a UX perspective, it's overwhelming and offers no improvement other than the Tinder swiping.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=400&fit=crop"
+  alt="Version 1 design mockup"
+  caption="Version 1 - Our first attempt at the swiping interface"
+  width={600}
+  height={400}
+/>
+
+<CaseStudySection>
+
+### Version 3
+
+Version 3 saw a pretty big jump in my design skills and the UX of the product. From a development standpoint this was also our beta launch where we received a lot of important feedback.
+
+At this point, we really didn't receive any feedback on the design, but rather on the UX of the app. One thing we noticed was that most people were just swiping and not actually viewing the "more info" button. Additionally, the match score also was unnecessary as students expected good schools on their feed anyway.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=400&fit=crop"
+  alt="Version 3 design mockup"
+  caption="Version 3 — Beta launch where we learned students weren't clicking 'more info'"
+  width={600}
+  height={400}
+/>
+
+<CaseStudySection>
+
+### Version 7 (Current)
+
+The current version introduced a lot of changes. The first one was removing the swipeable card and instead just displaying the information. From a UX perspective, this reduces a lot of friction and makes it more about the information than simply swiping.
+
+We also:
+- Broke down the information into sections
+- Allowed users to filter by location, costs, etc.
+- Introduced a saved page so students could track their schools
+- Added question cards in the feed to improve matches and recommendations
+
+I really want to emphasize these improvements have been over the course of the last year, and have been fueled by hundreds of interviews from students. And by no means is this the final version!
+
+</CaseStudySection>
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+  <CaseStudyImage
+    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=800&fit=crop"
+    alt="Current app home screen"
+    caption="Home feed with personalized college cards"
+    width={600}
+    height={800}
+  />
+  <CaseStudyImage
+    src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&h=800&fit=crop"
+    alt="Current app details screen"
+    caption="College detail view with key info upfront"
+    width={600}
+    height={800}
+  />
+</div>
+
+<CaseStudySection title="Key Features">
+
+### Scholarships
+
+We built a comprehensive scholarship matching system that connects students with opportunities they actually qualify for, not just a generic list.
+
+### Messaging
+
+Direct communication between students and admissions counselors, making the process feel more personal and less intimidating.
+
+### AI Assistant
+
+An AI-powered assistant that answers questions about colleges, applications, and the entire process in a conversational way.
+
+### Tasks
+
+A task management system that keeps students on track with deadlines, requirements, and next steps.
+
+</CaseStudySection>
+
+<CaseStudySection title="Development">
+
+### Pulling Data
+
+One of the biggest challenges was aggregating college data from multiple sources and keeping it accurate and up-to-date.
+
+### Student Data
+
+We built a robust profiling system that captures student preferences, academic info, and interests to power our matching algorithm.
+
+### Matching Algorithm
+
+The heart of FindU—our algorithm that matches students with schools based on dozens of factors, constantly improving based on user feedback.
+
+</CaseStudySection>
+
+<CaseStudySection title="The Startup Journey">
+
+### Team and Managing
+
+Growing from 2 cofounders to a team of 15+ people taught us a lot about delegation, communication, and building culture.
+
+### Business
+
+From pitch decks to investor meetings, we learned the startup game from the ground up.
+
+### Marketing
+
+Reaching Gen Z students required us to rethink traditional marketing—TikTok, Instagram, and word of mouth became our main channels.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=600&fit=crop"
+  alt="Team collaboration"
+  caption="Growing from 2 cofounders to a team of 15+"
+  width={1200}
+  height={600}
+/>
+
+<CaseStudySection title="Results">
+
+### Press and Investment
+
+We raised seed funding and received coverage from several education and tech publications.
+
+### Metrics
+
+</CaseStudySection>
+
+<CaseStudyStats
+  stats={[
+    {
+      value: "5,000+",
+      label: "Students",
+      description: "Onboarded in beta",
+    },
+    {
+      value: "15+",
+      label: "Team Members",
+      description: "Built the team",
+    },
+    {
+      value: "$2.5M",
+      label: "Raised",
+      description: "Seed funding",
+    },
+  ]}
+/>
+
+<CaseStudyTestimonial
+  quote="This is the first time I've felt like I actually have a say in my future, rather than just doing what I'm told."
+  author="Sarah M."
+  role="High School Junior"
+/>

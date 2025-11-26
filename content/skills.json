@@ -1,0 +1,59 @@
+{
+  "categories": [
+    {
+      "id": "frontend",
+      "title": "Frontend",
+      "skills": ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "React Query"],
+      "order": 1
+    },
+    {
+      "id": "backend",
+      "title": "Backend",
+      "skills": ["Node.js", "Express", "NestJS", "GraphQL", "REST APIs", "WebSockets"],
+      "order": 2
+    },
+    {
+      "id": "database",
+      "title": "Database",
+      "skills": ["PostgreSQL", "MongoDB", "Redis", "Prisma", "TypeORM", "SQL"],
+      "order": 3
+    },
+    {
+      "id": "devops",
+      "title": "DevOps & Tools",
+      "skills": ["Docker", "AWS", "CI/CD", "Git", "Vercel", "Linux"],
+      "order": 4
+    },
+    {
+      "id": "ai-ml",
+      "title": "AI/ML",
+      "skills": ["OpenAI API", "LangChain", "Vector Databases", "Prompt Engineering", "RAG Systems"],
+      "order": 5
+    },
+    {
+      "id": "design",
+      "title": "Design",
+      "skills": ["Figma", "Adobe Creative Suite", "UI/UX Design", "Design Systems", "Prototyping"],
+      "order": 6
+    }
+  ],
+  "soft": [
+    "Product Strategy",
+    "Team Leadership",
+    "Startup Operations",
+    "Client Communication",
+    "Mentoring",
+    "Public Speaking"
+  ],
+  "ai": {
+    "route": "/skills",
+    "summary": "Full-stack developer specializing in AI interfaces, React/Next.js, TypeScript, and cloud infrastructure. Experience with OpenAI API, LangChain, and RAG systems.",
+    "highlights": [
+      "Frontend: React, Next.js, TypeScript, Tailwind CSS",
+      "Backend: Node.js, Express, GraphQL",
+      "AI/ML: OpenAI API, LangChain, Vector Databases, RAG",
+      "Database: PostgreSQL, MongoDB, Redis",
+      "Design: Figma, UI/UX, Design Systems"
+    ]
+  }
+}

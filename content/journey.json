@@ -1,0 +1,48 @@
+{
+  "steps": [
+    {
+      "id": "2025-building",
+      "year": "2025",
+      "title": "Building the Future",
+      "description": "Co-founded FindU and Mkrs., focusing on solving real problems in education and AI consulting. Growing teams and shipping products.",
+      "image": "/images/projects/findu/findu-mockup.png",
+      "order": 1,
+      "ai": {
+        "summary": "2025: Co-founded FindU and Mkrs., building products in education and AI consulting."
+      }
+    },
+    {
+      "id": "2024-startups",
+      "year": "2024",
+      "title": "Deep Dive into Startups",
+      "description": "Joined the Nebraska Startup Academy and various accelerators. Built Mkrs.world and started taking my ideas seriously as businesses.",
+      "image": "/images/projects/mkrs-screenshot.png",
+      "order": 2,
+      "ai": {
+        "summary": "2024: Joined accelerators, built Mkrs.world, started treating ideas as businesses."
+      }
+    },
+    {
+      "id": "2023-spark",
+      "year": "2023",
+      "title": "The Spark",
+      "description": "Started exploring full-stack development more intensely. Realized that code wasn't just for homework—it was a tool for creation.",
+      "image": "/images/hero-img.png",
+      "order": 3,
+      "ai": {
+        "summary": "2023: Discovered code as a creative tool through full-stack development."
+      }
+    },
+    {
+      "id": "2022-hello-world",
+      "year": "2022",
+      "title": "Hello World",
+      "description": "Wrote my first lines of meaningful code. The infinite possibilities of the web captivated me immediately.",
+      "image": "/images/hero-kenny.png",
+      "order": 4,
+      "ai": {
+        "summary": "2022: First meaningful code, captivated by web possibilities."
+      }
+    }
+  ]
+}

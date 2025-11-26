@@ -4,24 +4,12 @@ import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { ArrowUpRight, Calendar, User } from 'lucide-react';
 import { motion } from 'framer-motion';
+import type { Venture } from "@/lib/content/loader";
 
 interface VentureModalProps {
   isOpen: boolean;
   onClose: () => void;
-  venture: {
-    name: string;
-    role: string;
-    dateRange: string;
-    description: string;
-    backgroundColor: string;
-    logoUrl?: string;
-    logoClassName?: string;
-    customLogo?: React.ReactNode;
-    // Add more fields if needed for the modal details
-    longDescription?: string;
-    technologies?: string[];
-    websiteUrl?: string;
-  } | null;
+  venture: Venture | null;
 }
 
 export default function VentureModal({ isOpen, onClose, venture }: VentureModalProps) {
@@ -32,24 +20,22 @@ export default function VentureModal({ isOpen, onClose, venture }: VentureModalP
       <DialogContent className="sm:max-w-[600px] p-0 gap-0 overflow-hidden rounded-[20px] sm:rounded-[20px] border-border bg-surface shadow-2xl">
         
         {/* Hero Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
           className={`w-full h-[200px] ${venture.backgroundColor} flex items-center justify-center relative overflow-hidden`}
         >
-          {venture.customLogo ? (
-            venture.customLogo
-          ) : venture.logoUrl ? (
+          {venture.logoUrl && (
             <motion.img
               initial={{ y: 10, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.3 }}
               src={venture.logoUrl}
               alt={`${venture.name} logo`}
-              className={`${venture.logoClassName} object-contain transform scale-125`}
+              className={`${venture.logoClassName || ''} object-contain transform scale-125`}
             />
-          ) : null}
+          )}
         </motion.div>
 
         <div className="p-6 md:p-8">

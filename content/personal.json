@@ -1,0 +1,36 @@
+{
+  "name": "Kenny Morales",
+  "username": "knnymrls",
+  "role": "Designer & Developer",
+  "focus": "AI Interfaces",
+  "status": "Co-founder of two startups, creating tech/startup content",
+  "location": "Remote",
+  "bio": "Passionate about building AI-powered interfaces that make technology more accessible and intuitive. Currently focused on scaling startup ventures while mentoring the next generation of creators.",
+  "social": {
+    "github": "https://github.com/knnymrls",
+    "linkedin": "https://linkedin.com/in/knnymrls",
+    "twitter": "https://twitter.com/knnymrls",
+    "instagram": "https://instagram.com/knnymrls"
+  },
+  "contact": {
+    "availability": "Open to discussing new opportunities, partnerships, and collaborations",
+    "interests": [
+      "AI/ML projects",
+      "Startup collaborations",
+      "Technical advisory roles",
+      "Speaking opportunities",
+      "Investment opportunities"
+    ],
+    "responseTime": "Usually responds within 24 hours",
+    "preferredContact": "Contact form or LinkedIn for professional inquiries"
+  },
+  "ai": {
+    "summary": "Kenny Morales is a designer and developer specializing in AI interfaces. Co-founder of FindU ($2.5M valuation) and Mkrs. consulting agency. Based remotely, focused on building AI-powered products and mentoring creators.",
+    "highlights": [
+      "Co-founder of FindU (EdTech, $2.5M valuation)",
+      "Co-founder of Mkrs. (AI consulting agency)",
+      "Specializes in AI interfaces and full-stack development",
+      "Open to collaborations, advisory roles, and speaking opportunities"
+    ]
+  }
+}

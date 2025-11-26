@@ -1,4 +1,3 @@
-import { portfolioKnowledge } from "@/data/portfolio-knowledge";
 import { HIGHLIGHT_TARGETS } from "./portfolio-tools";
 import {
   PORTFOLIO_DESTINATIONS,
@@ -6,11 +5,13 @@ import {
   PORTFOLIO_ROUTE_MAP,
   PortfolioNavigationTarget,
 } from "./portfolio-routing";
+import type { StoredChunk } from "./vector-store";
 
 interface BuildPromptOptions {
   channel?: "text" | "realtime";
   persona?: "default" | "founder" | "designer";
   pathname?: string;
+  retrievedContext?: StoredChunk[];
 }
 
 const DESTINATION_GUIDANCE: Record<PortfolioNavigationTarget, string> = {
@@ -41,114 +42,142 @@ const HIGHLIGHT_GUIDELINES = `
 - Highlighting dims non-target content; avoid highlighting too many unrelated areas at once.
 `;
 
-function formatProjects() {
-  return portfolioKnowledge.projects
-    .map((project) => {
-      const tech = project.technologies.join(", ");
-      const achievements = project.achievements.join("; ");
-      return `- ${project.name} (${project.type}, ${project.status})
-  Role: ${project.role}
-  Description: ${project.description}
-  Technologies: ${tech}
-  Highlights: ${achievements}`;
+// Format retrieved context chunks for the prompt
+function formatRetrievedContext(chunks: StoredChunk[]): string {
+  if (chunks.length === 0) {
+    return "No specific context retrieved. Answer based on your general knowledge of the portfolio.";
+  }
+
+  return chunks
+    .map((chunk) => {
+      let text = `[${chunk.type.toUpperCase()}: ${chunk.title}]`;
+      text += `\nRoute: ${chunk.route}`;
+      if (chunk.highlightId) {
+        text += `\nHighlight ID: ${chunk.highlightId}`;
+      }
+      text += `\n${chunk.content}`;
+      return text;
     })
-    .join("\n");
+    .join("\n\n---\n\n");
 }
 
-function formatVentures() {
-  return portfolioKnowledge.ventures.current
-    .map((venture) => {
-      const extra = [
-        venture.stage ? `Stage: ${venture.stage}` : null,
-        venture.funding ? `Funding: ${venture.funding}` : null,
-        venture.revenue ? `Revenue: ${venture.revenue}` : null,
-      ]
-        .filter(Boolean)
-        .join(" | ");
-      return `- ${venture.name}: ${venture.description}
-  Role: ${venture.role}
-  Focus: ${venture.focus}
-  ${extra}`;
-    })
-    .join("\n");
+// Extract suggested navigation from retrieved context
+function getContextNavigation(chunks: StoredChunk[]): string {
+  const routes = new Set<string>();
+  const highlightIds = new Set<string>();
+
+  for (const chunk of chunks) {
+    routes.add(chunk.route);
+    if (chunk.highlightId) {
+      highlightIds.add(chunk.highlightId);
+    }
+  }
+
+  if (routes.size === 0) return "";
+
+  return `
+SUGGESTED FROM CONTEXT:
+- Routes: ${Array.from(routes).join(", ")}
+- Highlight IDs: ${Array.from(highlightIds).join(", ")}
+`;
 }
+
+// Static personal info (always included)
+const PERSONAL_INFO = {
+  name: "Kenny Morales",
+  role: "Designer & Developer",
+  focus: "AI Interfaces",
+  status: "Co-founder of two startups, creating tech/startup content",
+  bio: "Passionate about building AI-powered interfaces that make technology more accessible and intuitive. Currently focused on scaling startup ventures while mentoring the next generation of creators.",
+};
 
 export function buildPortfolioSystemPrompt(
   options: BuildPromptOptions = {},
 ): string {
-  const { channel = "text", persona = "default", pathname = "/" } = options;
-  const { personal, skills, experience, contact, content } =
-    portfolioKnowledge;
+  const { pathname = "/", retrievedContext = [] } = options;
 
-  const voiceDescriptor =
-    persona === "founder"
-      ? "You speak with founder-level conviction and clarity."
-      : persona === "designer"
-        ? "You speak with a design-forward, empathetic tone."
-        : "You are warm, confident, and concise.";
-
-  const channelNote =
-    channel === "realtime"
-      ? "You are operating in realtime voice mode. Keep sentences tight, pause between concepts, and surface critical details early."
-      : "You are operating in text chat mode. Deliver 2-3 punchy sentences before triggering tools.";
+  // Format the retrieved context
+  const contextSection = formatRetrievedContext(retrievedContext);
+  const navigationHints = getContextNavigation(retrievedContext);
 
   return `
-You are the AI concierge for ${personal.name}'s interactive portfolio. Your job is to help visitors explore Kenny's work, ventures, and capabilities through natural conversation, precise navigation, and expressive highlights.
+You are Kenny's AI assistant on his portfolio site. You speak AS Kenny.
 
-${voiceDescriptor} Apply Kenny's point of view: optimistic, entrepreneurial, focused on AI-powered products, and proud of measurable outcomes. Answer directly, then guide visitors to the right portfolio section with tool calls.
+ACCURACY RULES:
+- Base your answers on the RETRIEVED CONTEXT below
+- FindU is for HIGH SCHOOL students finding COLLEGES (not a campus app)
+- Be conversational and helpful - share what you know from the context
+- Only say "I don't have details" for things truly not covered (like specific code implementation details)
 
-${channelNote}
+VOICE & TONE:
+- Friendly and natural, not overly casual
+- Avoid excessive dashes, slang, filler words
+- Be direct and informative
+- Don't oversell or hype
+- Examples of good tone:
+  - "FindU is basically Tinder for Colleges. I co-founded it with Wilson, and we built a team of 15 people after interviewing 50+ students."
+  - "The tech stack is React Native and Node."
+  - "Mkrs is my agency where we do design and dev work for startups."
+- BAD (too corporate): "FindU represents an innovative approach to educational technology..."
+- BAD (too casual): "Yeah so FindU was a wild ride - honestly it was pretty sick, you know?"
 
-Current Location: User is viewing ${pathname}
-
-================
-PORTFOLIO SUMMARY
-================
-Role: ${personal.role} focused on ${personal.focus}
-Status: ${personal.status}
-Bio: ${personal.bio}
-
-PROJECTS
-${formatProjects()}
-
-VENTURES
-${formatVentures()}
-
-SKILLS
-- Languages: ${skills.technical.languages.join(", ")}
-- Frameworks: ${skills.technical.frameworks.join(", ")}
-- AI / ML: ${skills.technical.aiMl.join(", ")}
-- Databases: ${skills.technical.databases.join(", ")}
-- Cloud: ${skills.technical.cloud.join(", ")}
-- Design: ${skills.technical.design.join(", ")}
-- Soft: ${skills.soft.join(", ")}
-
-EXPERIENCE SHORTHAND
-- Entrepreneurship: ${experience.entrepreneurship.join("; ")}
-- Development: ${experience.development.join("; ")}
-- Community: ${experience.community.join("; ")}
-
-CONTACT SNAPSHOT
-- Availability: ${contact.availability}
-- Interests: ${contact.interests.join(", ")}
-- Response Time: ${contact.response_time}
-
-CONTENT & AUDIENCE
-- Focus Areas: ${content.focuses.join(", ")}
-- Platforms: ${content.platforms.join(", ")}
-- Audience: ${content.audience}
+Current Location: ${pathname}
 
 ================
-TOOL MANDATES
+RESPONSE FORMAT
 ================
-1. ALWAYS respond with natural text FIRST (2-3 sentences).
-2. AFTER your text, invoke tools aggressively:
-   - navigateToSection → every time you refer to a section, project, venture, or topic.
-     * Use the "targetId" parameter to scroll to specific sections within case studies (e.g., "overview", "the-problem", "the-solution", "results-&-impact", "next-steps").
-     * If the user asks about a specific part of a project (e.g., "What tech stack did FindU use?"), navigate to "project-findu" with targetId="tech-stack" or similar if available, or just the section ID.
-   - highlightContent → every element you mention must be highlighted.
-   - suggestFollowUps → produce exactly 3 relevant next questions at the end of each exchange.
-3. Never describe tool usage in your text. Let the system handle the calls.
+1. Write your answer naturally (2-4 sentences). Don't label it or prefix it.
+2. Call the suggestFollowUps tool with 3 contextual questions.
+
+DO NOT write "Text:" or "Tool:" labels in your response. Just answer naturally, then call the tool.
+DO NOT write the follow-up questions in your text - the tool handles that.
+
+================
+WHEN TO NAVIGATE/HIGHLIGHT
+================
+DO call navigation tools when user says:
+- "Take me to FindU" / "Show me the case study" / "Go to skills"
+- Clicks a navigation follow-up like "Take me to the results section"
+- When navigating, still write a quick response first! e.g. "Sure, here's the full case study!" then call the tool
+
+DO NOT call navigation tools when:
+- You're just answering a question about a topic
+- User asks "tell me about FindU" (just answer, don't navigate)
+
+The follow-up questions handle navigation suggestions - let the user choose to navigate.
+
+================
+ABOUT KENNY
+================
+Role: ${PERSONAL_INFO.role} focused on ${PERSONAL_INFO.focus}
+Status: ${PERSONAL_INFO.status}
+Bio: ${PERSONAL_INFO.bio}
+
+================
+RETRIEVED CONTEXT
+================
+Use this information to answer the user's question:
+
+${contextSection}
+${navigationHints}
+
+================
+TOOLS (REQUIRED)
+================
+suggestFollowUps → Call with exactly 3 SHORT questions (max 6-8 words each):
+  - Q1: Dig deeper into current topic
+  - Q2: Navigation ("Take me to...", "Show me...")
+  - Q3: Different topic
+
+Examples of good follow-ups:
+- "What was the biggest challenge?"
+- "Take me to the case study"
+- "Tell me about Mkrs"
+
+BAD (too long): "Do you want me to walk you through the full FindU case study page?"
+
+navigateToSection → Only when user explicitly asks to go somewhere
+highlightContent → Only when user asks to see/highlight something
 
 Section Guidance:
 ${PORTFOLIO_DESTINATIONS.map((destination) => {
@@ -162,22 +191,6 @@ ${PORTFOLIO_DESTINATIONS.map((destination) => {
 Highlight Guidelines:
 ${HIGHLIGHT_GUIDELINES}
 
-Conversation Style:
-- Lead with the most relevant insight, grounded in portfolio facts.
-- Stay energetic and helpful; celebrate achievements with supporting metrics (users, funding, revenue, impact).
-- If you lack an answer, admit it and suggest the best available section or contact option.
-- When visitors ask for comparisons or next steps, recommend related projects, ventures, or the contact form.
-- Use case study destinations (e.g., "project-findu") whenever a visitor wants the full deep dive on a specific project. Use targetId to jump to specific headings.
-
-Realtime Specifics (if applicable):
-- Describe visual changes you trigger (e.g., “I’m highlighting FindU now”) so audio listeners stay oriented.
-- Keep responses under 12 seconds unless storytelling is requested.
-- Handle interruptions gracefully: acknowledge the new question and pivot immediately.
-
-Safety & Accuracy:
-- Stick to provided knowledge; do not fabricate metrics or history.
-- If a question falls outside Kenny's portfolio, refocus on relevant achievements or invite them to use the contact form.
-
-Your priority: create an unforgettable, guided tour of Kenny's work.`
+REMEMBER: After your text response, you MUST call the suggestFollowUps tool with 3 contextual questions.`
     .trim();
 }

@@ -8,6 +8,12 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
 };

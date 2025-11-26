@@ -1,26 +1,58 @@
-import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
-import CaseStudyHero from '@/components/case-study/CaseStudyHero'
-import CaseStudySection from '@/components/case-study/CaseStudySection'
-import CaseStudyImage from '@/components/case-study/CaseStudyImage'
-import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
+---
+slug: mkrs
+title: mkrs.world
+description: The new way communities interact with each other
+status: published
 
-export const metadata = {
-  title: 'mkrs.world Case Study | Kenny Morales',
-  description: 'The new way communities interact with each other',
-}
+hero:
+  backgroundColor: bg-project-mkrs
+  customLogoComponent: MkrsLogo
 
-<CaseStudyLayout>
+role: Product Designer & Frontend Developer
+timeline: "2023"
+duration: 5 min
+tags:
+  - Community
+  - Web3
+  - Social
 
-<CaseStudyHero
-  title="mkrs.world"
-  description="The new way communities interact with each other"
-  backgroundColor="bg-project-mkrs"
-  customLogo={<img alt="mkrs logo" className="w-auto h-[43px]" src="http://localhost:3845/assets/4c07fdb2019e63a1964a7782e4ee4f011eb1dcfb.svg" />}
-  duration="5 min"
-  role="Product Designer & Frontend Developer"
-  timeline="2023"
-  tags={['Community', 'Web3', 'Social']}
-/>
+customFont:
+  fontFamily: var(--font-plus-jakarta), sans-serif
+
+metrics:
+  - value: "1,200+"
+    label: Makers
+    description: Active in first 3 months
+  - value: "180+"
+    label: Projects
+    description: Collaborative projects initiated
+  - value: "23 min"
+    label: Session Time
+    description: Average (3x industry average)
+
+technologies:
+  - Next.js
+  - WebSocket
+  - IPFS
+  - Smart Contracts
+  - React
+
+ai:
+  route: /projects/mkrs
+  highlightId: project-mkrs
+  summary: mkrs.world reimagines online community building with project-centric profiles, AI-powered matching, and collaborative spaces. Features visual project galleries, smart matching, and community-driven moderation. Achieved 1,200+ makers and 180+ collaborative projects in 3 months.
+  keywords:
+    - community
+    - makers
+    - collaboration
+    - web3
+    - social platform
+  achievements:
+    - 1,200+ active makers in first 3 months
+    - 180+ collaborative projects initiated
+    - 23 min average session duration (3x industry average)
+    - 68% weekly return rate
+---
 
 <CaseStudySection title="Overview">
 
@@ -181,9 +213,3 @@ How to sustain the platform without becoming extractive?
 - **DAO Integration**: Full community ownership through decentralized governance
 
 </CaseStudySection>
-
-</CaseStudyLayout>
-
-export default function Page({ children }) {
-  return children
-}

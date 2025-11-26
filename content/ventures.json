@@ -1,0 +1,161 @@
+{
+  "ventures": [
+    {
+      "id": "findu",
+      "name": "FindU",
+      "role": "Co-founder",
+      "dateRange": "Jan 25' - Present",
+      "description": "I helped build and grow our startup to a 2.5M Valuation in a year.",
+      "longDescription": "FindU is a platform designed to help Generation Z students navigate the critical transition from high school to their next life chapter. We leverage AI and personalized assessments to provide tailored recommendations and guidance.",
+      "backgroundColor": "bg-[#ff5d5d]",
+      "logoUrl": "/figma-assets/0d287b1ddbb976e04e2e2371d152126f4c30f8a1.svg",
+      "logoClassName": "w-[111px] h-[33px]",
+      "technologies": ["Next.js", "TypeScript", "OpenAI API", "PostgreSQL"],
+      "websiteUrl": "https://findu.app",
+      "order": 1,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-findu",
+        "summary": "Seed-stage EdTech startup ($2.5M valuation) helping GenZ students navigate post-high school decisions using AI and personalized assessments."
+      }
+    },
+    {
+      "id": "mkrs",
+      "name": "Mkrs.",
+      "role": "Co-founder",
+      "dateRange": "Jun 25' - Present",
+      "description": "Working on a software consulting agency with a focus on AI.",
+      "longDescription": "Mkrs. is a boutique software consultancy specializing in building high-performance AI applications for startups and enterprise clients.",
+      "backgroundColor": "bg-[#2b2b2b]",
+      "logoUrl": "/figma-assets/c0fc9236599dbf1af7c99963111b15e84f10abce.svg",
+      "logoClassName": "w-[94px] h-[27px]",
+      "technologies": ["React", "Python", "Machine Learning", "Cloud Infrastructure"],
+      "order": 2,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-mkrs",
+        "summary": "Software consulting agency specializing in AI applications for startups and enterprise clients."
+      }
+    },
+    {
+      "id": "creators",
+      "name": "Creators",
+      "role": "Co-founder",
+      "dateRange": "Oct 24' - May 25'",
+      "description": "Start a club to help freshman at my school learn to code.",
+      "longDescription": "Creators is a student organization dedicated to empowering freshmen with coding skills through workshops, hackathons, and mentorship programs.",
+      "backgroundColor": "bg-[#92e28a]",
+      "logoUrl": "/figma-assets/e271bd235a8c2c6de838d09fa90a6005a0092860.svg",
+      "logoClassName": "w-[92.716px] h-[81.519px]",
+      "technologies": ["Education", "Community Building", "Mentorship"],
+      "order": 3,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-creators",
+        "summary": "Student coding club empowering freshmen through workshops, hackathons, and mentorship programs."
+      }
+    },
+    {
+      "id": "nebraska-startup-academy",
+      "name": "Nebraska Startup Academy",
+      "role": "Member",
+      "dateRange": "Jan 24' - Present",
+      "description": "Joined our state startup program that offers membership.",
+      "backgroundColor": "bg-[#2c4437]",
+      "logoUrl": "/figma-assets/098dda3e73c8bb1dc322f64412bc252d4fbca4d4.png",
+      "logoClassName": "w-[121px] h-[121px]",
+      "technologies": ["Entrepreneurship", "Networking", "Business Development"],
+      "order": 4,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-nebraska-startup-academy",
+        "summary": "State startup program member focused on entrepreneurship and business development."
+      }
+    },
+    {
+      "id": "undergraduate-research",
+      "name": "Undergraduate Research",
+      "role": "Student",
+      "dateRange": "Aug 24' - May 25'",
+      "description": "Researched loneliness and received an award for the best research.",
+      "backgroundColor": "bg-[#dd0000]",
+      "logoUrl": "/figma-assets/f793e65874fb2858a3edf45439bf525d3d71793f.svg",
+      "logoClassName": "w-[77px] h-[103px]",
+      "technologies": ["Data Analysis", "Psychology", "Research Methods"],
+      "order": 5,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-undergraduate-research",
+        "summary": "Award-winning undergraduate research on loneliness using data analysis and research methods."
+      }
+    },
+    {
+      "id": "entrepreneurship-accelerator",
+      "name": "Entrepreneurship Accelerator",
+      "role": "Member",
+      "dateRange": "Aug 25' - Present",
+      "description": "Joined a select group of 30 students around campus with their own business.",
+      "backgroundColor": "bg-neutral-100",
+      "logoUrl": "/figma-assets/73d089e8ff68b0f570f308fd10e13ee8aebc16f2.png",
+      "logoClassName": "w-[146px] h-[102px]",
+      "technologies": ["Lean Startup", "Customer Discovery", "Product Strategy"],
+      "order": 6,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-entrepreneurship-accelerator",
+        "summary": "Member of select 30-student accelerator focused on lean startup and product strategy."
+      }
+    },
+    {
+      "id": "teachers-assistant",
+      "name": "Teacher's Assistant",
+      "role": "Student",
+      "dateRange": "Jan 24' - Present",
+      "description": "TA'd for a classes teaching innovation where students build a startup from start to MVP.",
+      "backgroundColor": "bg-[#f7f7f7]",
+      "logoUrl": "/figma-assets/50625161ec76d4b80b18aa037a5576decb98163a.png",
+      "logoClassName": "w-[93px] h-[93px]",
+      "technologies": ["Teaching", "Product Management", "Agile Methodology"],
+      "order": 7,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-teachers-assistant",
+        "summary": "Teaching assistant for innovation class where students build startups from idea to MVP."
+      }
+    },
+    {
+      "id": "mkrs-world",
+      "name": "Mkrs.world",
+      "role": "Founder",
+      "dateRange": "Jan 24' - Present",
+      "description": "Built a platform for students to connect and create collusions between the various colleges on campus",
+      "backgroundColor": "bg-[#222222]",
+      "logoUrl": "/figma-assets/7bd9f54cfd64d8c8c40026dbd7a03342ce9e1c69.svg",
+      "logoClassName": "w-[133px] h-[30px]",
+      "technologies": ["Social Graph", "React Native", "Node.js"],
+      "order": 8,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-mkrs-world",
+        "summary": "Platform connecting students across colleges using social graph technology."
+      }
+    },
+    {
+      "id": "grit-robotics",
+      "name": "G.R.I.T Robotics",
+      "role": "Co-founder",
+      "dateRange": "Jan 24' - Present",
+      "description": "Created a robotics club for underserved middle school students that is still standing today.",
+      "backgroundColor": "bg-[#9d84bc]",
+      "logoUrl": "/figma-assets/841b1888d4679de4fed4eb7e59127475cbb5dcfe.png",
+      "logoClassName": "w-[78px] h-[76px]",
+      "technologies": ["Robotics", "STEM Education", "Grant Writing"],
+      "order": 9,
+      "ai": {
+        "route": "/ventures",
+        "highlightId": "venture-grit-robotics",
+        "summary": "Robotics club for underserved middle school students focused on STEM education."
+      }
+    }
+  ]
+}

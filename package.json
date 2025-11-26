@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "content:sync": "tsx lib/scripts/sync-content.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^2.0.32",
@@ -19,8 +20,10 @@
     "ai": "^5.0.48",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.13",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.544.0",
     "next": "15.5.3",
+    "next-mdx-remote": "^5.0.0",
     "openai": "^5.22.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -36,6 +39,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
     "tailwindcss": "^4",
+    "tsx": "^4.19.4",
     "typescript": "^5"
   }
 }

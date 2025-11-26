@@ -47,7 +47,7 @@ export const highlightContentToolDescription =
   "Highlight specific content elements on the page to draw attention to them. Use this whenever you mention concrete pieces of the UI.";
 
 export const suggestFollowUpsToolDescription =
-  "Provide three contextual follow-up questions that keep the portfolio conversation moving.";
+  "REQUIRED: Call this after every response with 3 contextual follow-up questions. Questions appear as clickable buttons for the user.";
 
 export const navigateToSectionTool = tool({
   description: navigateToSectionToolDescription,

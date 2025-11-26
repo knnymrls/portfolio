@@ -11,7 +11,8 @@ export async function POST(req: Request) {
       );
     }
 
-    return createPortfolioAgentResponse(messages, pathname);
+    // createPortfolioAgentResponse is now async (RAG retrieval)
+    return await createPortfolioAgentResponse(messages, pathname);
   } catch (error) {
     console.error("Error in chat API:", error);
     return new Response(

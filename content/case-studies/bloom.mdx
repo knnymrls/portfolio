@@ -1,27 +1,56 @@
-import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
-import CaseStudyHero from '@/components/case-study/CaseStudyHero'
-import CaseStudySection from '@/components/case-study/CaseStudySection'
-import CaseStudyImage from '@/components/case-study/CaseStudyImage'
-import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
-import CanvasCodeExplorer from '@/components/case-study/CanvasCodeExplorer'
+---
+slug: bloom
+title: Bloom
+description: RAG-based search engine to find employees within an enterprise.
+status: coming-soon
 
-export const metadata = {
-  title: 'Bloom Case Study | Kenny Morales',
-  description: 'RAG-based search engine to find employees within an enterprise.',
-}
+hero:
+  backgroundColor: bg-project-bloom
+  logoUrl: /images/projects/bloom-logo.svg
 
-<CaseStudyLayout>
+role: Lead Product Designer & AI Engineer
+timeline: "2024"
+duration: 15 min
+tags:
+  - AI
+  - Enterprise
+  - Search
+  - RAG
 
-<CaseStudyHero
-  title="Bloom"
-  description="RAG-based search engine to find employees within an enterprise."
-  backgroundColor="bg-project-bloom"
-  logoUrl="http://localhost:3845/assets/277dc8048462d287475705b7ab92ab5869b45d09.svg"
-  duration="15 min"
-  role="Lead Product Designer & AI Engineer"
-  timeline="2024"
-  tags={['AI', 'Enterprise', 'Search', 'RAG']}
-/>
+metrics:
+  - value: "85%"
+    label: Time Saved
+    description: Finding relevant experts
+  - value: "92%"
+    label: Relevance
+    description: First-page results accuracy
+  - value: "$2.4M"
+    label: Savings
+    description: Per 10K employees annually
+
+technologies:
+  - GPT-4
+  - Pinecone
+  - LangChain
+  - Next.js
+  - PostgreSQL
+
+ai:
+  route: /projects/bloom
+  highlightId: project-bloom
+  summary: Bloom is an intelligent employee discovery platform for large enterprises using RAG technology. Features natural language search, dynamic expertise graphs, and privacy-first architecture. Achieved 85% reduction in time to find experts and $2.4M annual savings per 10K employees.
+  keywords:
+    - enterprise
+    - RAG
+    - search
+    - knowledge management
+    - AI
+  achievements:
+    - 85% reduction in time to find relevant experts
+    - 92% relevance rate for first-page results
+    - $2.4M estimated annual savings per 10K employees
+    - 34% increase in cross-team collaboration
+---
 
 <CaseStudySection title="Overview">
 
@@ -176,12 +205,6 @@ Identify missing capabilities and skills gaps across the organization.
 - Row-level security enforcement
 - Audit logging for all searches
 - Data retention policies and right-to-be-forgotten compliance
-
-### Codebase Structure
-
-Explore the Bloom project structure and implementation:
-
-<CanvasCodeExplorer title="Bloom Codebase" />
 
 </CaseStudySection>
 
@@ -341,9 +364,3 @@ Bloom represents a fundamental shift in how organizations think about their most
 The future of work is not just about productivity tools, but about human connection and knowledge sharing at scale. Bloom is a step toward that future.
 
 </CaseStudySection>
-
-</CaseStudyLayout>
-
-export default function Page({ children }) {
-  return children
-}

@@ -3,8 +3,11 @@ import VenturesGrid from "@/components/sections/VenturesGrid";
 import PressSection from "@/components/sections/PressSection";
 import ContentCreationSection from "@/components/sections/ContentCreationSection";
 import HeroImage from "../../public/images/hero-img-ventures.png";
+import { getVentures, getPress } from "@/lib/content/loader";
 
-export default function VenturesPage() {
+export default async function VenturesPage() {
+  const [ventures, press] = await Promise.all([getVentures(), getPress()]);
+
   return (
     <div className="max-w-[1000px] mx-auto px-4">
       <Hero
@@ -12,8 +15,8 @@ export default function VenturesPage() {
         imageUrl={HeroImage.src}
         imageAlt="Ventures illustration"
       />
-      <VenturesGrid />
-      <PressSection />
+      <VenturesGrid ventures={ventures} />
+      <PressSection items={press} />
       <ContentCreationSection />
     </div>
   );

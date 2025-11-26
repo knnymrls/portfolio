@@ -5,7 +5,7 @@ import HeroImage from "../../public/images/hero-img.png"; // Using the generic h
 
 export default function AboutPage() {
   return (
-    <div className="max-w-[1000px] mx-auto px-4">
+    <div className="max-w-[1000px] mx-auto px-4" data-highlight-section="about">
       <Hero
         title="I build things for the web, sometimes they work, usually they're fun."
         imageUrl={HeroImage.src}

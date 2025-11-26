@@ -1,27 +1,56 @@
-import CaseStudyLayout from '@/components/case-study/CaseStudyLayout'
-import CaseStudyHero from '@/components/case-study/CaseStudyHero'
-import CaseStudySection from '@/components/case-study/CaseStudySection'
-import CaseStudyImage from '@/components/case-study/CaseStudyImage'
-import CaseStudyCallout from '@/components/case-study/CaseStudyCallout'
-import CodeExplorer from '@/components/case-study/CodeExplorer'
+---
+slug: flock
+title: Flock
+description: Helping teams find time to meet using AI
+status: coming-soon
 
-export const metadata = {
-  title: 'Flock Case Study | Kenny Morales',
-  description: 'Helping teams find an ideal time to meet using AI',
-}
+hero:
+  backgroundColor: bg-project-flock
+  logoUrl: /images/projects/flock-logo.svg
+  customLogoComponent: FlockLogo
 
-<CaseStudyLayout>
+role: Lead Designer & Full-Stack Developer
+timeline: "2024"
+duration: 5 min
+tags:
+  - AI
+  - Productivity
+  - Scheduling
 
-<CaseStudyHero
-  title="Flock"
-  description="Helping teams find an ideal time to meet using AI"
-  backgroundColor="bg-project-flock"
-  logoUrl="http://localhost:3845/assets/b4d9c789899891637b311b18b2b39771451b9526.svg"
-  duration="5 min"
-  role="Lead Designer & Full-Stack Developer"
-  timeline="2024"
-  tags={['AI', 'Productivity', 'Scheduling']}
-/>
+metrics:
+  - value: "2,500+"
+    label: Teams
+    description: Active in beta
+  - value: "73%"
+    label: Time Saved
+    description: Reduction in scheduling time
+  - value: "89%"
+    label: Satisfaction
+    description: With suggested times
+
+technologies:
+  - Next.js
+  - GPT-4
+  - Google Calendar API
+  - Microsoft Graph
+  - WebSocket
+
+ai:
+  route: /projects/flock
+  highlightId: project-flock
+  summary: Flock is an AI-powered scheduling tool that finds optimal meeting times by analyzing calendar patterns, time zones, and individual energy levels. Features natural language input, smart suggestions with reasoning, and automatic time zone fairness distribution.
+  keywords:
+    - scheduling
+    - AI
+    - productivity
+    - meetings
+    - calendar
+  achievements:
+    - 2,500+ active teams in beta
+    - 73% reduction in scheduling time
+    - 89% satisfaction with suggested meeting times
+    - 45% decrease in cancelled meetings
+---
 
 <CaseStudySection title="Overview">
 
@@ -159,12 +188,6 @@ Seamless connections with:
 - Apple Calendar
 - Zoom, Google Meet, Microsoft Teams for automatic video link generation
 
-### Code Architecture
-
-Explore the core components and structure of the Flock codebase:
-
-<CodeExplorer title="Flock Code Structure" />
-
 </CaseStudySection>
 
 <CaseStudySection title="Challenges & Solutions">
@@ -233,9 +256,3 @@ After 6 months in beta:
 - **Integration with Task Management**: Schedule meetings automatically when project dependencies require alignment
 
 </CaseStudySection>
-
-</CaseStudyLayout>
-
-export default function Page({ children }) {
-  return children
-}

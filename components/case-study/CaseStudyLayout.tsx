@@ -6,8 +6,8 @@ interface CaseStudyLayoutProps {
 
 export default function CaseStudyLayout({ children }: CaseStudyLayoutProps) {
   return (
-    <div className="max-w-[1000px] mx-auto px-4 py-12">
-      <article className="prose prose-lg max-w-none">
+    <div className="max-w-[1000px] mx-auto px-4 pb-24">
+      <article className="max-w-none">
         {children}
       </article>
     </div>
