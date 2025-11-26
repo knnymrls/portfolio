@@ -2,7 +2,7 @@ import Hero from "@/components/sections/Hero";
 import VenturesGrid from "@/components/sections/VenturesGrid";
 import PressSection from "@/components/sections/PressSection";
 import ContentCreationSection from "@/components/sections/ContentCreationSection";
-import HeroImage from "../../public/images/hero-img-ventures.png";
+import HeroImage from "../../public/images/ventures-hero.png";
 import { getVentures, getPress } from "@/lib/content/loader";
 
 export default async function VenturesPage() {

@@ -149,8 +149,7 @@ export function AIChat() {
         className={cn(
           "fixed bottom-6 left-1/2 -translate-x-1/2 z-50",
           "w-[726px] max-w-[calc(100vw-2rem)]",
-          "transition-all duration-300 ease-out",
-          "hidden lg:block"
+          "transition-all duration-300 ease-out"
         )}
       >
         <AIChatActionIndicator action={currentAction} />
@@ -165,7 +164,7 @@ export function AIChat() {
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
               className="mb-2 overflow-hidden"
             >
-              <div className="bg-surface/95 backdrop-blur-md border border-border rounded-[20px] p-4 max-h-[400px] overflow-y-auto scrollbar-hide">
+              <div className="bg-surface/95 backdrop-blur-md border border-border rounded-[20px] p-4 max-h-[60vh] overflow-y-auto scrollbar-hide">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-xs font-semibold uppercase tracking-[0.3em] text-surface-secondary">
                     Kenny&apos;s AI Concierge

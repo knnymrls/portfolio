@@ -1,7 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import AboutBio from "@/components/sections/AboutBio";
 import DraggableBox from "@/components/sections/DraggableBox";
-import HeroImage from "../../public/images/hero-img.png";
+import HeroImage from "../../public/images/about-hero.png";
 
 export default function AboutPage() {
   return (

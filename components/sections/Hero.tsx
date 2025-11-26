@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface HeroProps {
   title: string | React.ReactNode;
@@ -40,63 +41,81 @@ export default function Hero({
 
           {/* CTA and social links */}
           <div
-            className="flex flex-col lg:flex-row items-start lg:items-center gap-3"
+            className="flex flex-wrap items-center gap-3"
             data-highlight-id="hero-actions"
           >
-            <Link
-              href="/contact"
-              className="h-12 bg-foreground text-background px-6 rounded-[13px] flex items-center gap-2 hover:opacity-90 transition-opacity"
-              data-highlight-id="cta-contact"
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Image src="/icons/send.svg" alt="" width={16} height={16} className="dark:invert" />
-              <span className="text-lg font-medium tracking-[0.36px]">
-                Reach out
-              </span>
-            </Link>
+              <Link
+                href="/contact"
+                className="h-12 bg-foreground text-background px-6 rounded-[13px] flex items-center gap-2 hover:opacity-90 transition-opacity"
+                data-highlight-id="cta-contact"
+              >
+                <motion.div
+                  whileHover={{ x: 2, rotate: 15 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  <Image src="/icons/send.svg" alt="" width={16} height={16} className="dark:invert" />
+                </motion.div>
+                <span className="text-lg font-medium tracking-[0.36px]">
+                  Reach out
+                </span>
+              </Link>
+            </motion.div>
 
             <div className="flex items-center gap-2">
-              <Link
-                href="https://github.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-                aria-label="GitHub"
-                data-highlight-id="social-github"
+              <motion.div
+                whileHover={{ scale: 1.08, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
-              </Link>
+                <Link
+                  href="https://github.com/knnymrls"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                  aria-label="GitHub"
+                  data-highlight-id="social-github"
+                >
+                  <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
+                </Link>
+              </motion.div>
 
-              <Link
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-                aria-label="LinkedIn"
-                data-highlight-id="social-linkedin"
+              <motion.div
+                whileHover={{ scale: 1.08, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
-              </Link>
+                <Link
+                  href="https://www.linkedin.com/in/knnymrls/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                  aria-label="LinkedIn"
+                  data-highlight-id="social-linkedin"
+                >
+                  <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
+                </Link>
+              </motion.div>
 
-              <Link
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-                aria-label="Instagram"
-                data-highlight-id="social-instagram"
+              <motion.div
+                whileHover={{ scale: 1.08, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
-              </Link>
-
-              <Link
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                href={"/resume" as any}
-                className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
-                aria-label="Resume"
-                data-highlight-id="social-resume"
-              >
-                <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
-              </Link>
+                <Link
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors text-foreground"
+                  aria-label="Resume"
+                  data-highlight-id="social-resume"
+                >
+                  <Image src="/icons/file.svg" alt="" width={20} height={20} className="dark:invert" />
+                </Link>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -123,13 +142,9 @@ export default function Hero({
             </div>
           )}
 
-          {/* Desktop image */}
+          {/* Image - responsive sizing */}
           <div
-            className={`relative mx-auto ${mobileImageUrl ? 'hidden lg:block' : ''}`}
-            style={{
-              width: `${imageSize.width}px`,
-              height: `${imageSize.height}px`,
-            }}
+            className={`relative mx-auto ${mobileImageUrl ? 'hidden lg:block' : ''} w-[120px] h-[120px] lg:w-[315px] lg:h-[315px]`}
           >
             {imageSrc ? (
               <Image
