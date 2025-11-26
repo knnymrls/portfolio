@@ -1,6 +1,5 @@
 export const PORTFOLIO_PRIMARY_SECTIONS = [
   "home",
-  "skills",
   "ventures",
   "about",
   "contact",
@@ -23,7 +22,6 @@ export type PortfolioNavigationTarget =
 
 export const PORTFOLIO_ROUTE_MAP: Record<PortfolioNavigationTarget, string> = {
   home: "/",
-  skills: "/skills",
   ventures: "/ventures",
   about: "/about",
   contact: "/contact",
@@ -38,7 +36,6 @@ export const PORTFOLIO_DESTINATION_LABELS: Record<
   string
 > = {
   home: "Home / Work overview",
-  skills: "Skills hub",
   ventures: "Ventures overview",
   about: "About Kenny",
   contact: "Contact + collaborations",

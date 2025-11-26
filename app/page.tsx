@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import CaseStudies from "@/components/sections/CaseStudies";
+import SkillsOverview from "@/components/sections/SkillsOverview";
 import HeroImage from "../public/images/hero-img.png";
 
 export default function Home() {
@@ -13,6 +14,8 @@ export default function Home() {
         />
 
         <CaseStudies />
+
+        <SkillsOverview />
       </div>
 
       {/* Mobile Chat Input - Only visible on small screens */}

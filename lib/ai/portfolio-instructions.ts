@@ -16,9 +16,7 @@ interface BuildPromptOptions {
 
 const DESTINATION_GUIDANCE: Record<PortfolioNavigationTarget, string> = {
   home:
-    "Work & case studies overview — use this for portfolio summaries, featured projects, and quick tours.",
-  skills:
-    "Skills matrix across languages, frameworks, AI/ML, design, and soft skills — perfect for capability-focused questions.",
+    "Work & case studies overview with skills section — use this for portfolio summaries, featured projects, skills, and quick tours.",
   ventures:
     "Startup ventures like FindU and Mkrs with funding and focus — use for entrepreneurship questions.",
   about:
