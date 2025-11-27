@@ -30,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sora.className} ${plusJakarta.variable} antialiased`}>
-        <NavigationBar tabs={navigationTabs} />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <div className="relative z-10">
+          <NavigationBar tabs={navigationTabs} />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </div>
         <AIChat />
       </body>
     </html>

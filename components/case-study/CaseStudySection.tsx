@@ -1,4 +1,8 @@
+"use client";
+
 import React from 'react';
+import { motion } from 'framer-motion';
+import { fadeUp, viewportOnce } from '@/lib/motion';
 
 interface CaseStudySectionProps {
   title?: string;
@@ -12,15 +16,22 @@ export default function CaseStudySection({
   className = '',
 }: CaseStudySectionProps) {
   // Generate a slug from the title for deep linking
-  const id = title 
-    ? title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') 
+  const id = title
+    ? title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
     : undefined;
 
   // Main sections (with title) get more top spacing to separate from previous content
   const sectionSpacing = title ? 'mt-20 mb-8' : 'mb-8';
 
   return (
-    <section id={id} className={`${sectionSpacing} ${className} scroll-mt-24`}>
+    <motion.section
+      id={id}
+      className={`${sectionSpacing} ${className} scroll-mt-24`}
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+    >
       {title && (
         <h2 className="font-medium text-base text-surface-secondary tracking-[0.32px] uppercase mb-8">
           {title}
@@ -29,6 +40,6 @@ export default function CaseStudySection({
       <div className="text-base leading-relaxed text-foreground">
         {children}
       </div>
-    </section>
+    </motion.section>
   );
 }

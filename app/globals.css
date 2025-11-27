@@ -39,15 +39,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --surface: #1a1a1a;
-    --surface-secondary: #a0a0a0;
-    --border: #333333;
-    
-    --nav-active: #333333;
-    --nav-inactive: rgba(51, 51, 51, 0.6);
-    
+    --background: #161616;
+    --foreground: #f0f0f0;
+    --surface: #222222;
+    --surface-secondary: #a8a8a8;
+    --border: #3a3a3a;
+
+    --nav-active: #3a3a3a;
+    --nav-inactive: rgba(58, 58, 58, 0.6);
+
     /* Project colors remain the same in dark mode */
     --project-findu: #ff6b6b;
     --project-mkrs: #2b2b2b;
@@ -59,7 +59,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  overflow-x: hidden; /* Hide horizontal overflow */
+  overflow-x: hidden;
 }
 
 html {
@@ -123,4 +123,55 @@ html {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* WebKit */
+}
+
+/* Micro-interaction utilities */
+.hover-lift {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Link with animated underline */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease-out;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Focus ring with style */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--foreground);
+  transition: box-shadow 0.15s ease-out;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

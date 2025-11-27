@@ -1,5 +1,9 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { ease, duration, viewportOnceEarly } from '@/lib/motion';
 
 interface CaseStudyImageProps {
   src: string;
@@ -10,6 +14,16 @@ interface CaseStudyImageProps {
   className?: string;
 }
 
+const imageReveal = {
+  hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: duration.slow, ease },
+  },
+};
+
 export default function CaseStudyImage({
   src,
   alt,
@@ -19,7 +33,13 @@ export default function CaseStudyImage({
   className = '',
 }: CaseStudyImageProps) {
   return (
-    <figure className={`my-12 ${className}`}>
+    <motion.figure
+      className={`my-12 ${className}`}
+      variants={imageReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnceEarly}
+    >
       <div className="rounded-2xl overflow-hidden">
         {width && height ? (
           <Image
@@ -39,6 +59,6 @@ export default function CaseStudyImage({
           {caption}
         </figcaption>
       )}
-    </figure>
+    </motion.figure>
   );
 }

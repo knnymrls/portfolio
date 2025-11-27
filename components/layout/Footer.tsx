@@ -1,11 +1,26 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { fadeIn, viewportOnce } from "@/lib/motion";
+
+const vibes = [
+  "probably drinking coffee",
+  "made in nebraska",
+  "shipping pixels",
+  "building things",
+  "overthinking ui",
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [vibe, setVibe] = useState(vibes[0]);
+
+  useEffect(() => {
+    setVibe(vibes[Math.floor(Math.random() * vibes.length)]);
+  }, []);
 
   const buttonMotion = {
     whileHover: { scale: 1.08, y: -2 },
@@ -14,13 +29,21 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full ">
+    <motion.footer
+      className="w-full"
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+    >
       <div className="max-w-[1000px] mx-auto px-4 py-12">
         <div className="flex flex-row items-center justify-between gap-6">
-          {/* Left side - Name and copyright */}
+          {/* Left side - Name and vibe */}
           <div className="text-left">
-            <p className="text-sm font-medium text-surface-secondary">
-              knnymrls - {currentYear}
+            <p className="text-sm text-surface-secondary">
+              <span className="font-medium">knnymrls</span>
+              <span className="mx-2">·</span>
+              <span className="italic">{vibe}</span>
             </p>
           </div>
 
@@ -62,6 +85,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

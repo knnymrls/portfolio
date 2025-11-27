@@ -1,28 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ease } from "@/lib/motion";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
       initial={{
         opacity: 0,
-        y: 40,
-        scale: 0.96,
-        filter: "blur(20px)",
+        y: 20,
+        filter: "blur(10px)",
       }}
       animate={{
         opacity: 1,
         y: 0,
-        scale: 1,
         filter: "blur(0px)",
       }}
       transition={{
-        duration: 0.5,
-        ease: [0.16, 1, 0.3, 1], // Smooth easing
-        opacity: { duration: 0.25 },
-        scale: { duration: 0.5 },
-        filter: { duration: 0.25 },
+        duration: 0.4,
+        ease,
+        opacity: { duration: 0.3 },
+        filter: { duration: 0.3 },
       }}
     >
       {children}

@@ -1,8 +1,17 @@
+"use client";
+
 import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
+import { springSnappy } from '@/lib/motion';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+// Omit conflicting event handlers from ButtonHTMLAttributes
+type ButtonBaseProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>,
+  'onAnimationStart' | 'onAnimationEnd' | 'onDrag' | 'onDragStart' | 'onDragEnd'
+>;
+
+export interface ButtonProps extends ButtonBaseProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'icon';
   size?: 'sm' | 'md' | 'lg';
   icon?: LucideIcon;
@@ -10,14 +19,14 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ 
-    className, 
-    variant = 'primary', 
-    size = 'md', 
+  ({
+    className,
+    variant = 'primary',
+    size = 'md',
     icon: Icon,
     iconPosition = 'left',
     children,
-    ...props 
+    ...props
   }, ref) => {
     const iconSize = {
       sm: 16,
@@ -25,10 +34,23 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: 20,
     };
 
+    // Different hover/tap behavior for icon vs regular buttons
+    const motionProps = variant === 'icon'
+      ? {
+          whileHover: { scale: 1.08, y: -2 },
+          whileTap: { scale: 0.95 },
+          transition: springSnappy,
+        }
+      : {
+          whileHover: { scale: 1.02 },
+          whileTap: { scale: 0.98 },
+          transition: springSnappy,
+        };
+
     return (
-      <button
+      <motion.button
         className={cn(
-          'inline-flex items-center justify-center font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+          'inline-flex items-center justify-center font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
           {
             // Variants
             'bg-foreground text-background hover:bg-opacity-90 rounded-button':
@@ -53,6 +75,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )}
         ref={ref}
+        {...motionProps}
         {...props}
       >
         {Icon && iconPosition === 'left' && variant !== 'icon' && (
@@ -66,7 +89,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {Icon && iconPosition === 'right' && variant !== 'icon' && (
           <Icon size={iconSize[size]} />
         )}
-      </button>
+      </motion.button>
     );
   }
 );

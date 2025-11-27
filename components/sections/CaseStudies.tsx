@@ -2,6 +2,7 @@
 
 import { ProjectCard, ProjectCardProps } from "@/components/ui/ProjectCard";
 import { motion, AnimatePresence } from "framer-motion";
+import { staggerContainer, staggerItem, fadeUp, viewportOnce } from "@/lib/motion";
 
 const FindULogo = ({ isHovered }: { isHovered: boolean }) => {
   return (
@@ -166,26 +167,35 @@ export default function CaseStudies() {
       data-highlight-section="case-studies"
     >
       <div className="flex flex-col gap-5 w-full">
-        <h2
+        <motion.h2
           className="font-medium text-base text-surface-secondary tracking-[0.32px] uppercase"
           data-highlight-id="case-studies-title"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
         >
           CASE STUDIES
-        </h2>
+        </motion.h2>
 
         {/* Using CSS Grid with auto-fit for responsive layout */}
-        <div
+        <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-5"
           data-highlight-id="projects-grid"
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
         >
           {projects.map((project) => (
-            <ProjectCard
-              key={project.name}
-              {...project}
-              data-highlight-id={`project-${project.name.toLowerCase()}`}
-            />
+            <motion.div key={project.name} variants={staggerItem}>
+              <ProjectCard
+                {...project}
+                data-highlight-id={`project-${project.name.toLowerCase()}`}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

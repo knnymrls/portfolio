@@ -1,4 +1,8 @@
+"use client";
+
 import React from 'react';
+import { motion } from 'framer-motion';
+import { ease, staggerContainer, staggerItem, duration } from '@/lib/motion';
 
 interface CaseStudyHeroProps {
   title: string;
@@ -12,38 +16,61 @@ interface CaseStudyHeroProps {
   tags?: string[];
 }
 
+const heroContainer = staggerContainer(0.12);
+
+const logoVariant = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: duration.slow, ease },
+  },
+};
+
 export default function CaseStudyHero({
   title,
   description,
   backgroundColor,
   logoUrl,
   customLogo,
-  duration,
+  duration: readDuration,
   role,
   timeline,
   tags,
 }: CaseStudyHeroProps) {
   return (
-    <div className="mb-16">
+    <motion.div
+      className="mb-16"
+      variants={heroContainer}
+      initial="hidden"
+      animate="visible"
+    >
       {/* Logo/Brand Section */}
-      <div className={`${backgroundColor} rounded-2xl p-12 flex items-center justify-center mb-8`} style={{ minHeight: '300px' }}>
+      <motion.div
+        className={`${backgroundColor} rounded-2xl p-12 flex items-center justify-center mb-8`}
+        style={{ minHeight: '300px' }}
+        variants={logoVariant}
+      >
         {customLogo || (logoUrl && (
           <img src={logoUrl} alt={`${title} logo`} className="w-auto max-h-[200px]" />
         ))}
-      </div>
+      </motion.div>
 
       {/* Title and Description */}
-      <div className="mb-8">
+      <motion.div className="mb-8" variants={staggerItem}>
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">{title}</h1>
         <p className="text-xl text-surface-secondary">{description}</p>
-      </div>
+      </motion.div>
 
       {/* Meta Information */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-y border-border">
-        {duration && (
+      <motion.div
+        className="grid grid-cols-2 md:grid-cols-4 gap-6 py-6 border-y border-border"
+        variants={staggerItem}
+      >
+        {readDuration && (
           <div>
             <div className="text-sm text-surface-secondary uppercase tracking-wider mb-1">Read Time</div>
-            <div className="text-base font-medium">{duration}</div>
+            <div className="text-base font-medium">{readDuration}</div>
           </div>
         )}
         {role && (
@@ -70,7 +97,7 @@ export default function CaseStudyHero({
             </div>
           </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

@@ -1,5 +1,9 @@
+"use client";
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { spring } from '@/lib/motion';
 
 export interface VentureCardProps {
   name: string;
@@ -36,10 +40,17 @@ export function VentureCard({
   className,
 }: VentureCardProps) {
   return (
-    <div className={cn(
-      "bg-surface rounded-[20px] border border-border overflow-hidden h-[320px] group relative",
-      className
-    )}>
+    <motion.div
+      className={cn(
+        "bg-surface rounded-[20px] border border-border overflow-hidden h-[320px] group relative",
+        className
+      )}
+      whileHover={{
+        y: -4,
+        boxShadow: "0 12px 24px -8px rgba(0,0,0,0.1)",
+      }}
+      transition={spring}
+    >
       <Link href={href} className="absolute inset-0 z-10" aria-label={`View ${name} details`}>
         <span className="sr-only">View {name}</span>
       </Link>
@@ -78,6 +89,6 @@ export function VentureCard({
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -3,6 +3,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { ease, staggerContainer, staggerItem, duration } from "@/lib/motion";
+
+// Hero-specific variants
+const heroContainer = staggerContainer(0.1);
+
+const imageVariant = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: duration.slow, ease },
+  },
+};
 
 interface HeroProps {
   title: string | React.ReactNode;
@@ -25,45 +38,46 @@ export default function Hero({
   mobileImageSize = { width: 88, height: 88 },
 }: HeroProps) {
   return (
-    <section
+    <motion.section
       className="w-full pt-[165px] pb-[108px]"
       data-highlight-section="hero"
+      variants={heroContainer}
+      initial="hidden"
+      animate="visible"
     >
       <div className="flex flex-col lg:flex-row gap-6 lg:gap-16 items-start lg:items-center justify-between">
         {/* Left content */}
         <div className="flex flex-col gap-9 flex-1">
-          <h1
+          <motion.h1
             className="text-3xl lg:text-4xl font-semibold text-foreground leading-[1.5] max-w-[650px]"
             data-highlight-id="hero-title"
+            variants={staggerItem}
           >
             {title}
-          </h1>
+          </motion.h1>
 
           {/* CTA and social links */}
-          <div
+          <motion.div
             className="flex flex-wrap items-center gap-3"
             data-highlight-id="hero-actions"
+            variants={staggerItem}
           >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+            <Link
+              href="/contact"
+              className="group h-12 bg-foreground text-background px-6 rounded-[13px] flex items-center gap-2 hover:opacity-90 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              data-highlight-id="cta-contact"
             >
-              <Link
-                href="/contact"
-                className="h-12 bg-foreground text-background px-6 rounded-[13px] flex items-center gap-2 hover:opacity-90 transition-opacity"
-                data-highlight-id="cta-contact"
-              >
-                <motion.div
-                  whileHover={{ x: 2, rotate: 15 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  <Image src="/icons/send.svg" alt="" width={16} height={16} className="dark:invert" />
-                </motion.div>
-                <span className="text-lg font-medium tracking-[0.36px]">
-                  Reach out
-                </span>
-              </Link>
-            </motion.div>
+              <Image
+                src="/icons/send.svg"
+                alt=""
+                width={16}
+                height={16}
+                className="dark:invert transition-transform group-hover:translate-x-0.5 group-hover:rotate-12"
+              />
+              <span className="text-lg font-medium tracking-[0.36px]">
+                Reach out
+              </span>
+            </Link>
 
             <div className="flex items-center gap-2">
               <motion.div
@@ -117,13 +131,14 @@ export default function Hero({
                 </a>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right content - Image */}
-        <div
+        <motion.div
           className="shrink-0 order-first lg:order-last"
           data-highlight-id="hero-image"
+          variants={imageVariant}
         >
           {/* Mobile image */}
           {mobileImageUrl && (
@@ -161,8 +176,8 @@ export default function Hero({
               />
             ) : null}
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -1,82 +1,103 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/Button';
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Cal, { getCalApi } from '@calcom/embed-react';
+import { staggerContainer, staggerItem } from '@/lib/motion';
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: '30min' });
+      cal('ui', { hideEventTypeDetails: false, layout: 'month_view' });
+    })();
+  }, []);
 
   return (
-    <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24" data-highlight-section="contact">
-      <div className="mx-auto max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-white mb-8" data-highlight-id="contact-title">
-          Contact Me
-        </h1>
-        <form onSubmit={handleSubmit} className="space-y-6" data-highlight-id="contact-form">
-          <div data-highlight-id="contact-field-name">
-            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-              Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              id="name"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-2 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
-            />
+    <div className="max-w-[1000px] mx-auto px-4 pt-[165px] pb-[108px]" data-highlight-section="contact">
+      <motion.div
+        variants={staggerContainer(0.1)}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div variants={staggerItem} className="mb-12">
+          <h1 className="text-3xl lg:text-4xl font-semibold text-foreground mb-4">
+            Let&apos;s chat
+          </h1>
+          <p className="text-lg text-surface-secondary max-w-md">
+            Have a project in mind or just want to connect? Book a time or reach out directly.
+          </p>
+        </motion.div>
+
+        {/* Contact options */}
+        <motion.div
+          variants={staggerItem}
+          className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-10"
+        >
+          {/* Email */}
+          <a
+            href="mailto:knnymrls@outlook.com"
+            className="group flex items-center gap-3"
+          >
+            <div className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center group-hover:bg-border/20 transition-colors">
+              <Mail size={20} className="text-foreground" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-sm text-surface-secondary">Email me</span>
+              <span className="text-foreground font-medium group-hover:underline">knnymrls@outlook.com</span>
+            </div>
+          </a>
+
+          {/* Social icons */}
+          <div className="flex items-center gap-3">
+            <Link
+              href="https://github.com/knnymrls"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              aria-label="GitHub"
+            >
+              <Image src="/icons/github.svg" alt="" width={20} height={20} className="dark:invert" />
+            </Link>
+
+            <Link
+              href="https://www.linkedin.com/in/knnymrls/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              aria-label="LinkedIn"
+            >
+              <Image src="/icons/linkedin.svg" alt="" width={20} height={20} className="dark:invert" />
+            </Link>
+
+            <Link
+              href="https://instagram.com/knnymrls"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-12 w-12 bg-surface rounded-[13px] border border-border flex items-center justify-center hover:bg-border/20 transition-colors"
+              aria-label="Instagram"
+            >
+              <Image src="/icons/instagram.svg" alt="" width={20} height={20} className="dark:invert" />
+            </Link>
           </div>
-          <div data-highlight-id="contact-field-email">
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-2 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
-            />
-          </div>
-          <div data-highlight-id="contact-field-message">
-            <label htmlFor="message" className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
-              Message
-            </label>
-            <textarea
-              name="message"
-              id="message"
-              rows={4}
-              required
-              value={formData.message}
-              onChange={handleChange}
-              className="mt-2 block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 dark:bg-gray-900 dark:text-white dark:ring-gray-700"
-            />
-          </div>
-          <Button type="submit" size="lg" className="w-full" data-highlight-id="contact-submit">
-            Send Message
-          </Button>
-        </form>
-      </div>
+        </motion.div>
+
+        {/* Cal.com embed - full width */}
+        <motion.div
+          variants={staggerItem}
+          className="w-full min-h-[700px]"
+        >
+          <Cal
+            namespace="30min"
+            calLink="knnymrls/30min"
+            style={{ width: '100%', height: '100%', overflow: 'scroll' }}
+            config={{ layout: 'month_view' }}
+          />
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
