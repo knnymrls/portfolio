@@ -17,7 +17,7 @@ export default async function VenturesPage() {
       />
       <VenturesGrid ventures={ventures} />
       <PressSection items={press} />
-      <ContentCreationSection />
+      {/* <ContentCreationSection /> */}
     </div>
   );
 }

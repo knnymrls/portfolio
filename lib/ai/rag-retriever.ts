@@ -1,8 +1,27 @@
 import OpenAI from "openai";
-import { loadVectorStore, searchSimilar, type StoredChunk } from "./vector-store";
+import { loadVectorStore, searchHybrid, type StoredChunk } from "./vector-store";
 import type { ContentChunk } from "./embeddings";
 
 const openai = new OpenAI();
+
+// Extract keywords from query
+function extractKeywords(query: string): string[] {
+  const stopWords = new Set([
+    "a", "an", "the", "is", "are", "was", "were", "be", "been", "being",
+    "have", "has", "had", "do", "does", "did", "will", "would", "could",
+    "should", "may", "might", "must", "can", "and", "but", "or", "for",
+    "to", "in", "on", "with", "about", "what", "which", "who", "when",
+    "where", "why", "how", "that", "this", "it", "he", "she", "they",
+    "my", "your", "me", "you", "i", "we", "tell", "show", "know", "get",
+    "see", "want", "please", "help", "more", "some", "many", "much",
+  ]);
+
+  return query
+    .toLowerCase()
+    .replace(/[^\w\s]/g, " ")
+    .split(/\s+/)
+    .filter((word) => word.length > 2 && !stopWords.has(word));
+}
 
 // Retrieve context for a user query
 export async function retrieveContext(
@@ -14,7 +33,7 @@ export async function retrieveContext(
     currentRoute?: string;
   } = {}
 ): Promise<StoredChunk[]> {
-  const { topK = 5, threshold = 0.5, filterType, currentRoute } = options;
+  const { topK = 5, threshold = 0.3, filterType } = options;
 
   // Embed the query
   const response = await openai.embeddings.create({
@@ -22,6 +41,9 @@ export async function retrieveContext(
     input: query,
   });
   const queryEmbedding = response.data[0].embedding;
+
+  // Extract keywords for hybrid search
+  const keywords = extractKeywords(query);
 
   // Load the vector store
   const chunks = await loadVectorStore();
@@ -31,12 +53,21 @@ export async function retrieveContext(
     return [];
   }
 
-  // Search for similar chunks
-  const results = searchSimilar(queryEmbedding, chunks, {
+  // Use hybrid search (semantic + keyword matching)
+  const results = searchHybrid(queryEmbedding, keywords, chunks, {
     topK,
     threshold,
     filterType,
-    filterRoute: currentRoute,
+    semanticWeight: 0.6,
+    keywordWeight: 0.4, // Boost keyword matching
+  });
+
+  // Debug logging
+  console.log(`[RAG] Query: "${query}"`);
+  console.log(`[RAG] Keywords: ${keywords.join(", ")}`);
+  console.log(`[RAG] Found ${results.length} chunks:`);
+  results.forEach((r, i) => {
+    console.log(`  ${i + 1}. ${r.chunk.title} (score: ${r.score.toFixed(3)})`);
   });
 
   return results.map((r) => r.chunk);

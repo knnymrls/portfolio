@@ -12,6 +12,8 @@ interface CaseStudyImageProps {
   width?: number;
   height?: number;
   className?: string;
+  quality?: number;
+  unoptimized?: boolean;
 }
 
 const imageReveal = {
@@ -31,6 +33,8 @@ export default function CaseStudyImage({
   width,
   height,
   className = '',
+  quality = 95,
+  unoptimized = false,
 }: CaseStudyImageProps) {
   return (
     <motion.figure
@@ -40,13 +44,16 @@ export default function CaseStudyImage({
       whileInView="visible"
       viewport={viewportOnceEarly}
     >
-      <div className="rounded-2xl overflow-hidden">
+      <div className="rounded-2xl border-1 border-border overflow-hidden">
         {width && height ? (
           <Image
             src={src}
             alt={alt}
             width={width}
             height={height}
+            quality={quality}
+            unoptimized={unoptimized}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
             className="w-full h-auto object-cover"
           />
         ) : (

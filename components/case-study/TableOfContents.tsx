@@ -133,7 +133,7 @@ export default function TableOfContents() {
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
@@ -166,7 +166,7 @@ export default function TableOfContents() {
               {/* Main section */}
               <motion.button
                 onClick={() => handleClick(section.id)}
-                className="group flex items-center gap-3 py-1.5 text-left"
+                className="group flex items-center gap-3 py-1.5 text-left cursor-pointer"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 + idx * 0.05 }}
@@ -186,7 +186,7 @@ export default function TableOfContents() {
                 {/* Label */}
                 <span
                   className={`text-sm max-w-[160px] leading-tight transition-colors duration-200 ${
-                    sectionActive ? "text-foreground" : "text-surface-secondary group-hover:text-foreground/70"
+                    sectionActive ? "text-foreground" : "text-surface-secondary group-hover:text-foreground"
                   }`}
                 >
                   {section.title}
@@ -209,7 +209,7 @@ export default function TableOfContents() {
                         <motion.button
                           key={subItem.id}
                           onClick={() => handleClick(subItem.id)}
-                          className="group flex items-center gap-2 py-1 text-left"
+                          className="group flex items-center gap-2 py-1 text-left cursor-pointer"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: subIdx * 0.03 }}
@@ -229,7 +229,7 @@ export default function TableOfContents() {
                           {/* Label */}
                           <span
                             className={`text-xs max-w-[140px] leading-tight transition-colors duration-200 ${
-                              isSubActive ? "text-foreground" : "text-surface-secondary/70 group-hover:text-foreground/60"
+                              isSubActive ? "text-foreground" : "text-surface-secondary/70 group-hover:text-foreground"
                             }`}
                           >
                             {subItem.title}

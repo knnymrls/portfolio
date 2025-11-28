@@ -49,24 +49,45 @@ export async function generateEmbeddings(
 function extractMDXSections(mdxContent: string): { title: string; slug: string; content: string }[] {
   const sections: { title: string; slug: string; content: string }[] = [];
 
-  // Match CaseStudySection components
-  const sectionRegex = /<CaseStudySection\s+title="([^"]+)"[^>]*>([\s\S]*?)<\/CaseStudySection>/g;
+  // Match CaseStudySection components WITH titles
+  const titledSectionRegex = /<CaseStudySection\s+title="([^"]+)"[^>]*>/g;
 
+  // Find all titled sections and their positions
+  const titledSections: { title: string; startIndex: number }[] = [];
   let match;
-  while ((match = sectionRegex.exec(mdxContent)) !== null) {
-    const title = match[1];
-    const content = match[2]
-      .trim()
-      // Remove nested JSX components but keep text
-      .replace(/<[^>]+>/g, " ")
+  while ((match = titledSectionRegex.exec(mdxContent)) !== null) {
+    titledSections.push({
+      title: match[1],
+      startIndex: match.index,
+    });
+  }
+
+  // For each titled section, capture ALL content until the next titled section
+  for (let i = 0; i < titledSections.length; i++) {
+    const currentSection = titledSections[i];
+    const nextSection = titledSections[i + 1];
+
+    // Extract content from this section start to next section (or end of file)
+    const endIndex = nextSection ? nextSection.startIndex : mdxContent.length;
+    const sectionContent = mdxContent.slice(currentSection.startIndex, endIndex);
+
+    // Clean the content
+    const content = sectionContent
+      // Remove all JSX tags but keep text content
+      .replace(/<CaseStudySection[^>]*>/g, " ")
+      .replace(/<\/CaseStudySection>/g, " ")
+      .replace(/<CaseStudyImage[^/]*\/>/g, " ")
+      .replace(/<[A-Z][^>]*\/>/g, " ") // Self-closing components
+      .replace(/<[A-Z][^>]*>[\s\S]*?<\/[A-Z][^>]*>/g, " ") // Other components
+      .replace(/<[^>]+>/g, " ") // Any remaining tags
       // Clean up whitespace
       .replace(/\s+/g, " ")
       .trim();
 
-    if (content.length > 50) { // Only include sections with meaningful content
+    if (content.length > 50) {
       sections.push({
-        title,
-        slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        title: currentSection.title,
+        slug: currentSection.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
         content,
       });
     }
@@ -96,6 +117,17 @@ export function chunkContent(content: AllContent): ContentChunk[] {
     if (study.content) {
       const sections = extractMDXSections(study.content);
       for (const section of sections) {
+        // Add section-specific keywords based on content
+        const sectionKeywords = [...(study.ai.keywords || [])];
+        const lowerContent = section.content.toLowerCase();
+
+        // Add keywords based on section content
+        if (lowerContent.includes('user') || lowerContent.includes('student')) sectionKeywords.push('users', 'students', 'user count');
+        if (lowerContent.includes('marketing')) sectionKeywords.push('marketing', 'growth', 'traction');
+        if (lowerContent.includes('team')) sectionKeywords.push('team', 'hiring', 'management');
+        if (lowerContent.includes('funding') || lowerContent.includes('raised')) sectionKeywords.push('funding', 'investment', 'raised');
+        if (lowerContent.includes('interview')) sectionKeywords.push('interviews', 'research', 'user research');
+
         chunks.push({
           id: `case-study-${study.slug}-${section.slug}`,
           type: "case-study",
@@ -104,6 +136,7 @@ export function chunkContent(content: AllContent): ContentChunk[] {
           route: `${study.ai.route}#${section.slug}`,
           highlightId: study.ai.highlightId,
           section: section.title,
+          keywords: [...new Set(sectionKeywords)], // Dedupe
         });
       }
     }

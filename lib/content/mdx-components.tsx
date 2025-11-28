@@ -5,12 +5,20 @@ import CaseStudyLayout from "@/components/case-study/CaseStudyLayout";
 import CaseStudyHero from "@/components/case-study/CaseStudyHero";
 import CaseStudySection from "@/components/case-study/CaseStudySection";
 import CaseStudyImage from "@/components/case-study/CaseStudyImage";
+import CaseStudyVideo from "@/components/case-study/CaseStudyVideo";
 import CaseStudyCallout from "@/components/case-study/CaseStudyCallout";
 import CaseStudyStats from "@/components/case-study/CaseStudyStats";
 import CaseStudyPersonas from "@/components/case-study/CaseStudyPersonas";
 import CaseStudyColorPalette from "@/components/case-study/CaseStudyColorPalette";
 import CaseStudyProcessTimeline from "@/components/case-study/CaseStudyProcessTimeline";
 import CaseStudyTestimonial from "@/components/case-study/CaseStudyTestimonial";
+import DataPipelineDiagram from "@/components/case-study/DataPipelineDiagram";
+import DataStatsVisualization from "@/components/case-study/DataStatsVisualization";
+import StudentProfileDiagram from "@/components/case-study/StudentProfileDiagram";
+import {
+  V1AlgorithmDiagram,
+  V2AlgorithmDiagram,
+} from "@/components/case-study/MatchingAlgorithmDiagram";
 import type { MDXComponents } from "mdx/types";
 
 // Case study specific components
@@ -19,12 +27,18 @@ export const caseStudyComponents: MDXComponents = {
   CaseStudyHero,
   CaseStudySection,
   CaseStudyImage,
+  CaseStudyVideo,
   CaseStudyCallout,
   CaseStudyStats,
   CaseStudyPersonas,
   CaseStudyColorPalette,
   CaseStudyProcessTimeline,
   CaseStudyTestimonial,
+  DataPipelineDiagram,
+  DataStatsVisualization,
+  StudentProfileDiagram,
+  V1AlgorithmDiagram,
+  V2AlgorithmDiagram,
 
   // Base typography styling
   h1: ({ children }) => (

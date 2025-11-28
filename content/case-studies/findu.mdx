@@ -17,15 +17,15 @@ tags:
   - Education
 
 metrics:
-  - value: "5,000+"
-    label: Students
-    description: Onboarded in beta phase
-  - value: "78%"
-    label: Confidence Increase
-    description: In post-grad plans
-  - value: "65%"
-    label: Faster Decisions
-    description: Reduction in time
+  - value: "50+"
+    label: Interviews
+    description: Student research sessions
+  - value: "$115K"
+    label: Raised
+    description: Funding & competitions
+  - value: "15+"
+    label: Team
+    description: From 2 cofounders
 
 technologies:
   - React Native
@@ -37,7 +37,7 @@ ai:
   route: /projects/findu
   highlightId: project-findu
   summary: |
-    FindU, or "Tinder for Colleges," started as a classroom project and became a startup co-founded by Kenny and Wilson Overfield. It helps high school students figure out what to do after graduation by making college discovery engaging through a swiping interface. After interviewing 50+ students, they discovered the core problem: students don't want to spend time researching colleges due to fear of failure, feeling overwhelmed, and not knowing what's out there. The solution focuses on personalization over arbitrary rankings. The app went through 7 major design iterations based on hundreds of student interviews. Key features include swiping through personalized college matches, scholarship matching, messaging with counselors, an AI assistant, and task management. They raised funding and grew the team to 15+ people.
+    FindU, or "Tinder for Colleges," started as a classroom project and became a startup co-founded by Kenny and Wilson Overfield. It helps high school students figure out what to do after graduation by making college discovery engaging through a swiping interface. After interviewing 50+ students, they discovered the core problem: students don't want to spend time researching colleges due to fear of failure, feeling overwhelmed, and not knowing what's out there. The solution focuses on personalization over arbitrary rankings. The app went through 7 major design iterations. Key features include swiping through personalized college matches, scholarship matching, messaging with counselors, an AI assistant, and task management. They raised $115K in funding and competitions, and grew the team from 2 cofounders to 15+ people.
   keywords:
     - education
     - AI
@@ -58,45 +58,69 @@ ai:
   achievements:
     - Started as classroom project, turned into funded startup
     - Interviewed 50+ students to understand pain points
-    - Built team of 15+ people
-    - 5,000+ students onboarded
+    - Built team from 2 cofounders to 15+ people
+    - Raised $115K in funding and pitch competitions
     - Went through 7 major design iterations
     - Built scholarship matching, messaging, AI assistant, and task features
-    - Raised seed funding
+    - Database of 6,500+ schools and 26,000+ scholarships
 ---
 
 <CaseStudySection title="Overview">
 
-Off the title you might be wondering, well what is FindU? FindU—or as we jokingly describe it, "Tinder for Colleges"—started off as a classroom project and turned into a startup run by myself and my cofounder Wilson Overfield.
+FindU started pretty simply: a class project where we asked, *why does figuring out college feel so painful for students who grew up with phones in their hands?*
 
-It solves the issue of students not knowing what to do after high school, and is currently focused on helping students get into college. We've raised money for FindU and built a team of more than 15 people, and learned so so much along the way!
+People joke and call it "Tinder for Colleges," and honestly that is not far off from the early concept. Students make a profile, swipe through schools that actually fit them, and slowly build a picture of what life after high school could look like.
+
+What began as a prototype in a Raikes classroom turned into a startup that I now run with my cofounder, Wilson Overfield. We raised $115K, built a team of 15+ people, and talked to hundreds of students who were all trying to answer the same question:
+
+**What do I do after I graduate?**
+
+FindU focuses on the college path right now, but the bigger goal is helping students feel less lost when they think about “what’s next.”
 
 </CaseStudySection>
 
 <CaseStudyImage
   src="/images/projects/findu/findu-overview.png"
   alt="Students collaborating on campus"
-  caption="Our target users: high school students navigating their next steps"
+  caption="Our target users: high school students trying to figure out what comes after graduation."
   width={1200}
   height={600}
 />
 
 <CaseStudySection title="Problem">
 
-After graduating high school, there really is this next choice of "what do I want to do with my life". Some students know exactly what they want to do, but others don't. In fact, our main passion towards FindU came from us knowing friends and family struggling with this decision. We started off FindU trying to figure out what were the main pain points which led us to interview 50 students from all different groups.
+When you graduate high school, everyone asks the same thing: *“So what are you doing next?”*  
+
+Some students have a plan. A lot of them do not.
+
+The motivation for FindU came from watching friends and family stress over this decision, or avoid it completely. We did not want to assume what the problem was, so we started with interviews.
+
+We talked to 50+ students from different backgrounds:
+
+- honor-roll students  
+- athletes  
+- first-gen students  
+- kids who felt “behind”  
+- kids who felt pressure to be perfect  
+
+We did one-on-ones, group sessions, and plenty of casual “just talk to me about what’s going on” conversations. We kept it open-ended and let students lead.
 
 ### Customer Interviews
 
-We spent weeks talking to students—honor roll kids, athletes, first-gen college students, kids who had no idea what they wanted to do. We did one-on-ones, group sessions, and even just casual conversations. Our conversations were increadibly open-ended and we really just let the students talk about their experiences.
+The surprising part was how similar the stories were.
 
-What surprised us was how similar everyone's struggles were, regardless of background. The straight-A student and the kid barely passing were both equally lost when it came to figuring out what's next.
+The straight-A student and the student barely passing were both saying versions of the same thing:
+
+> “I know college is important, but I have no idea where to start and it feels like too much.”
+
+They were not struggling with intelligence. They were struggling with friction and overwhelm.
 
 </CaseStudySection>
 
 <CaseStudyImage
   src="/images/projects/findu/findu-customer-interviews.png"
   alt="Customer interview sticky notes and whiteboard"
-  caption="Synthesizing insights from 50+ student interviews"
+  caption="Synthesizing insights from 50+ student interviews across backgrounds, schools, and GPA ranges."
   width={1200}
   height={800}
 />
@@ -105,34 +129,64 @@ What surprised us was how similar everyone's struggles were, regardless of backg
 
 ### What We Heard
 
-The same things kept coming up in our discussions:
+The same themes kept coming up:
 
-- "I don't know how financial aid works"
-- "How do I get scholarships"
-- "I just don't know where I want to go"
-- "My parents want me to go to a 'good school' but I don't even know what that means"
-- "I feel like I'm already behind"
+- "I don't know how financial aid works."
+- "How do I even find scholarships?"
+- "I just don't know where I want to go."
+- "My parents want me to go to a 'good school' but I don't know what that means."
+- "I feel like I'm already behind."
 
-This is particularly interesting because these were more of the *effects* of inaction by the students. Which led us to really diagnose the problem to be: **Students don't want to spend time researching colleges.**
+These sound like questions, but they are really symptoms.
 
-Now this really stems from a variety of reasons like a fear of failure, feeling overwhelmed, and simply just not knowing what is out there. In short, the information is out there, it's just not packaged in a way that would make it more accessible to students.
+Underneath all of this, we landed on one core problem:
+
+> **Students do not want to spend time researching colleges.**
+
+Not because they do not care.  
+Because:
+
+- they are scared of choosing wrong  
+- they feel overwhelmed by all the options  
+- they do not know how to compare schools  
+- the information is scattered across rankings, PDFs, and random websites  
+
+The information is out there. It is just not packaged in a way that feels approachable to a 17-year-old juggling school, family expectations, activities, and life.
 
 </CaseStudySection>
 
 <CaseStudySection title="Solution">
 
-### Swiping
+### Swiping as a Starting Point
 
-Here is where the "Tinder for Colleges" comes in. The main goal was to make a product that was engaging and students could relate to. Now traditionally students would use tools like Niche and US News which ultimately gives schools in a list and ranks them. So when students are looking for colleges they usually end up looking at the top 100 universities in the US, in a basic list.
+This is where the "Tinder for Colleges" idea came in.
 
-We realized that the top 100 universities might not be a great option for students so we really wanted to hone in on **personalization**. Which is where the Tinder aspect came in—students would make a profile and then swipe through schools that fit *them* rather than the arbitrary rankings.
+Students already know how swiping works. It is familiar, low friction, and honestly kind of fun. We wanted the first experience of exploring schools to feel like that, instead of landing on a dense table of rankings.
+
+Most students we talked to mentioned sites like Niche or US News. Those tools give you lists and rankings. What we noticed is that students end up defaulting to “top 100 universities” and scroll, without much sense of whether those schools fit their life, goals, or financial reality.
+
+So we flipped the model.
+
+Instead of asking, “Which of these top schools do you want?” we asked:
+
+> “What if we only showed you schools that actually make sense for you?”
+
+That led us to focus heavily on **personalization**. Students build a profile and then swipe through schools that match them, not just schools that sit high on some generic list.
 
 </CaseStudySection>
 
 <CaseStudyImage
+  src="/images/projects/findu/findu-compare-problem.png"
+  alt="Mobile app interface"
+  caption="The old mental model: long lists and top 100 rankings that do not mean much to most students."
+  width={1200}
+  height={800}
+/>
+
+<CaseStudyImage
   src="/images/projects/findu/findu-swiping.png"
   alt="Mobile app interface"
-  caption="The swiping interface that makes college discovery feel familiar"
+  caption="The new mental model: a familiar swiping interaction that makes it easier to start exploring schools."
   width={1200}
   height={800}
 />
@@ -141,60 +195,91 @@ We realized that the top 100 universities might not be a great option for studen
 
 #### Design Evolution
 
-Now to really nail down the design I went through countless iterations to try to find the perfect way of presenting schools.
+From here, the design became an ongoing experiment. The swiping concept was the hook, but actually making it useful took several passes.
 
-**Version 1**
+### Version 1
 
-On our first version the biggest limitation really came from my lack of design skills. You'll see things like different icon sizes, varying icon packs, and overall just a bad use of space. From a UX perspective, it's overwhelming and offers no improvement other than the Tinder swiping.
+Version 1 was our “get it working” phase.
+
+You can see all the rookie mistakes:
+
+- inconsistent icon sizes  
+- mixed icon packs  
+- too much information crammed into one card  
+- no real hierarchy  
+
+It looked like a swipeable info dump. The interaction was different, but the experience was still overwhelming. It did not actually make decision-making easier. It just moved the chaos into a card.
 
 </CaseStudySection>
 
 <CaseStudyImage
   src="/images/projects/findu/findu-swiping-v1.png"
   alt="Version 1 design mockup"
-  caption="Version 1 - Our first attempt at the swiping interface"
+  caption="Version 1: the first swipeable card. It worked technically, but the UX and visual hierarchy were rough."
   width={600}
   height={400}
 />
 
 <CaseStudySection>
 
-**Version 3**
+### Version 3
 
-Version 3 saw a pretty big jump in my design skills and the UX of the product. From a development standpoint this was also our beta launch where we received a lot of important feedback.
+By Version 3, my design skills and our understanding of the problem both leveled up.
 
-At this point, we really didn't receive any feedback on the design, but rather on the UX of the app. One thing we noticed was that most people were just swiping and not actually viewing the "more info" button. Additionally, the match score also was unnecessary as students expected good schools on their feed anyway.
+Visually, it was cleaner and more consistent. This is the version we used for our beta launch, so it became the first real test with hundreds of students.
+
+The feedback was interesting:
+
+- students loved the swiping  
+- almost nobody clicked the “More info” button  
+- the match score badge did not matter to them  
+
+They assumed that anything in their feed was already a decent match, so the score did not add much. And if a screen makes it easier to swipe than to learn, students will just swipe.
+
+So the problem shifted from “how do we make swiping feel good?” to:
+
+> “How do we help students actually *learn* about schools without overwhelming them or losing engagement?”
 
 </CaseStudySection>
 
 <CaseStudyImage
   src="/images/projects/findu/findu-swiping-v3.png"
   alt="Version 3 design mockup"
-  caption="Version 3 — Beta launch where we learned students weren't clicking 'more info'"
+  caption="Version 3: our beta launch. Students loved swiping but mostly ignored the details and match scores."
   width={600}
   height={400}
 />
 
 <CaseStudySection>
 
-**Version 7 (Current)**
+### Version 7 (Current)
 
-The current version introduced a lot of changes. The first one was removing the swipeable card and instead just displaying the information. From a UX perspective, this reduces a lot of friction and makes it more about the information than simply swiping.
+The current version is the result of a year of iteration and hundreds of user conversations.
+
+The biggest change:  
+We removed the swipeable card from the core experience and moved toward an **information-first layout**.
+
+From a UX standpoint, this:
+
+- reduces friction  
+- makes the experience less gimmicky  
+- puts the focus back on understanding schools, not just reacting to them  
 
 We also:
-- Broke down the information into sections
-- Allowed users to filter by location, costs, etc.
-- Introduced a saved page so students could track their schools
-- Added question cards in the feed to improve matches and recommendations
 
-I really want to emphasize these improvements have been over the course of the last year, and have been fueled by hundreds of interviews from students. And by no means is this the final version!
+- broke information into scannable sections  
+- added filters for location, costs, and other priorities  
+- introduced a saved page so students can keep track of schools they are serious about  
+- dropped in lightweight question cards to improve recommendations over time  
+
+This version finally felt like the right balance between “fun” and “useful.” That said, it is still not the final version. The whole product is built to keep evolving as we learn.
 
 </CaseStudySection>
 
 <CaseStudyImage
   src="/images/projects/findu/findu-swiping-v7.png"
   alt="Current app home screen"
-  caption="Home feed with personalized college cards"
+  caption="The current design shifts focus from the swipe itself to clear, structured information and actions."
   width={600}
   height={800}
 />
@@ -203,94 +288,520 @@ I really want to emphasize these improvements have been over the course of the l
 
 ### Scholarships
 
-We built a comprehensive scholarship matching system that connects students with opportunities they actually qualify for, not just a generic list.
+Pretty early on, one thing kept coming up whenever we asked about barriers to college:
 
-### Messaging
+> “I do not know how scholarships work.”  
+> “I do not know where to start.”  
+> “I am scared I will miss something important.”
 
-Direct communication between students and admissions counselors, making the process feel more personal and less intimidating.
+Students know scholarships exist, but the discovery process feels like this maze of tabs, random websites, and long lists where they cannot tell what applies to them.
 
-### AI Assistant
+Every college has scholarship pages. There are thousands of external opportunities. The problem is not supply. It is **signal**.
 
-An AI-powered assistant that answers questions about colleges, applications, and the entire process in a conversational way.
+So we built a scholarship experience that:
+
+- understands each student’s profile  
+- surfaces relevant scholarships  
+- ties those scholarships directly to the schools they are already exploring  
+
+No scrolling through hundreds of random “no essay” scholarships that may or may not be realistic.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-scholarships-main.png"
+  alt="Scholarships screen in the app"
+  caption="Scholarship discovery that feels connected to the rest of the college search, not bolted on."
+  width={600}
+  height={800}
+/>
+
+<CaseStudySection>
+
+We tested two main views:
+
+- a **swipe view**, which felt more game-like and engaging  
+- a **grid view**, which felt more like a traditional list  
+
+Both had their place, but the real unlock was integrating scholarships into the core college flow.
+
+Students using FindU are not just thrown into a giant pool of generic scholarships. Instead, they see **school-specific** opportunities tied to the colleges they are already saving and considering.
+
+That means students are effectively discovering:
+
+> “If I go here, this is what it could realistically cost with the scholarships I am likely to get.”
+
+For most students, cost is the deciding factor. So connecting schools and scholarships in a single flow became a huge part of the value.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-scholarship-showcase.png"
+  alt="Scholarship showcase view"
+  caption="Scholarships are framed in context of specific schools, not as an isolated hunting exercise."
+  width={600}
+  height={800}
+/>
+
+<CaseStudySection>
 
 ### Tasks
 
-A task management system that keeps students on track with deadlines, requirements, and next steps.
+Once we launched scholarships, we saw a new pattern.
+
+Students were:
+
+1. finding schools  
+2. finding scholarships  
+3. leaving the app to manage everything in spreadsheets or notes apps  
+
+From their perspective this made sense. From a product perspective, it meant we were offloading the hardest part of the process to tools we did not design.
+
+So we built a task and application tracking system inside FindU.
+
+This sounds simple at first, but we hit an important nuance:
+
+> Liking a school is **not** the same thing as applying to it.
+
+In the early concept, we assumed students would like 5–10 schools and then apply to most of them. In reality, they liked 20+ schools and realistically planned to apply to a handful.
+
+Through more interviews, we learned:
+
+- “Like” means *I am interested*  
+- “Apply” means *I am committing real time and effort*  
+
+So the task system had to reflect that gap. We:
+
+- separated “liked” schools from “active applications”  
+- let students attach tasks and deadlines (essay, FAFSA, recommendation letters, etc.)  
+- built a single view where they could see what they had done and what was left  
+
+This turned FindU from just a discovery tool into an actual **execution** tool.
 
 </CaseStudySection>
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-tasks-1.png"
+  alt="Tasks page in the app"
+  caption="Tasks connect interest to action, helping students track where they are in the process for each school."
+  width={600}
+  height={800}
+/>
+
+<CaseStudySection>
+
+### AI Assistant
+
+Once ChatGPT became mainstream, students started using AI for everything: homework, essays, and even parts of the college search. We knew we wanted to add AI, but not as “ChatGPT in a box.”
+
+Our edge was context.
+
+FindU knows:
+
+- which schools a student is looking at  
+- which schools they have liked  
+- their interests and constraints  
+- which scholarships they have seen  
+
+So we built an AI assistant that could:
+
+- answer questions about specific schools  
+- help compare schools  
+- suggest schools that match a student’s profile  
+- surface scholarships that actually fit  
+
+Pretty quickly, we noticed something humbling:
+
+> The AI was better at recommending schools than our first matching algorithm.
+
+That pushed us to lean harder into AI as a core part of the product, not an add-on.
+
+Right now, the assistant:
+
+- lives on the school page with full context on that school  
+- also exists as a general assistant in the messaging tab for broader questions  
+
+Long term, we see this evolving into something closer to an **AI college counselor** that walks with students across the whole journey, not just helps them search.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-ai-advisor.png"
+  alt="Context-aware AI assistant view"
+  caption="Early AI integration: using school and profile context to give better answers than a generic chatbot."
+  width={600}
+  height={800}
+/>
+
+<CaseStudySection>
+
+### Messaging
+
+The last major piece was acknowledging something we heard from almost every adult we interviewed:
+
+> “Students do not go through this alone.”
+
+Counselors, parents, coaches, friends. All of them influence the decision.
+
+So we built a messaging layer that:
+
+- lets students message counselors and parents directly  
+- lets counselors nudge students, share schools, or send deadlines  
+- lets parents stay in the loop without needing screenshots and separate group chats  
+
+We also made it easy to share:
+
+- schools  
+- scholarships  
+- tasks  
+
+And we experimented with friend groups, where students could help each other discover schools and trade opinions.
+
+This turned FindU into a shared space instead of a single-player app. It also naturally brought students back into the product, since important conversations and reminders were happening inside it.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-messaging.png"
+  alt="Messaging and collaboration view"
+  caption="Messaging connects students, counselors, and parents around shared schools, scholarships, and next steps."
+  width={600}
+  height={800}
+/>
 
 <CaseStudySection title="Development">
 
 ### Pulling Data
 
-One of the biggest challenges was aggregating college data from multiple sources and keeping it accurate and up-to-date.
+One of the biggest challenges was not actually *getting* data. It was figuring out what data even mattered.
+
+Most students we talked to could not articulate what information they wanted about a college. They would say things like "I want to know if it is a good fit," but when asked what that meant, they had no answer. Rankings did not help. Acceptance rates did not help. The information existed, but it was not packaged in a way that answered the real question:
+
+> "Will I be happy here, and can I afford it?"
+
+So before we wrote a single line of code to pull data, we ran interviews. Lots of them. We asked students what they wished they had known before choosing a school. We asked recent grads what surprised them. We asked parents what kept them up at night.
+
+From that, we built a list of what actually mattered:
+
+- cost after financial aid (not sticker price)
+- graduation rates and outcomes
+- campus vibe and location
+- programs and majors available
+- scholarships tied to that specific school
+
+#### The Technical Side
+
+Once we knew *what* to pull, we had to figure out *how*.
+
+We started with the College Scorecard API from the Department of Education. It gave us a foundation: tuition, test scores, demographics, graduation rates, earnings data. Solid, but dry. Numbers without context.
+
+The bigger challenge was everything the government does not track:
+
+- What does the campus actually look like?
+- What scholarships are available beyond federal aid?
+- What are the application deadlines?
+- What majors and programs exist?
+
+For images, we built scrapers that pulled photos from school websites and stored them in our own database. For scholarships and deadlines, we used a combination of web scraping and AI. We would pull raw content from school pages, then run it through a model like GPT to extract and structure the relevant information.
+
+This was messy. Every school formats things differently. Some universities have one college. Some have twelve colleges within them, each with their own requirements. Nothing is standardized.
+
+</CaseStudySection>
+
+<DataPipelineDiagram
+  sources={[
+    { name: "College Scorecard API", icon: "🏛️", description: "Federal education data" },
+    { name: "Web Scraping", icon: "🌐", description: "Campus images & content" },
+    { name: "Clearbit API", icon: "🎨", description: "School logos & branding" },
+  ]}
+  processing={["Extract", "Transform", "AI Processing", "Validate"]}
+  output="Unified Database"
+/>
+
+<CaseStudySection>
+
+#### The Numbers
+
+Right now, our database includes:
+
+- **6,500+ schools** with core data from federal sources
+- **3,200+ validated schools** with complete profiles
+- **6,100+ schools** with campus images
+- **41,000+ academic programs** mapped to schools
+- **26,000+ scholarships** with eligibility criteria
+- **20,900+ deadlines** for applications, financial aid, and housing
+
+And it keeps growing. We run scheduled syncs to keep data fresh and flag schools where information has changed.
+
+The goal was never to have *more* data than competitors. It was to have the *right* data, structured in a way that actually helps a student make a decision.
 
 ### Student Data
 
-We built a robust profiling system that captures student preferences, academic info, and interests to power our matching algorithm.
+The first version of FindU had a classic mistake: a long onboarding flow.
+
+We asked students to fill out everything upfront. GPA, test scores, location preferences, budget, interests, career goals. The logic was simple: more data equals better matches.
+
+The problem? Two things:
+
+1. **Students dropped off.** A 15-question onboarding is a lot when you just want to see what the app does.
+2. **The data was static.** Once a student finished onboarding, we never learned anything new about them. Their preferences were frozen in time, even though a junior's priorities might shift completely by senior year.
+
+We were also missing signals that were right in front of us. Every swipe was information. If a student kept swiping right on small liberal arts schools and left on big state schools, that told us something. But we were not capturing it.
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-old-onboarding.png"
+  alt="Old onboarding flow"
+  caption="The old onboarding flow was a 15-question form that students would have to fill out upfront."
+  width={600}
+  height={800}
+/>
+
+#### Progressive Profiling
+
+So we rebuilt the system around progressive profiling.
+
+Now the onboarding is short. Name, email, graduation year, maybe a couple basics. Enough to get started, not enough to feel like a chore.
+
+
+
+The real profiling happens while students use the app.
+
+As they swipe through schools, we drop in **question cards**. Quick, low-friction questions that feel like part of the experience:
+
+- "What matters most in a college?"
+- "Your ideal Friday night?"
+- "What would make you swipe left instantly?"
+- "Want undergraduate research opportunities?"
+- "Can you handle real winters with snow?"
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-new-onboarding.png"
+  alt="New onboarding flow"
+  caption="The new onboarding flow is a lot shorter and more focused on getting students started."
+  width={600}
+  height={800}
+/>
+
+These questions do two things:
+
+1. They give us richer preference data than a static form ever could.
+2. They keep updating. A student's profile gets smarter the more they use the app.
+
+We also started learning from behavior. If someone consistently swipes right on schools with strong engineering programs, we do not need them to tell us they are interested in engineering. The data shows it.
+
+</CaseStudySection>
+
+<StudentProfileDiagram
+  onboardingFields={[
+    { name: "Name & Email" },
+    { name: "Graduation Year" },
+    { name: "Location" },
+    { name: "GPA" },
+    { name: "Test Scores" },
+    { name: "Budget" },
+    { name: "Income Bracket" },
+  ]}
+  profiles={[
+    {
+      title: "Academic Profile",
+      icon: "📚",
+      fields: ["Learning Style", "Class Size", "Study Habits", "Course Rigor", "Academic Strengths"],
+    },
+    {
+      title: "Interests Profile",
+      icon: "🎯",
+      fields: ["Extracurriculars", "Hobbies", "Sports", "Arts & Music", "Greek Life"],
+    },
+    {
+      title: "Career Profile",
+      icon: "🚀",
+      fields: ["Dream Industries", "Work Style", "Grad School", "Entrepreneurship", "Internships"],
+    },
+  ]}
+  learnedCategories={[
+    "Big Public Research",
+    "Small Liberal Arts",
+    "Mid-Size Private",
+    "Technical/STEM",
+    "Urban Campus",
+    "Rural/Small Town",
+  ]}
+/>
+
+<CaseStudySection>
+
+This shift from "collect everything upfront" to "learn as you go" made the matching way better and the experience way less painful.
 
 ### Matching Algorithm
 
-The heart of FindU—our algorithm that matches students with schools based on dozens of factors, constantly improving based on user feedback.
+The matching algorithm is the core of FindU. We went through two major versions.
+
+#### Version 1: Weighted Scoring
+
+The first version used a simple formula: weight each factor, add them up.
+
+</CaseStudySection>
+
+<V1AlgorithmDiagram />
+
+<CaseStudySection>
+
+**Academic (50%)** compared student stats to enrolled students using SAT/ACT percentile ranges. **Major (25%)** was binary—does the school offer it or not. **Financial (25%)** compared budget to net price after aid.
+
+The **category boost** was where learning happened. As students swiped, we tracked patterns across school types (big public, liberal arts, STEM-focused, etc.) and adjusted future recommendations.
+
+It worked. Fast (sub-100ms) and students got reasonable matches. But it could not *reason*:
+
+- A low-income student with a $10K budget got filtered away from Harvard—even though Harvard costs $0–5K for families under $75K
+- "Software Engineering" would not match "Computer Science" without manual mappings
+- Category learning needed 20+ swipes before it had enough signal
+
+#### Version 2: LLM-Based Matching
+
+So we rebuilt it around GPT-4o-mini.
+
+</CaseStudySection>
+
+<V2AlgorithmDiagram />
+
+<CaseStudySection>
+
+Instead of rigid formulas, the model sees full context and reasons about trade-offs. It knows elite schools are often cheaper for low-income families. It understands "Software Engineering" equals "Computer Science." It reads intent, not just data.
+
+The tradeoff is latency (100ms → 2–5 seconds). But the quality improvement is worth it.
+
+The bigger insight: **some decisions require understanding context, not just math.**
 
 </CaseStudySection>
 
 <CaseStudySection title="The Startup Journey">
 
+This section is less about showing off wins and more about what I have actually learned building a startup as a student.
+
 ### Team and Managing
 
-Growing from 2 cofounders to a team of 15+ people taught us a lot about delegation, communication, and building culture.
-
-### Business
-
-From pitch decks to investor meetings, we learned the startup game from the ground up.
-
-### Marketing
-
-Reaching Gen Z students required us to rethink traditional marketing—TikTok, Instagram, and word of mouth became our main channels.
+In the beginning, there was no "managing." I was just in Figma for hours, building screens, tweaking pixels, shipping features. The work was the process.
 
 </CaseStudySection>
 
 <CaseStudyImage
-  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&h=600&fit=crop"
-  alt="Team collaboration"
-  caption="Growing from 2 cofounders to a team of 15+"
+  src="/images/projects/findu/findu-team.png"
+  alt="FindU team meeting"
+  caption="From 2 cofounders to a team of 15+."
   width={1200}
   height={600}
 />
 
-<CaseStudySection title="Results">
+<CaseStudySection>
 
-### Press and Investment
+Growing the team to 15 people changed everything.
 
-We raised seed funding and received coverage from several education and tech publications.
+Suddenly I was not just designing. I was thinking about tasks, priorities, who needs what, and how to get everyone moving in the same direction. The work shifted from *doing* to *coordinating*.
 
-### Metrics
+The hardest part has been **context transfer**.
+
+As a founder, I spend 12+ hours a day on this. Every decision, every pivot, every user conversation lives in my head. But nobody else has that context. They join a call, get a task, and try to fill in the gaps.
+
+So how do you transfer what you know to people who were not there when you learned it?
+
+I still do not have a perfect answer. But I have learned that:
+
+- Writing things down matters more than I thought
+- Repeating yourself is not annoying, it is necessary
+- The goal is not alignment on tasks. It is alignment on *why* behind the tasks.
+
+This part of the job is not as fun as designing. But it is probably more important.
+
+### Business
+
+We have raised **$100,000 in funding** and won over **$15,000 in pitch competitions**. That capital has let us do things like run marketing campaigns, order merch, and actually pay for tools.
+
+But running a business means making decisions that pure design work does not prepare you for.
+
+For example: our revenue model involves helping colleges reach students. That means we are sitting on student data—interests, preferences, where they want to go. Colleges want that information so they can recruit more effectively.
+
+This creates real questions:
+
+- How much information do we share?
+- What is the line between helpful and invasive?
+- Are we building something students trust, or something that uses them?
+
+We have had to think through these tradeoffs carefully. The easy answer is "sell everything." The right answer is harder to find.
+
+### Marketing
+
+This has been the hardest part. Honestly.
+
+Across all our content, we have gotten **over a million views**. TikToks, Instagram, press coverage—people have seen FindU.
+
+But right now, we have **178 active users**.
+
+Clearly, awareness is not the problem. Conversion is.
+
+What has worked:
+
+- **Local presence.** In Lincoln and Omaha, people know us. We have been on the news, featured in Silicon Prairie Weekly, and shown up at events. That has brought us connections, advisors, and credibility.
+- **Word of mouth.** When students use it and like it, they tell friends. That is still our best channel.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-press.jpg"
+  alt="FindU press and event coverage"
+  caption="Local press and events have been our strongest marketing channel."
+  width={1200}
+  height={600}
+/>
+
+<CaseStudySection>
+
+What has not worked:
+
+- Expecting viral content to translate into signups
+- Marketing to students directly without school buy-in
+
+So we are pivoting. Instead of going student-by-student, we are taking a **school-first approach**—onboarding entire schools at once. That meant building a whole counselor dashboard, which added complexity, but it also gives us a real distribution channel.
+
+</CaseStudySection>
+
+<CaseStudyImage
+  src="/images/projects/findu/findu-counselor-dashboard.png"
+  alt="FindU counselor dashboard"
+  caption="The counselor dashboard lets schools onboard students at scale."
+  width={1200}
+  height={600}
+/>
+
+<CaseStudySection title="What's Next">
+
+We are still in the middle of it.
+
+Right now, the focus is:
+
+- Getting more schools on board through the counselor dashboard
+- Simplifying the product so users know exactly what they are getting
+- Improving the matching so recommendations feel less like suggestions and more like answers
+
+FindU is not a finished product. It is a work in progress—and so is everything I have learned building it.
 
 </CaseStudySection>
 
 <CaseStudyStats
   stats={[
     {
-      value: "5,000+",
-      label: "Students",
-      description: "Onboarded in beta",
+      value: "$115K+",
+      label: "Raised",
+      description: "Funding and competitions",
     },
     {
       value: "15+",
       label: "Team Members",
-      description: "Built the team",
+      description: "From 2 cofounders",
     },
     {
-      value: "$2.5M",
-      label: "Raised",
-      description: "Seed funding",
+      value: "1M+",
+      label: "Views",
+      description: "Across all content",
     },
   ]}
-/>
-
-<CaseStudyTestimonial
-  quote="This is the first time I've felt like I actually have a say in my future, rather than just doing what I'm told."
-  author="Sarah M."
-  role="High School Junior"
 />
