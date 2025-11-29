@@ -4,6 +4,7 @@ import "./globals.css";
 import { NavigationBar } from "@/components/ui/NavigationBar";
 import { AIChat } from "@/components/ai/AIChat";
 import Footer from "@/components/layout/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const sora = Sora({ subsets: ["latin"] });
 const plusJakarta = Plus_Jakarta_Sans({
@@ -36,6 +37,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <AIChat />
+        <Analytics />
       </body>
     </html>
   );
